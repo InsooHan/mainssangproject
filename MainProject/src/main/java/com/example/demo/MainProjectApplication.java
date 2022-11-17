@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //won test
 //10:33
 //jintest
+//jinatest
 @SpringBootApplication
 public class MainProjectApplication {
 
