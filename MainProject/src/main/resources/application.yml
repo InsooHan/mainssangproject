@@ -1,0 +1,23 @@
+#tomcat port
+server:
+  port: 9001
+#jsp
+spring:
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/
+#      suffix: .jsp
+  devtools:
+    livereload:
+      enabled: true
+#mysql
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://won.cw7kz1ybbs2q.us-east-1.rds.amazonaws.com:3306/webservice?serverTimezone=Asia/Seoul
+    username: adminsist
+    password: thsutleo12
+#mybatis
+mybatis:
+  type-aliases-package: fpro.data.*
+  mapper-locations:
+  - /mapper/**/*.xml
