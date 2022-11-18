@@ -14,23 +14,59 @@
 <script src="https://kit.fontawesome.com/a47cf79e39.js" crossorigin="anonymous"></script>
 <title>Insert title here</title>
 <style type="text/css">
+div.layout div{
+		border: 0px solid gray;
+	}
+div.layout div.title{
+		position: absolute;
+		width: 100%;
+		height: 100px;
+		background-color: #100B0B;
+	}
+	
+
+	div.layout div.main{
+		position: absolute;
+		top: 100px;
+		width: 100%;
+		height: auto;
+		min-height: 80%;
+		padding-bottom: 200px;
+	}
+	
+	html, body {
+    height: 100%
+	}
+
+	#wrap {
+	    min-height: 100%;
+	    position: relative;
+	    padding-bottom: 60px;
+	}
+	
+	footer {
+	    position: relative;
+	    transform: translatY(-100%);
+	    height: 120px;
+	    background-color: pink;
+	}
+	
+	
+
 
 </style>
 </head>
 <body>
-<div class="layout">
+<div class="layout" id="wrap">
 	<div class="title">
 		<tiles:insertAttribute name="title"/>
 	</div>
-	<div class="menu">
-		<tiles:insertAttribute name="menu"/>
-	</div>
-	<div class="info">
-		<tiles:insertAttribute name="info"/>
-	</div>
-	<div class="main">
+	<div class="main" id="content-wrap">
 		<tiles:insertAttribute name="main"/>
 	</div>
 </div>
+	<footer>
+		<tiles:insertAttribute name="footer"/>
+	</footer>
 </body>
 </html>
