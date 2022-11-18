@@ -67,8 +67,8 @@
 						<button type="button" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block" onclick="location.href='${root}/login/main'" style="position:relative; z-index:999; background-color: #339EB2; border: 0px; color: white;">로그인</button>
 					</c:if>
 					<c:if test="${sessionScope.loginok!=null}">
-						<b>${sessionScope.myid }님이 로그인 중입니다.</b>
-						<button type="button" class="btn btn-info btn-m" onclick="location.href='${root}/login/main'" style="background-color: #339EB2; border: 0px; color: white;">로그아웃</button>
+						<b style="color: white;">${sessionScope.myid }님 로그인 중</b>&nbsp;&nbsp;
+						<button type="button" class="btn btn-info btn-m" onclick="location.href='${root}/login/logoutprocess'" style="position:relative; z-index:999; background-color: #339EB2; border: 0px; color: white;">로그아웃</button>
 					</c:if>
 					
 				</div>
