@@ -12,31 +12,22 @@
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="https://kit.fontawesome.com/a47cf79e39.js" crossorigin="anonymous"></script>
 
-	<!-- 메뉴 템플릿 css 추가-->
- 	<link href="https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap" rel="stylesheet"> 
 
-    <link rel="stylesheet" href="fonts/icomoon/style.css">
-
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    
-    <!-- Style -->
-    <link rel="stylesheet" href="css/style.css">
-    <!-- 메뉴 템플릿 css end-->
 
 
 <title>Insert title here</title>
 
 </head>
+<c:set var="root" value="<%=request.getContextPath() %>"></c:set>
 <body>
 <!-- NAVBAR -->
     <header class="site-navbar mt-3" style="position: relative; z-index: 10;">
       <div class="container-fluid">
         <div class="row align-items-center">
         <!-- 좌측 상단 로고 -->
-          <div class="site-logo col-6"><a href="#"><img alt="" src="../save/megabox_logo.png" style="width: 150px;"> </a></div>
+          <div class="site-logo col-6">
+          <a href="${root }/" style="position: relative; z-index: 999;"><img alt="" src="../save/megabox_logo.png" style="width: 150px;"></a>
+          </div>
 
 		  <!-- 메뉴 탭 start -->
           <nav class="mx-auto site-navigation" style="text-align: center; ">
@@ -49,7 +40,7 @@
                 </ul>
               </li>
               <li><a href="blog.html">예매</a></li>
-              <li><a href="blog.html">스토어</a></li>
+              <li><a href="${root }/store/list">스토어</a></li>
               <li><a href="contact.html">커뮤니티</a></li>
               <li class="has-children">
               <a href="contact.html">이벤트/공지사항</a>
