@@ -12,6 +12,21 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="https://kit.fontawesome.com/a47cf79e39.js" crossorigin="anonymous"></script>
+
+	<!-- 메뉴 템플릿 css 추가-->
+ 	<link href="https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap" rel="stylesheet"> 
+
+    <link rel="stylesheet" href="../template/fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="../template/css/owl.carousel.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../template/css/bootstrap.min.css">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="../template/css/style.css">
+    <!-- 메뉴 템플릿 css end-->
+
 <title>Insert title here</title>
 <style type="text/css">
 div.layout div{
@@ -46,9 +61,6 @@ div.layout div.title{
 	
 	footer {
 	    position: relative;
-	    transform: translatY(-100%);
-	    height: 120px;
-	    background-color: pink;
 	}
 	
 	
