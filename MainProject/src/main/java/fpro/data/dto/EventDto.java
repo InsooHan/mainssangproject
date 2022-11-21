@@ -3,18 +3,19 @@ package fpro.data.dto;
 import java.sql.Timestamp;
 
 import org.apache.ibatis.type.Alias;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
 @Data
-@Alias("addto")
-public class AdminDto {
+@Alias("evdto")
+public class EventDto {
 
-	private int  num;
+	private String  num;
 	private String  category;
 	private String  subject;
-	private String  photo;
+	private MultipartFile  uploadfile;
 	private String  content;
-	private int readcount;
+	private Timestamp  eventday;
 	private Timestamp  wirteday;
 }
