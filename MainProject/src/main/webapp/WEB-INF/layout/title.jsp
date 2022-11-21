@@ -33,20 +33,20 @@
           <nav class="mx-auto site-navigation" style="text-align: center; ">
             <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
               <li class="has-children">
-                <a href="job-listings.html">영화</a>
-                <ul class="dropdown">
-                  <li><a href="job-single.html">최신 영화</a></li>
-                  <li><a href="post-job.html">박스오피스</a></li>
-                </ul>
-              </li>
+            <a href="${root }/movie/list">영화</a>
+            <ul class="dropdown">
+               <li><a href="${root }/movie/list">박스오피스</a></li>
+               <li><a href="${root }/movie/new">최신영화</a></li>
+            </ul>
+           </li>
               <li><a href="blog.html">예매</a></li>
               <li><a href="${root }/store/list">스토어</a></li>
-              <li><a href="contact.html">커뮤니티</a></li>
+              <li><a href="${root }/community/list">커뮤니티</a></li>
               <li class="has-children">
               <a href="contact.html">이벤트/공지사항</a>
               <ul class="dropdown">
-                  <li><a a href="${root }/admin/list">이벤트</a></li>
-                  <li><a href="post-job.html">공지사항</a></li>
+                  <li><a href="${root }/event/list">이벤트</a></li>
+                  <li><a href="${root }/admin/list">공지사항</a></li>
                 </ul>
                 </li>
             </ul>
@@ -95,6 +95,7 @@
 	      	<input type="password" name="pass" class="form-control" placeholder="비밀번호" required="required" style="width: 300px; margin-top: 10px;">
 	      	<input type="checkbox" name="cbsave" ${sessionScope.saveok==null?"":"checked"}><span style="font-size: 11px; color: gray;">아이디 저장</span>
 	      	<button type="submit">로그인</button>
+	      	<button type="button" class="btn btn-info btn-m" onclick="location.href='${root }/member/memberform'">회원가입</button>
 	      </form>
 	      </div>
 	
