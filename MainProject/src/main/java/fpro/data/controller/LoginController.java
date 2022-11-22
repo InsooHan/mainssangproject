@@ -29,6 +29,7 @@ public class LoginController {
 		//cbsave값 가져오기
 		String saveok = (String)session.getAttribute("saveok");
 		
+		
 		if(loginok==null) {
 			return "/login/loginform";
 		}else {
