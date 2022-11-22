@@ -13,72 +13,76 @@
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="https://kit.fontawesome.com/a47cf79e39.js" crossorigin="anonymous"></script>
 
-	<!-- 메뉴 템플릿 css 추가-->
- 	<link href="https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap" rel="stylesheet"> 
+   <!-- 메뉴 템플릿 css 추가-->
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap" rel="stylesheet"> 
 
-    <link rel="stylesheet" href="../template/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="../fonts/icomoon/style.css">
 
-    <link rel="stylesheet" href="../template/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../css/owl.carousel.min.css">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../template/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
     
     <!-- Style -->
-    <link rel="stylesheet" href="../template/css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <!-- 메뉴 템플릿 css end-->
 
 <title>Insert title here</title>
 <style type="text/css">
+html {
+	height: 100%;
+}
+body {
+	margin: 0;
+	height: 100%;
+}
+div.layout{
+	min-height: 100%;
+	position: relative;
+	padding-bottom: 348px;
+}
 div.layout div{
-		border: 0px solid gray;
-	}
+      border: 0px solid gray;
+   }
 div.layout div.title{
-		position: absolute;
-		width: 100%;
-		height: 100px;
-		background-color: #100B0B;
-	}
-	
+      position: absolute;
+	  top: 0; 
+	  left: 0;
+	  height: 100px;
+	  width: 100%;
+      background-color: #100B0B;
+   }
+   
 
-	div.layout div.main{
-		position: absolute;
-		top: 100px;
-		width: 100%;
-		height: auto;
-		min-height: 80%;
-		padding-bottom: 200px;
-	}
-	
-	html, body {
-    height: 100%
-	}
-
-	#wrap {
-	    min-height: 100%;
-	    position: relative;
-	    padding-bottom: 60px;
-	}
-	
-	footer {
-	    position: relative;
-	}
-	
-	
-
+   div.layout div.main{
+   	  width: 100%;
+   	  height: auto;
+      padding-top: 150px; 
+      padding-bottom: 200px;
+   }
+   
+     
+   div.layout div.footer {
+	  position: absolute;
+	  width: 100%;
+	  bottom: 0; 
+	  left: 0;
+   }
+   
 
 </style>
 </head>
 <body>
-<div class="layout" id="wrap">
-	<div class="title">
-		<tiles:insertAttribute name="title"/>
-	</div>
-	<div class="main" id="content-wrap">
-		<tiles:insertAttribute name="main"/>
-	</div>
+<div class="layout">
+   <div class="title">
+      <tiles:insertAttribute name="title"/>
+   </div>
+   <div class="main">
+      <tiles:insertAttribute name="main"/>
+   </div>
+   <div class="footer">
+      <tiles:insertAttribute name="footer"/>
+   </div>
 </div>
-	<footer>
-		<tiles:insertAttribute name="footer"/>
-	</footer>
 </body>
 </html>

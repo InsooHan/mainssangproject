@@ -16,17 +16,17 @@
 
 
 <title>Insert title here</title>
-
 </head>
 <c:set var="root" value="<%=request.getContextPath() %>"></c:set>
 <body>
 <!-- NAVBAR -->
-    <header class="site-navbar mt-3" style="position: relative; z-index: 10;">
+	<div class="title" style="z-index: 50;">
+    <header class="site-navbar mt-3">
       <div class="container-fluid">
         <div class="row align-items-center">
         <!-- 좌측 상단 로고 -->
           <div class="site-logo col-6">
-          <a href="${root }/" style="position: relative; z-index: 999;"><img alt="" src="../save/megabox_logo.png" style="width: 150px;"></a>
+          <a href="${root }/" style="position: relative; z-index: 50;"><img alt="" src="../image/megabox_logo.png" style="width: 150px;"></a>
           </div>
 
 		  <!-- 메뉴 탭 start -->
@@ -76,20 +76,21 @@
         </div>
       </div>
     </header>
+    </div>
     
     <!-- The Modal -->
 	<div class="modal" id="myModal">
 	  <div class="modal-dialog modal-lg">
-	    <div class="modal-content">
+	    <div class="modal-content" >
 	
 	      <!-- Modal Header -->
-	      <div class="modal-header" style="background-color: #6464CD; z-index: 999; position: relative;">
+	      <div class="modal-header" style="background-color: #6464CD; z-index: 100; position: relative;">
 	        <h4 class="modal-title">로그인</h4>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 	      </div>
 	
 	      <!-- Modal body -->
-	      <div class="modal-body">
+	      <div class="modal-body" >
 	      <form action="login/loginprocess" method="post">
 	      	<input type="text" name="id" class="form-control" placeholder="아이디" value="${sessionScope.saveok==null?"":sessionScope.myid}" style="width: 300px;">
 	      	<input type="password" name="pass" class="form-control" placeholder="비밀번호" required="required" style="width: 300px; margin-top: 10px;">

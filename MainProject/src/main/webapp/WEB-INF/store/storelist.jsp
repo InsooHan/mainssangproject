@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Dongle&family=Jua&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -29,16 +30,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="container" style="margin-top: 70px;">
+<div class="container" style="margin-top: 70px; font-family: Noto Sans KR;">
 	
 	<!-- 관리자만 보이는 상품 추가 버튼 -->
 	<c:if test="${sessionScope.loginok!=null && sessionScope.myid=='admin'}">
-		<button type="button" class="btn btn-primary" style="float: right;" onclick="location.href='insert'">상품 추가</button>
+		<button type="button" class="btn btn-primary" style="float: right;" onclick="location.href='form'">상품 추가</button>
 	</c:if>
 		
 	<!-- 스토어 카테고리 -->
 	<div class="container mt-3">
-	  <h2>스토어</h2>
+	  <p style="font-size: 2.5em; color: #252451; font-weight: 700;">스토어</p>
 	  <br>
 	  <!-- 카테고리 메뉴 -->
 	  <ul class="nav nav-tabs" role="tablist" style="text-align: center;">
@@ -59,29 +60,169 @@
 	    </li>
 	  </ul>
 	
-	  <!-- 메뉴 클릭시 카테고리별 출력 -->
+	  <!-- 탭 클릭시 카테고리별 출력 -->
 	  <div class="tab-content">
+	  	<!-- 전체 스토어 탭 -->
 	    <div id="storelist" class="container tab-pane active"><br>
-	      <h3>전체 상품</h3>
+	      <p style="font-size: 1.6em; font-weight: 400; color: #252451;">전체 상품</p>
 	      <p>총 ${totalCount }개의 상품이 있습니다.</p>
-	      
-	      
+	      <div class="storemain">
+	      	  <div class="storeevent" style="display: flex;">
+		      <img alt="" src="../image/storecoupon.png" style="vertical-align: top;">
+		      <div class="eventment" style="flex: 1; margin-top: 70px;">
+		      <p style="font-size: 2em; font-weight: 600; color: #339EB2;">메가박스 기프트 카드 런칭!</p>
+		      <p style="font-size: 2em; font-weight: 600; color: #503396;">소중한 분께 기프트 카드를 선물하세요!</p>
+		      </div>
+		      </div>
+		      <!-- 전체 상품 리스트 start -->
+			  <hr>
+			  <div class="storealllist">
+		      <table class="table table-borderless" style="text-align: center;">
+		      	<tr>
+		    	<c:forEach var="dto" items="${list}" varStatus="i">
+		    		<td>
+		    			<div>
+		    				<img alt="" src="../save/${dto.store_photo }">
+		    			</div>
+		    			<b style="font-size: 1.2em;"> ${dto.store_product }</b>
+		    			<p> ${dto.store_content }</p>
+		    			<fmt:formatNumber value="${dto.store_price}" type="currency"></fmt:formatNumber>
+		    		</td>
+		    	<c:if test="${(i.count+4)%4==0}">
+		    	</tr>
+		    	<tr>
+		    	</c:if>
+		    	</c:forEach>
+		      </table>
+		      </div>
+		      <!-- 전체 상품 리스트 end -->
+	      </div>
 	    </div>
+
+		<!-- 기프트카드 탭 -->
 	    <div id="giftcard" class="container tab-pane fade"><br>
-	      <h3>기프트 카드</h3>
-	      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+	      <p style="font-size: 1.6em; font-weight: 400; color: #252451;">기프트카드</p>
+	      <!-- 기프트카드 상품 리스트 start -->
+			  <hr>
+			  <div class="storegiftcardlist">
+		      <table class="table table-borderless" style="text-align: center;">
+		      	<tr>
+		    	<c:forEach var="dto" items="${list}" varStatus="g">
+		    	<c:set var="category" value="${dto.store_category }"></c:set>
+		    	<c:if test="${category=='giftcard'}">
+		    		<td>
+		    			<div>
+		    				<img alt="" src="../save/${dto.store_photo }">
+		    			</div>
+		    			<b style="font-size: 1.2em;"> ${dto.store_product }</b>
+		    			<p> ${dto.store_content }</p>
+		    			<fmt:formatNumber value="${dto.store_price}" type="currency"></fmt:formatNumber>
+		    		</td>
+			    	<c:if test="${(g.count+4)%4==0}">
+			    	</tr>
+			    	<tr>
+			    	</c:if>
+		    	</c:if>
+		    	</c:forEach>
+		      </table>
+		      </div>
+		      <!-- 기프트카드 상품 리스트 end -->
 	    </div>
+	    
+	    <!-- 메가티켓 탭 -->
 	    <div id="ticket" class="container tab-pane fade"><br>
-	      <h3>메가티켓</h3>
-	      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+	      <p style="font-size: 1.6em; font-weight: 400; color: #252451;">메가티켓</p>
+	      <!-- 메가티켓 상품 리스트 start -->
+			  <hr>
+			  <div class="storegiftcardlist">
+		      <table class="table table-borderless" style="text-align: center;">
+		      	<tr>
+		    	<c:forEach var="dto" items="${list}" varStatus="i">
+		    	<c:set var="category" value="${dto.store_category }"></c:set>
+		    	<c:if test="${category=='ticket'}">
+		    		<td>
+		    			<div>
+		    				<img alt="" src="../save/${dto.store_photo }">
+		    			</div>
+		    			<b style="font-size: 1.2em;"> ${dto.store_product }</b>
+		    			<p> ${dto.store_content }</p>
+		    			<fmt:formatNumber value="${dto.store_price}" type="currency"></fmt:formatNumber>
+		    		</td>
+			    	<c:if test="${(i.count+4)%4==0}">
+			    	</tr>
+			    	<tr>
+			    	</c:if>
+		    	</c:if>
+		    	</c:forEach>
+		      </table>
+		      </div>
+		      <!-- 메가티켓 상품 리스트 end -->
 	    </div>
+	    
+	    <!-- 팝콘/음료/굿즈 탭 -->
 	    <div id="popcorn" class="container tab-pane fade"><br>
-	      <h3>팝콘/음료/굿즈</h3>
-	      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+	      <p style="font-size: 1.6em; font-weight: 400; color: #252451;">팝콘/음료/굿즈</p>
+	      <!-- 팝콘/음료/굿즈 상품 리스트 start -->
+			  <hr>
+			  <div class="storegiftcardlist">
+		      <table class="table table-borderless" style="text-align: center;">
+		      	<tr>
+		    	<c:forEach var="dto" items="${list}" varStatus="g">
+		    	<c:set var="category" value="${dto.store_category }"></c:set>
+		    	<c:if test="${category=='food'}">
+		    		<td>
+		    			<div>
+		    				<img alt="" src="../save/${dto.store_photo }">
+		    			</div>
+		    			<b style="font-size: 1.2em;"> ${dto.store_product }</b>
+		    			<p> ${dto.store_content }</p>
+		    			<fmt:formatNumber value="${dto.store_price}" type="currency"></fmt:formatNumber>
+		    		</td>
+			    	<c:if test="${(g.count+4)%4==0}">
+			    	</tr>
+			    	<tr>
+			    	</c:if>
+		    	</c:if>
+		    	</c:forEach>
+		      </table>
+		      </div>
+		      <!-- 팝콘/음료/굿즈 상품 리스트 end -->
 	    </div>
+	    
+	    <!-- 포인트몰 탭 -->
 	    <div id="pointmall" class="container tab-pane fade"><br>
-	      <h3>포인트몰</h3>
-	      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+	      <p style="font-size: 1.6em; font-weight: 400; color: #252451;">전체 상품</p>
+	      <p>총 ${totalCount }개의 상품이 있습니다.</p>
+	      <div class="storemain">
+	      	  <div class="storeevent" style="display: flex;">
+		      <img alt="" src="../image/pointmall.png" style="vertical-align: top; margin-left:20px; width: 220px; height: 220px;">
+		      <div class="eventment" style="flex: 1; margin-top: 65px; margin-left: 40px;">
+		      <p style="font-size: 2em; font-weight: 600; color: #339EB2;">메가박스 포인트몰 오픈!</p>
+		      <p style="font-size: 2em; font-weight: 600; color: #503396;">메가박스 포인트로 상품을 구매하세요!</p>
+		      </div>
+		      </div>
+		      <!-- 전체 상품 리스트 start -->
+			  <hr>
+			  <div class="storealllist">
+		      <table class="table table-borderless" style="text-align: center;">
+		      	<tr>
+		    	<c:forEach var="dto" items="${list}" varStatus="i">
+		    		<td>
+		    			<div>
+		    				<img alt="" src="../save/${dto.store_photo }">
+		    			</div>
+		    			<b style="font-size: 1.2em;"> ${dto.store_product }</b>
+		    			<p> ${dto.store_content }</p>
+		    			<fmt:formatNumber value="${dto.store_price}" type="currency"></fmt:formatNumber>
+		    		</td>
+		    	<c:if test="${(i.count+4)%4==0}">
+		    	</tr>
+		    	<tr>
+		    	</c:if>
+		    	</c:forEach>
+		      </table>
+		      </div>
+		      <!-- 전체 상품 리스트 end -->
 	    </div>
 	  </div>
 	</div>
