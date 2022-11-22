@@ -45,7 +45,7 @@
               <li class="has-children">
               <a href="contact.html">이벤트/공지사항</a>
               <ul class="dropdown">
-                  <li><a a href="${root }/admin/list">이벤트</a></li>
+                  <li><a href="${root}/admin/list">이벤트</a></li>
                   <li><a href="post-job.html">공지사항</a></li>
                 </ul>
                 </li>

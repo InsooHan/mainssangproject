@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mini.data.mapper.AdminMapperInter">
+<mapper namespace="fpro.data.mapper.AdminMapperInter">
 	<select id="getTotalCount" parameterType="Map" resultType="int">
 		select count(*) from admin
 		<if test="searchcolumn!=null and searchword!=null">
@@ -9,7 +9,7 @@
 		</if>
 	</select>
 	<insert id="insertAdmin"  parameterType="addto">
-		insert into admin values(null,#{category},#{subject},#{photo},#{content},0,now())
+		insert into admin values(null,#{division},#{subject},#{photo},#{content},0,now())
 	</insert>
 	<select id="getList" parameterType="Map" resultType="addto">
 		select * from admin 
@@ -24,5 +24,18 @@
 	<select id="getData" parameterType="int" resultType="addto">
 		select * from admin where num=#{num}
 	</select>
+		<select id="getMaxNum" resultType="int">
+		select ifnull(max(num),0) from admin
+	</select>
+	<update id="updateAdmin"  parameterType="addto">
+		update admin set division=#{division},subject=#{subject},content=#{content}
+		<if test="photo!=null">
+			,photo=#{photo}
+		</if>
+		where num=#{num}
+	</update>
+	<delete id="deleteAdmin" parameterType="String">
+		delete from admin where num=#{num}
+	</delete>
 	
 </mapper>

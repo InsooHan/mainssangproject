@@ -30,11 +30,6 @@ public class AdminService implements AdminServiceInter {
 	}
 
 
-	@Override
-	public void insertBoard(AdminDto dto) {
-		// TODO Auto-generated method stub
-		mapperInter.insertBoard(dto);
-	}
 
 
 	@Override
@@ -62,6 +57,51 @@ public class AdminService implements AdminServiceInter {
 		// TODO Auto-generated method stub
 		return mapperInter.getData(num);
 	}
+
+
+
+
+	@Override
+	public void insertAdmin(AdminDto dto) {
+		// TODO Auto-generated method stub
+		
+	
+		
+		mapperInter.insertAdmin(dto);
+	}
+
+
+
+
+	@Override
+	public int getMaxNum() {
+		// TODO Auto-generated method stub
+		return mapperInter.getMaxNum();
+	}
+
+
+
+
+	@Override
+	public void updateAdmin(AdminDto dto) {
+		// TODO Auto-generated method stub
+		mapperInter.updateAdmin(dto);
+	}
+
+
+
+
+	@Override
+	public void deleteAdmin(int num) {
+		// TODO Auto-generated method stub
+		mapperInter.deleteAdmin(num);
+	}
+
+
+
+
+
+
 	
 
 }
