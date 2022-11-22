@@ -6,11 +6,11 @@
 		select count(*) from store
 	</select>
 	
-	<insert id="insertStore" parameterType="store">
-		insert into store (store_product, store_photo, store_price, store_category) values(#{store_product},#{store_photo},#{store_price},${store_category})
+	<insert id="insertStore" parameterType="storedto">
+		insert into store (store_product, store_price, store_photo, store_content, store_category) values(#{store_product},#{store_price},#{store_photo},#{store_content},#{store_category})
 	</insert>
 	
-	<select id="getAllStore" resultType="store">
-		select * from store order by num desc
+	<select id="getAllStores" resultType="storedto">
+		select * from store order by store_num
 	</select>
 </mapper>
