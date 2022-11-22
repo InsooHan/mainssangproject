@@ -14,14 +14,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="insert" method="post" enctype="multipart/form-data">
+<form action="update" method="post" enctype="multipart/form-data">
 	<table class="table table-bordered" style="width: 500px;">
-		<caption><b>공지</b></caption>
+	<input type="hidden" name="num" value="${dto.num }">
+		<caption><b>공지 수정</b></caption>
 		<tr>
 			<th width="120" bgcolor="pink">제목</th>
 				<td>
 					<input type="text" name="subject" class="form-control"
-					required="required">
+					required="required" value="${dto.subject }">
 				</td>
 		</tr>
 		<tr>
@@ -32,7 +33,7 @@
 					<input type="radio" name="division" 
 					value='극장'>극장
 					<input type="radio" name="division"
-					value='기타' checked="checked">기타
+					value='기타' >기타
 				</td>
 		</tr>
 		<tr>
@@ -44,12 +45,12 @@
 		<tr>
 			<td colspan="2" align="center">
 			<input type="text" style="width: 490px; height: 150px;" class="form-control"
-			name="content" required="required">
+			name="content" required="required" value="${dto.content }">
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-				<button type="submit" class="btn btn-default" style="width: 100px;">등록</button>
+				<button type="submit" class="btn btn-default" style="width: 100px;">수정</button>
 				<button type="button" class="btn btn-default" style="width: 100px;"
 				onclick="location.href='list'">목록</button>
 			</td>

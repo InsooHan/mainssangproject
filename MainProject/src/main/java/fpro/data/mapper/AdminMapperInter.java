@@ -11,8 +11,11 @@ import fpro.data.dto.AdminDto;
 public interface AdminMapperInter {
 
 	public int getTotalCount(Map<String, String> map);
-	public void insertBoard(AdminDto dto);
+	public void insertAdmin(AdminDto dto);
 	public List<AdminDto> getList(Map<String, Object> map);
 	public void updateReadcount(int num);
 	public AdminDto getData(int num);
+	public int getMaxNum();
+	public void updateAdmin(AdminDto dto);
+	public void deleteAdmin(int num);
 }

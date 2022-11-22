@@ -43,7 +43,7 @@
               <li><a href="${root }/store/list">스토어</a></li>
               <li><a href="${root }/community/list">커뮤니티</a></li>
               <li class="has-children">
-              <a href="contact.html">이벤트/공지사항</a>
+            <a href="contact.html">이벤트/공지사항</a>
               <ul class="dropdown">
                   <li><a href="${root }/event/list">이벤트</a></li>
                   <li><a href="${root }/admin/list">공지사항</a></li>

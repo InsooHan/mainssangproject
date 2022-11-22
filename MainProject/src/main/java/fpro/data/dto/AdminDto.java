@@ -11,10 +11,10 @@ import lombok.Data;
 public class AdminDto {
 
 	private int  num;
-	private String  category;
+	private String  division;
 	private String  subject;
 	private String  photo;
 	private String  content;
 	private int readcount;
-	private Timestamp  wirteday;
+	private Timestamp  writeday;
 }
