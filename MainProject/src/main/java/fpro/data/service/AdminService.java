@@ -29,7 +29,36 @@ public class AdminService implements AdminServiceInter {
 		return mapperInter.getTotalCount(map);
 	}
 
+	@Override
+	public int getOtherCount(String searchcolumn, String searchword) {
+		// TODO Auto-generated method stub
+		Map<String , String> map=new HashMap<>();
+		map.put("searchcolumn", searchcolumn);
+		map.put("searchword", searchword);
+		
+		return mapperInter.getOtherCount(map);
+	
+	}
 
+	@Override
+	public int getSystemCount(String searchcolumn, String searchword) {
+		// TODO Auto-generated method stub
+		Map<String , String> map=new HashMap<>();
+		map.put("searchcolumn", searchcolumn);
+		map.put("searchword", searchword);
+		
+		return mapperInter.getSystemCount(map);
+	}
+
+	@Override
+	public int getTheaterCount(String searchcolumn, String searchword) {
+		// TODO Auto-generated method stub
+		Map<String , String> map=new HashMap<>();
+		map.put("searchcolumn", searchcolumn);
+		map.put("searchword", searchword);
+		
+		return mapperInter.getTheaterCount(map);
+	}
 
 
 	@Override
@@ -96,6 +125,16 @@ public class AdminService implements AdminServiceInter {
 		// TODO Auto-generated method stub
 		mapperInter.deleteAdmin(num);
 	}
+
+
+
+
+
+
+
+
+
+	
 
 
 
