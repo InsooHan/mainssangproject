@@ -28,9 +28,15 @@
     <!-- 메뉴 템플릿 css end-->
 
 <title>Insert title here</title>
+<style type="text/css">
+	.storelist a{
+	cursor: pointer;
+	color: black;
+	}
+</style>
 </head>
 <body>
-<div class="container" style="margin-top: 70px; font-family: Noto Sans KR;">
+<div class="container" style="margin-top: 50px; font-family: Noto Sans KR;">
 	
 	<!-- 관리자만 보이는 상품 추가 버튼 -->
 	<c:if test="${sessionScope.loginok!=null && sessionScope.myid=='admin'}">
@@ -76,15 +82,16 @@
 		      </div>
 		      <!-- 전체 상품 리스트 start -->
 			  <hr>
-			  <div class="storealllist">
+			  <div class="storelist storealllist">
 		      <table class="table table-borderless" style="text-align: center;">
 		      	<tr>
 		    	<c:forEach var="dto" items="${list}" varStatus="i">
 		    		<td>
-		    			<div>
+		    			<a href="detail?store_num=${dto.store_num }"><div>
 		    				<img alt="" src="../save/${dto.store_photo }">
 		    			</div>
 		    			<b style="font-size: 1.2em;"> ${dto.store_product }</b>
+		    			</a>
 		    			<p> ${dto.store_content }</p>
 		    			<fmt:formatNumber value="${dto.store_price}" type="currency"></fmt:formatNumber>
 		    		</td>
@@ -104,17 +111,18 @@
 	      <p style="font-size: 1.6em; font-weight: 400; color: #252451;">기프트카드</p>
 	      <!-- 기프트카드 상품 리스트 start -->
 			  <hr>
-			  <div class="storegiftcardlist">
+			  <div class="storelist storegiftcardlist">
 		      <table class="table table-borderless" style="text-align: center;">
 		      	<tr>
 		    	<c:forEach var="dto" items="${list}" varStatus="g">
 		    	<c:set var="category" value="${dto.store_category }"></c:set>
 		    	<c:if test="${category=='giftcard'}">
 		    		<td>
-		    			<div>
+		    			<a href="detail?store_num=${dto.store_num }"><div>
 		    				<img alt="" src="../save/${dto.store_photo }">
 		    			</div>
 		    			<b style="font-size: 1.2em;"> ${dto.store_product }</b>
+		    			</a>
 		    			<p> ${dto.store_content }</p>
 		    			<fmt:formatNumber value="${dto.store_price}" type="currency"></fmt:formatNumber>
 		    		</td>
@@ -134,17 +142,16 @@
 	      <p style="font-size: 1.6em; font-weight: 400; color: #252451;">메가티켓</p>
 	      <!-- 메가티켓 상품 리스트 start -->
 			  <hr>
-			  <div class="storegiftcardlist">
+			  <div class="storelist storegiftcardlist">
 		      <table class="table table-borderless" style="text-align: center;">
 		      	<tr>
-		    	<c:forEach var="dto" items="${list}" varStatus="i">
-		    	<c:set var="category" value="${dto.store_category }"></c:set>
-		    	<c:if test="${category=='ticket'}">
+		    	<c:forEach var="dto" items="${mtlist}" varStatus="i">
 		    		<td>
-		    			<div>
+		    			<a href="detail?store_num=${dto.store_num }"><div>
 		    				<img alt="" src="../save/${dto.store_photo }">
 		    			</div>
 		    			<b style="font-size: 1.2em;"> ${dto.store_product }</b>
+		    			</a>
 		    			<p> ${dto.store_content }</p>
 		    			<fmt:formatNumber value="${dto.store_price}" type="currency"></fmt:formatNumber>
 		    		</td>
@@ -152,7 +159,6 @@
 			    	</tr>
 			    	<tr>
 			    	</c:if>
-		    	</c:if>
 		    	</c:forEach>
 		      </table>
 		      </div>
@@ -164,17 +170,18 @@
 	      <p style="font-size: 1.6em; font-weight: 400; color: #252451;">팝콘/음료/굿즈</p>
 	      <!-- 팝콘/음료/굿즈 상품 리스트 start -->
 			  <hr>
-			  <div class="storegiftcardlist">
+			  <div class="storelist storegiftcardlist">
 		      <table class="table table-borderless" style="text-align: center;">
 		      	<tr>
 		    	<c:forEach var="dto" items="${list}" varStatus="g">
 		    	<c:set var="category" value="${dto.store_category }"></c:set>
 		    	<c:if test="${category=='food'}">
 		    		<td>
-		    			<div>
+		    			<a href="detail?store_num=${dto.store_num }"><div>
 		    				<img alt="" src="../save/${dto.store_photo }">
 		    			</div>
 		    			<b style="font-size: 1.2em;"> ${dto.store_product }</b>
+		    			</a>
 		    			<p> ${dto.store_content }</p>
 		    			<fmt:formatNumber value="${dto.store_price}" type="currency"></fmt:formatNumber>
 		    		</td>
@@ -203,15 +210,16 @@
 		      </div>
 		      <!-- 전체 상품 리스트 start -->
 			  <hr>
-			  <div class="storealllist">
+			  <div class="storelist storealllist">
 		      <table class="table table-borderless" style="text-align: center;">
 		      	<tr>
 		    	<c:forEach var="dto" items="${list}" varStatus="i">
 		    		<td>
-		    			<div>
+		    			<a href="detail?store_num=${dto.store_num }"><div>
 		    				<img alt="" src="../save/${dto.store_photo }">
 		    			</div>
 		    			<b style="font-size: 1.2em;"> ${dto.store_product }</b>
+		    			</a>
 		    			<p> ${dto.store_content }</p>
 		    			<fmt:formatNumber value="${dto.store_price}" type="currency"></fmt:formatNumber>
 		    		</td>
