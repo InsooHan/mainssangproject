@@ -12,4 +12,8 @@ public interface StoreServiceInter {
 	public int getTotalCount();
 	//store 전체 목록 조회
 	public List<StoreDto> getAllStores();
+	//메가티겟 목록 조회
+	public List<StoreDto> getMegaticket();
+	//store_num에 맞는 데이터 조회
+	public StoreDto getStore(String store_num);
 }

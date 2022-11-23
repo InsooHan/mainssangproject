@@ -477,3 +477,11 @@ a {
   .btn.btn-outline-primary:hover {
     color: #fff;
     background: #89ba16; }
+    
+.btn.btn-megabox {
+  color: #fff;
+  background: #503396;
+  border-color: #503396; }
+  .btn.btn-megabox:hover {
+    background: #330066;
+    border-color: #330066; }

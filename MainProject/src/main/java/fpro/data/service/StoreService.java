@@ -32,4 +32,16 @@ public class StoreService implements StoreServiceInter {
 		return mapperInter.getAllStores();
 	}
 
+	@Override
+	public List<StoreDto> getMegaticket() {
+		// TODO Auto-generated method stub
+		return mapperInter.getMegaticket();
+	}
+
+	@Override
+	public StoreDto getStore(String store_num) {
+		// TODO Auto-generated method stub
+		return mapperInter.getStore(store_num);
+	}
+
 }

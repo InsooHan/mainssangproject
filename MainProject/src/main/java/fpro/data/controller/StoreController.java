@@ -77,13 +77,32 @@ public class StoreController {
 		int totalCount = service.getTotalCount();
 		mview.addObject("totalCount", totalCount);
 		
-		//데이터 출력
-		
+		//전체 데이터 출력
 		List<StoreDto> list = service.getAllStores(); 
 		mview.addObject("list", list);
+		
+		//메가티켓 목록만 출력
+		List<StoreDto> mtlist = service.getMegaticket();
+		mview.addObject("mtlist", mtlist);
 		 
 		mview.setViewName("/store/storelist");
 		
 		return mview;
 	}
+	
+	@GetMapping("/store/detail")
+	public ModelAndView detail(@RequestParam String store_num) {
+		
+		ModelAndView mview = new ModelAndView();
+		
+		StoreDto dto = service.getStore(store_num);
+		
+		mview.addObject("dto", dto);
+		
+		mview.setViewName("/store/storedetail");
+		
+		return mview;
+			
+	}
+	
 }

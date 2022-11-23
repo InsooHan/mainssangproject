@@ -2,6 +2,9 @@ package fpro.data.mapper;
 
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
 public interface LoginMapperInter {
 
 	public String getName(String id); //아이디에 해당하는 이름 가져오기
