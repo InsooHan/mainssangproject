@@ -11,6 +11,9 @@ import fpro.data.dto.AdminDto;
 public interface AdminMapperInter {
 
 	public int getTotalCount(Map<String, String> map);
+	public int getSystemCount(Map<String, String> map);
+	public int getTheaterCount(Map<String, String> map);
+	public int getOtherCount(Map<String, String> map);
 	public void insertAdmin(AdminDto dto);
 	public List<AdminDto> getList(Map<String, Object> map);
 	public void updateReadcount(int num);

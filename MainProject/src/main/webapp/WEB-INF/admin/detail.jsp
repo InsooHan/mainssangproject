@@ -51,7 +51,7 @@
 		<button type="button" class="btn btn-outline-info"
 		onclick="location.href='updateform?num=${dto.num}&currentPage=${currentapge }'">수정</button>
 		<button type="button" class="btn btn-outline-info"
-		onclick="location.href='delete?num=${dto.num} &currentPage=${currentapge }'">삭제</button>
+		onclick="location.href='delete?num=${dto.num}'">삭제</button>
 		</c:if>
 	</td>
 </tr>

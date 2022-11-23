@@ -8,15 +8,38 @@
 			where ${searchcolumn} like concat('%',#{searchword},'%')
 		</if>
 	</select>
+	
+	<select id="getSystemCount" parameterType="Map" resultType="int">
+	select count(*) from admin where division = '시스템점검' 
+		<if test="searchcolumn!=null and searchword!=null">
+			and ${searchcolumn} like concat('%',#{searchword},'%')
+		</if>
+	</select>
+	
+	<select id="getTheaterCount" parameterType="Map" resultType="int">
+	select count(*) from admin where division = '극장' 
+		<if test="searchcolumn!=null and searchword!=null">
+			and ${searchcolumn} like concat('%',#{searchword},'%')
+		</if>
+	</select>
+	
+	<select id="getOtherCount" parameterType="Map" resultType="int">
+	select count(*) from admin where division = '기타' 
+		<if test="searchcolumn!=null and searchword!=null">
+			and ${searchcolumn} like concat('%',#{searchword},'%')
+		</if>
+	</select>
+	
 	<insert id="insertAdmin"  parameterType="addto">
 		insert into admin values(null,#{division},#{subject},#{photo},#{content},0,now())
 	</insert>
+	
 	<select id="getList" parameterType="Map" resultType="addto">
 		select * from admin 
 		<if test="searchcolumn!=null and searchword!=null">
 			where ${searchcolumn} like concat('%',#{searchword},'%')
 		</if>
-		order by num asc limit #{start},#{perpage}
+		order by num desc limit #{start},#{perpage}
 	</select>
 	<update id="updateReadcount" parameterType="int">
 		update admin set readcount=readcount+1 where num=#{num}
@@ -34,7 +57,7 @@
 		</if>
 		where num=#{num}
 	</update>
-	<delete id="deleteAdmin" parameterType="String">
+	<delete id="deleteAdmin" parameterType="int">
 		delete from admin where num=#{num}
 	</delete>
 	

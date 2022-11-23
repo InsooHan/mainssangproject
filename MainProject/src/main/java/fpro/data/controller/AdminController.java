@@ -47,12 +47,22 @@ public class AdminController {
 				int perPage=5; //한페이지에 보여질 글의 갯수
 				int perBlock=5; //한블럭당 보여지는 페이지개수
 				
+				
+				int otherCount=service.getOtherCount(sc, sw);
+				int systemCount=service.getSystemCount(sc, sw);
+				int theaterCount=service.getTheaterCount(sc, sw);
+				int systemPage;
+				int systemendPage; //각블럭의 끝페이지
+				int systemstart; //각페이지의 시작번호
+				int systemperPage=5; //한페이지에 보여질 글의 갯수
+				int systemperBlock=5; //한블럭당 보여지는 페이지개수
 
 				//총갯수:
-				
 				//총페이지갯수 구하기
 					totalPage=totalCount/perPage+(totalCount%perPage==0?0:1);
-
+				
+				/*추가*/
+					
 
 				//각블럭의 시작페이지(현재페이지 3: 시작:1 끝:5)
 				//각블럭의 시작페이지(현재페이지 6: 시작:6 끝:10)
@@ -90,7 +100,9 @@ public class AdminController {
 					mview.addObject("endPage", endPage);
 					mview.addObject("no", no);
 					mview.addObject("currentPage", currentPage);
-					
+					mview.addObject("otherCount", otherCount);
+					mview.addObject("systemCount", systemCount);
+					mview.addObject("theaterCount", theaterCount);
 					mview.addObject("totalCount", totalCount);
 
 					
@@ -217,19 +229,22 @@ public class AdminController {
 		//return "redirect:content?num="+service.getMaxNum();
 		//return "redirect:list?currentPage="+currentPage;
 	}
-	@GetMapping("/delete")
-	public String delete(AdminDto dto, int num, 
-			HttpSession session) {
+	
+	@GetMapping("/admin/delete")
+	public String delete(int num, List<MultipartFile> upload,HttpSession session){
+		
+
 		String path=session.getServletContext().getRealPath("/save");//폴더
 		String uploadfile=service.getData(num).getPhoto();
 		
 		File file=new File(path+"\\"+uploadfile);
 		file.delete();
 		
-		
 		service.deleteAdmin(num);
 		
 		return "redirect:list";
+		//return "redirect:list?currentPage="+currentPage;
+	
 	}
 }
 
