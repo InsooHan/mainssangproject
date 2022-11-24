@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fpro.data.mapper.CommunityMapperInter">
+	<select id="getTotalCount" parameterType="Map" resultType="int">
+		select count(*) from community 
+		<if test="searchcolumn!=null and searchword!=null">
+			where ${searchcolumn} like concat('%',#{searchword},'%') 
+		</if>
+	</select>
+	
+	<select id="getTotalCountMovieTalk" parameterType="Map" resultType="int">
+		select count(*) from community where category='영화수다'
+		<if test="searchcolumn!=null and searchword!=null">
+			and ${searchcolumn} like concat('%',#{searchword},'%') 
+		</if>
+	</select>
+	
+	<select id="getTotalCountMovieReport" parameterType="Map" resultType="int">
+		select count(*) from community where category='영화정보'
+		<if test="searchcolumn!=null and searchword!=null">
+			and ${searchcolumn} like concat('%',#{searchword},'%') 
+		</if>
+	</select>
+	
+	<select id="getMaxNum" resultType="int">
+		select ifnull(max(num),0) from community
+	</select>
+	
+	<select id="getMaxIdx" resultType="int">
+		select ifnull(max(idx),0) from boardanswer
+	</select>
+	
+	<select id="getMaxCategory" resultType="String" parameterType="int">
+		select ifnull(max(category),null) from community where num=#{num}
+	</select>
+	
+	<update id="updateRestep" parameterType="Map">
+		update community set restep=restep+1 where regroup=#{regroup} and restep>#{restep}
+	</update>
+	
+	<update id="updateAnRestep" parameterType="Map">
+		update boardanswer set ans_restep=ans_restep+1 where ans_regroup=#{ans_regroup} and ans_restep>#{ans_restep}
+	</update>
+	
+	<insert id="insertBoard" parameterType="community">
+		insert into community (id,name,subject,photo,content,regroup,restep,relevel,writeday,category,likes,readcount,notice) 
+		values (#{id},#{name},#{subject},#{photo},#{content},#{regroup},#{restep},#{relevel},now(),#{category},0,0,#{notice})
+	</insert>
+	
+	<select id="getList" resultType="community" parameterType="Map">
+		select * from community
+		<if test="searchcolumn!=null and searchword!=null">
+			where ${searchcolumn} like concat('%',#{searchword},'%') 
+		</if>
+			order by notice desc,regroup desc,restep asc limit #{start},#{perPage}
+	</select>
+	
+	<select id="getListMovieTalk" resultType="community" parameterType="Map">
+		select * from community where category='영화수다'
+		<if test="searchcolumn!=null and searchword!=null">
+			and ${searchcolumn} like concat('%',#{searchword},'%') 
+		</if>
+		 order by regroup desc,restep asc limit #{start},#{perPage}
+	</select>
+	
+	<select id="getListMovieReport" resultType="community" parameterType="Map">
+		select * from community where category='영화정보'
+		<if test="searchcolumn!=null and searchword!=null">
+			and ${searchcolumn} like concat('%',#{searchword},'%') 
+		</if>
+		 order by regroup desc,restep asc limit #{start},#{perPage}
+	</select>
+	
+	<select id="getListBest" resultType="community" parameterType="Map">
+		select * from community where category!='공지사항' and relevel=0
+		<if test="searchcolumn!=null and searchword!=null">
+			and ${searchcolumn} like concat('%',#{searchword},'%') 
+		</if>
+		order by likes desc,regroup desc,restep asc limit #{start},#{perPage}
+	</select>
+	
+	<update id="updateReadCount" parameterType="int">
+		update community set readcount=readcount+1 where num=#{num}
+	</update>
+	
+	<select id="getData" parameterType="int" resultType="community">
+		select * from community where num=#{num}
+	</select>
+	
+	<update id="likesUpdate" parameterType="int">
+		update community set likes=likes+1 where num=#{num}
+	</update>
+	
+	<update id="likesMinusUpdate" parameterType="int">
+		update community set likes=likes-1 where num=#{num}
+	</update>
+	
+	<update id="updateBoard" parameterType="community">
+		update community set subject=#{subject},content=#{content},category=#{category} where num=#{num}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="int">
+		delete from community where num=#{num}
+	</delete>
+	
+	<!-- 댓글 -->
+	<insert id="insertAnswer" parameterType="badto">
+		insert into boardanswer (idx,num,content,writeday,ans_regroup,ans_restep,ans_relevel) values (#{idx},#{num},#{content},now(),#{ans_regroup},#{ans_restep},#{ans_relevel})
+	</insert>
+	
+	<select id="getAlist" resultType="badto">
+		select * from boardanswer order by ans_regroup desc,ans_restep asc
+	</select>
+	
+</mapper>
