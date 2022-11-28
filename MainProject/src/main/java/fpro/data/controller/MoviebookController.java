@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import fpro.data.dto.DemovieDto;
 import fpro.data.dto.MovieDto;
 import fpro.data.dto.TheaterDto;
+import fpro.data.service.DemovieService;
 import fpro.data.service.MovieService;
 import fpro.data.service.TheaterService;
 
@@ -22,6 +24,8 @@ public class MoviebookController {
 	TheaterService service;
 	@Autowired
 	MovieService mservice;
+	@Autowired
+	DemovieService dservice;
 	
 	@GetMapping("/book/list")
 	public ModelAndView moveList() {
@@ -41,5 +45,12 @@ public class MoviebookController {
 	public List<TheaterDto> noPageList(@RequestParam String city){
 		return service.getSomeDatas(city);
 	}
+	
+	@GetMapping("book/movielist")
+	@ResponseBody
+	public List<DemovieDto> movietimelist(@RequestParam String moviename,@RequestParam String theater){
+		return dservice.getSomeDatas(theater, moviename);
+	}
+
 	
 }
