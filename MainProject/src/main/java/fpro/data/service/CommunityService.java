@@ -194,7 +194,7 @@ public class CommunityService implements CommunityServiceInter {
 	@Override
 	public void insertAnswer(BoardAnswerDto bdto) {
 		// TODO Auto-generated method stub
-		int idx=bdto.getIdx(); //0:새글.. 1보다큰값:답글
+		/*int idx=bdto.getIdx(); //0:새글.. 1보다큰값:답글
 		int regroup=bdto.getAns_regroup();
 		int restep=bdto.getAns_restep();
 		int relevel=bdto.getAns_relevel();
@@ -216,7 +216,7 @@ public class CommunityService implements CommunityServiceInter {
 		//바뀐값들을 다시 dto에 담는다
 		bdto.setAns_regroup(regroup);
 		bdto.setAns_restep(restep);
-		bdto.setAns_relevel(relevel);
+		bdto.setAns_relevel(relevel);*/
 
 		
 		inter.insertAnswer(bdto);
@@ -237,12 +237,32 @@ public class CommunityService implements CommunityServiceInter {
 		inter.updateAnRestep(map);
 	}
 
+
 	@Override
-	public List<BoardAnswerDto> getAlist() {
+	public List<BoardAnswerDto> getAlist(int num) {
 		// TODO Auto-generated method stub
-		return inter.getAlist();
+		return inter.getAlist(num);
 	}
 
+	@Override
+	public void deleteAnswer(int idx) {
+		// TODO Auto-generated method stub
+		inter.deleteAnswer(idx);
+	}
+
+	@Override
+	public BoardAnswerDto getAnsData(int idx) {
+		// TODO Auto-generated method stub
+		return inter.getAnsData(idx);
+	}
+
+	@Override
+	public void updateAnswer(BoardAnswerDto bdto) {
+		// TODO Auto-generated method stub
+		inter.updateAnswer(bdto);
+	}
+
+	
 	
 	
 

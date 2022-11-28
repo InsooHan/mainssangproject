@@ -30,5 +30,8 @@ public interface CommunityMapperInter {
 	public void likesUpdate(int num);
 	public void likesMinusUpdate(int num);
 	public void insertAnswer(BoardAnswerDto bdto);
-	public List<BoardAnswerDto> getAlist();
+	public List<BoardAnswerDto> getAlist(int num);
+	public void deleteAnswer(int idx);
+	public BoardAnswerDto getAnsData(int idx);
+	public void updateAnswer(BoardAnswerDto bdto);
 }
