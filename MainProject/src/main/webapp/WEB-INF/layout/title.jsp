@@ -61,7 +61,6 @@
 						<b style="color: white;">${sessionScope.myid }님 로그인 중</b>&nbsp;&nbsp;
 						<button type="button" class="btn btn-info btn-m" onclick="location.href='${root}/login/logoutprocess'" style="position:relative; z-index:999; background-color: #339EB2; border: 0px; color: white;">로그아웃</button>
 					</c:if>
-					
 				</div>
             	
             </div>
