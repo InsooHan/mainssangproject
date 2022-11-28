@@ -6,24 +6,24 @@ import fpro.data.dto.MemberDto;
 
 public interface MemberServieInter {
 
-	void insertMember(MemberDto dto);
+	public void insertMember(MemberDto dto);
 
-	List<MemberDto> getAllMembers();
+	public List<MemberDto> getAllMembers();
 
-	int getSearchId(String id);
+	public int getSearchId(String id);
 
-	String getName(String id);
+	public String getName(String id);
 
-	int getIdPassCheck(String id, String pass);
+	public int getIdPassCheck(String id, String pass);
 
-	MemberDto getDataById(String id);
+	public MemberDto getDataById(String id);
 
-	void deleteMember(String num);
+	public void deleteMember(String num);
 
-	MemberDto getDataByNum(String num);
+	public MemberDto getDataByNum(String num);
 
-	void updatePhoto(String num, String photo);
+	public void updatePhoto(String num, String photo);
 
-	void updateMember(MemberDto dto);
+	public void updateMember(MemberDto dto);
 
 }

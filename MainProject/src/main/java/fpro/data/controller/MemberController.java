@@ -37,7 +37,7 @@ public class MemberController {
    
    @GetMapping("/member/idcheck")
    @ResponseBody
-   public Map<String, Integer> idCheckProcess(String id){
+   public Map<String, Integer> idCheckProcess(@RequestParam String id){
       Map<String, Integer> map=new HashMap<>();
    
       int n=service.getSearchId(id);

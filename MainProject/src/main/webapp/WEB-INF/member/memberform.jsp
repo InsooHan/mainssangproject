@@ -43,20 +43,21 @@ $(function(){
 		}
 	});
 	$("#btnidcheck").click(function(){
-		
-		$.ajax({
+		//alert($("#id").val());
+ 		$.ajax({
 			type:"get",
 			dataType:"json",
 			url:"idcheck",
 			data:{"id":$("#id").val()},
 			success:function(res){
-				if(res.count==0){
+				//alert("성공");
+				 if(res.count==0){
 					$("span.idsuccess").text("가능한 아이디입니다");
 				}else{
 					$("span.idsuccess").text("이미 존재하는 아이디입니다");
-				}
+				} 
 			}
-		});
+		}); 
 	});
 	$("#id").keyup(function(){
 		$("span.idsuccess").text("");
