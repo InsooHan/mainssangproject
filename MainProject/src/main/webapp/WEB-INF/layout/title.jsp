@@ -12,9 +12,6 @@
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="https://kit.fontawesome.com/a47cf79e39.js" crossorigin="anonymous"></script>
 
-
-
-
 <title>Insert title here</title>
 </head>
 <c:set var="root" value="<%=request.getContextPath() %>"></c:set>
@@ -31,14 +28,8 @@
 
 		  <!-- 메뉴 탭 start -->
           <nav class="mx-auto site-navigation" style="text-align: center; ">
-            <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
-              <li class="has-children">
-            <a href="${root }/movie/list">영화</a>
-            <ul class="dropdown">
-               <li><a href="${root }/movie/list">박스오피스</a></li>
-               <li><a href="${root }/movie/new">최신영화</a></li>
-            </ul>
-           </li>
+            <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">\
+           	  <li><a href="${root }/movie/list">영화</a></li>
               <li><a href="blog.html">예매</a></li>
               <li><a href="${root }/store/list">스토어</a></li>
               <li><a href="${root }/community/list">커뮤니티</a></li>

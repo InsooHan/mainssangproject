@@ -33,20 +33,77 @@ $(function(){
 		var result = tprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 		
 		$("#totalprice").text(result+" 원");
+		
 	});
 	
-	
 	//로그인 상태면 구매페이지, 로그인 없으면 로그인 모달
-	$(".buybtn").click(){
+	$("#btnbuy").click(function(){
 		
-		if(sessionScope.loginok!=null){
-			alert("로그인 상태!");
+		//세션에서 로그인 유무 받아오기
+		var loginok = "<%=(String)session.getAttribute("loginok")%>";
+		
+		if(loginok!=null){
+			//alert("로그인 상태!");
+			
+			var formdata = $("#frm").serialize();
+			//alert(formdata);	
+
+			$.ajax({
+			      
+			      type:"post",
+			        dataType:"html",
+			        url:"cartinsert",
+			        data:formdata,
+			        success:function(){
+
+		        	location.href="/store/buy?store_num=${dto.store_num }";
+			      
+			           }, statutsCode:{
+			           404:function(){
+			              alert("파일을 찾을 수 없습니다.");
+			           },500:function(){
+			              alert("서버오류, 오타");
+			           }
+			        }
+			     }); 
+			
+			
 		}else{
 			alert("로그인이 필요합니다.");
 		}
 		
+	});
+	
+	//장바구니 클릭했을 때 추가 후 이동
+	$("#btncart").click(function(){
 		
-	}
+			var formdata = $("#frm").serialize();
+			//alert(formdata);	
+
+			$.ajax({
+			      
+			      type:"post",
+			        dataType:"html",
+			        url:"cartinsert",
+			        data:formdata,
+			        success:function(){
+
+			        var a = confirm("장바구니에 추가되었습니다. 장바구니로 이동하시겠습니까?");
+			        if(a){
+			        	location.href="cart";
+			        }
+			      
+			           }, statutsCode:{
+			           404:function(){
+			              alert("파일을 찾을 수 없습니다.");
+			           },500:function(){
+			              alert("서버오류, 오타");
+			           }
+			        }
+			     }); 
+			
+		});
+
 	
 });
 
@@ -56,6 +113,11 @@ $(function(){
 </head>
 <body>
 <div class="container" style="margin-top: 50px; font-family: Noto Sans KR;">
+<form id="frm" action="cartinsert" method="post">
+<!-- 장바구니 기능을 위해 hidden으로 제품num, 로그인 된 회원num -->
+<input type="hidden" name="store_num" value="${dto.store_num }">
+<input type="hidden" name="member_num" value="${member_num }">
+
 	<div class="detail_title">
 		<p style="font-size: 2em; font-weight: 700; color: #2E2E2E;">${dto.store_product }</p>
 		<p style="font-size: 1.2em; font-weight: 400; color: #848484;">${dto.store_content }</p>
@@ -80,7 +142,9 @@ $(function(){
 				</td>
 				<td>
 					<div style="margin-top: 30px;">
-						<p style="font-weight:300; font-size: 1.2em; color: black;">사용 가능 극장_모달창 만들기</p>
+						<p><a href="#" title="사용 가능 극장" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="코엑스점, 강남점" style="font-weight:300; font-size: 1.2em; color: black;">
+						사용 가능 극장
+						</a></p>
 						<p style="font-weight:300; font-size: 1.2em; color: black;">5년</p>
 						<p style="font-weight:300; font-size: 1.2em; color: black;">1회 8개 구매 가능</p>
 						<p style="font-weight:300; font-size: 1.2em; color: black;">구매일로부터 10일 이내 취소 가능하며, 부분취소는 불가능합니다.</p>
@@ -93,7 +157,7 @@ $(function(){
 					</td>
 					<td>
 						<input type="hidden" value="${dto.store_price }" id="storeprice">
-						<input type="number" min="1" max="8" step="1" name="cnt" id="cnt" value="1">
+						<input type="number" min="1" max="8" step="1" name="cart_cnt" id="cnt" value="1">
 						<div style="float:right; margin-right: 30px;">
 							<p style="font-size: 2em; color: black;" id="totalprice">
 							<fmt:formatNumber value="${dto.store_price }" pattern="#,###" /> 원
@@ -104,7 +168,10 @@ $(function(){
 				<tr>
 					<td colspan="2">
 						<div style="float: right;margin-right: 30px;">
-							<button class="btn btn-megabox btn-lg buybtn">
+							<button type="button" class="btn btn-success btn-lg" id="btncart">
+							장바구니
+							</button>
+							<button type="button" class="btn btn-megabox btn-lg" id="btnbuy">
 							구매하기
 							</button>
 						</div>
@@ -112,6 +179,8 @@ $(function(){
 				</tr>
 			</tr>
 		</table>
+		
+</form>
 		<hr>
 		<br><br>
 		<div id="accordion">
@@ -176,5 +245,16 @@ $(function(){
 	
 	
 </div>
+
+<script>
+//사용가능 극장 hover
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+  return new bootstrap.Popover(popoverTriggerEl)
+})
+
+
+
+</script>
 </body>
 </html>

@@ -14,6 +14,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-구매 페이지
+결제 완료
 </body>
 </html>
