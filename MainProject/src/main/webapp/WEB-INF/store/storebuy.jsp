@@ -11,6 +11,8 @@
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 <script src="https://kit.fontawesome.com/a47cf79e39.js" crossorigin="anonymous"></script>
 <title>Insert title here</title>
 <script type="text/javascript">
@@ -30,7 +32,29 @@
 		
 	});
 	
+	var IMP = window.IMP;   // 생략 가능
+	IMP.init("imp62053265"); // 예: imp00000000 
 
+    function requestPay() {
+        IMP.request_pay({
+            pg : 'html5_inicis',
+            pay_method : 'card',
+            merchant_uid: "merchant_" + new Date().getTime(), 
+            name : '당근 10kg',
+            amount : 100,
+            buyer_email : 'Iamport@chai.finance',
+            buyer_name : '아임포트 기술지원팀',
+            buyer_tel : '010-1234-5678',
+            buyer_addr : '서울특별시 강남구 삼성동',
+            buyer_postcode : '123-456'
+        }, function (rsp) { // callback
+            if (rsp.success) {
+                console.log(rsp);
+            } else {
+                console.log(rsp);
+            }
+        });
+    }
 </script>
 <style type="text/css">
 
@@ -71,7 +95,7 @@
 			<div class="buypage_title">
 				<p style="font-size: 1.8em; font-weight: 400; color: #503396;">최종 결제</p>
 			</div>
-			<div style="text-align:center; border: 1px #555555 solid; border-radius:10px; background-color: #555555; width: 100%; height: 300px;">
+			<div style="text-align:center; border: 1px #555555 solid; border-radius:10px; background-color: #555555; width: 100%; height: 350px;">
 				<div class="calc" style="margin-top: 30px; display: flex; justify-content:center; align-items:center;">
 					 <div class="price" style="width: 180px; height: 80px; display: inline-block;">
 					 	<p style="color: white;">총 상품 금액</p>
@@ -115,6 +139,8 @@
 					<br>
 					<input type="radio" name="payinput" id="pay_bank" value="pay_bank">
 					<span style="color: white;">무통장 입금</span>
+					<br><br>
+					<button type="button" class="btn btn-megabox" onclick="requestPay()">결제하기</button>
 				</div>
 				<br>
 				
@@ -123,5 +149,7 @@
 		
 	</div>
 </div>
+
+	
 </body>
 </html>
