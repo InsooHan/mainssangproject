@@ -52,7 +52,7 @@ font-size: 1.2em;
 <body>
 
 <!-- 카테고리 선택 -->
-<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" style="margin: 30px;">
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" style="margin-left: 20px;">
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" onclick="location.href='list'">전체</button>
   </li>
@@ -67,7 +67,7 @@ font-size: 1.2em;
   </li>
 </ul>
 
-
+<!-- 영화수다 리스트 출력 -->
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
   	<div class="boardlist" style="margin-left: 40px; margin-top: 20px;">
@@ -107,6 +107,8 @@ font-size: 1.2em;
 							<img alt="" src="../save/re.png">	
 							</c:if>
 							<a href="detail?num=${dto.num }&currentPage=${currentPage}" style="color: black;">${dto.subject }</a>
+							
+							<!-- 사진 있을경우 사진아이콘 -->
 							<c:if test="${dto.content.contains('img') }">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16" style="color: gray;">
 								  <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
@@ -114,6 +116,12 @@ font-size: 1.2em;
 								</svg>
 							</c:if>
 							
+							<!-- 댓글개수 -->
+							<c:if test="${dto.anscount>0 }">
+							<a style="color: red;" href="detail?num=${dto.num }&currentPage=${currentPage}#answer"><b>[${dto.anscount }]</b></a>
+							</c:if>
+							
+							<!-- 오늘 날짜일경우 제목 옆에 new -->
 							<c:set var="today" value="<%=new java.util.Date()%>" />
 							<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyy-MM-dd" /></c:set> 
 							<c:set var="dtodate"><fmt:formatDate value="${dto.writeday }" pattern="yyyy-MM-dd"/></c:set>
@@ -132,12 +140,11 @@ font-size: 1.2em;
 			</c:forEach>
 		
 	
-		<!-- 글쓰기버튼은 로그인을 해야만 보인다 -->
-<c:if test="${sessionScope.loginok!=null }">
+
 	<thead>
 	<tr>
 		<td colspan="6" align="right">
-			<button type="button" class="btn btn-outline-secondary" onclick="location.href='writeform'">
+			<button type="button" class="btn btn-outline-secondary" id="write">
 			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
  				 <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
 			</svg>
@@ -145,14 +152,14 @@ font-size: 1.2em;
 		</td>
 	</tr>
 	</thead>
-</c:if>
+
 	</table>
 	
 	
 	
 	<!-- 페이징처리 -->
 <c:if test="${totalCount>0}">
-	<div style="width: 800px; align-content: center; margin-left: 700px;" class="container">
+	<div style="width: 800px; align-content: center; margin-left: 550px;" class="container">
 		<ul class="pagination">
 			<!-- 이전 -->
 			<c:if test="${startPage>1 }">
@@ -203,7 +210,7 @@ font-size: 1.2em;
 
 
 
-<div class="searcharea" align="center">
+<div class="searcharea" style="align-content: center; margin-left: 500px;">
 	<!-- 검색창 -->
 	<form action="movietalk">
 		<div>
@@ -217,8 +224,19 @@ font-size: 1.2em;
 			<input type="submit" value="검색" class="btn btn-secondary btn-sm">
 		</div>
 	</form>
-	<%--<a href="list?searchcolumn=id&searchword=${sessionScope.myid }">내가쓴글</a> --%>
+	
 </div>
-
+<script type="text/javascript">
+$("#write").click(function(){
+	<c:if test="${sessionScope.loginok==null }">
+	alert("로그인이 필요합니다");
+	location.reload();
+	</c:if>
+	
+	<c:if test="${sessionScope.loginok!=null }">
+	location.href="writeform";
+		</c:if>
+})
+</script>
 </body>
 </html>

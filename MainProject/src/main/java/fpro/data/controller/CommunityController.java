@@ -72,6 +72,12 @@ public class CommunityController {
 
 				//각 페이지에서 필요한 게시글 불러오기
 				List<CommunityDto>list =ser.getList(sc, sw, start, perPage);
+				
+				
+				//댓글개수
+				for(CommunityDto d:list) {
+					d.setAnscount(ser.getAlist(d.getNum()).size());
+				}
 
 
 
@@ -130,6 +136,10 @@ public class CommunityController {
 		//각 페이지에서 필요한 게시글 불러오기
 		List<CommunityDto>list =ser.getListMovieTalk(sw, category, start, perPage);
 
+		//댓글개수
+		for(CommunityDto d:list) {
+			d.setAnscount(ser.getAlist(d.getNum()).size());
+		}
 
 
 		//각 글 앞에 붙힐 시작번호
@@ -189,6 +199,12 @@ public class CommunityController {
 		//각 페이지에서 필요한 게시글 불러오기
 
 		List<CommunityDto>list =ser.getListMovieReport(sc, sw, start, perPage);
+		
+		//댓글개수
+		for(CommunityDto d:list) {
+			d.setAnscount(ser.getAlist(d.getNum()).size());
+		}
+
 
 		//각 글 앞에 붙힐 시작번호
 		//총 글이 만약 20... 1페이지는 20부터 2페이지는 15부터
@@ -246,6 +262,12 @@ public class CommunityController {
 		//각 페이지에서 필요한 게시글 불러오기
 
 		List<CommunityDto>list =ser.getListBest(sc, sw, start, perPage);
+		
+		//댓글개수
+		for(CommunityDto d:list) {
+			d.setAnscount(ser.getAlist(d.getNum()).size());
+		}
+
 
 		//각 글 앞에 붙힐 시작번호
 		//총 글이 만약 20... 1페이지는 20부터 2페이지는 15부터
@@ -310,21 +332,14 @@ public class CommunityController {
 	
 	
 	
-	
-	
 	@GetMapping("/community/detail")
-	public ModelAndView detail(@RequestParam int currentPage,int num,@RequestParam(defaultValue = "0") int idx,@RequestParam(defaultValue = "0") int ans_regroup,
-			@RequestParam(defaultValue = "0") int ans_restep,@RequestParam(defaultValue = "0") int ans_relevel) {
+	public ModelAndView detail(@RequestParam int currentPage,int num) {
 		ModelAndView model=new ModelAndView();
 		CommunityDto dto=ser.getData(num);
 		ser.updateReadCount(num);
-		
 
-		model.addObject("idx", idx);
+
 		model.addObject("num", num);
-		model.addObject("ans_regroup", ans_regroup);
-		model.addObject("ans_relevel", ans_relevel);
-		model.addObject("ans_restep", ans_restep);
 		model.addObject("dto", dto);
 		model.addObject("currentPage", currentPage);
 		model.setViewName("/community/detail");
@@ -364,24 +379,52 @@ public class CommunityController {
 	
 	@GetMapping("/community/likes")
 	@ResponseBody
-	public void likes(int num) {
+	public Map<String, Integer> likes(int num) {
 		ser.likesUpdate(num);
+		int likes=ser.getData(num).getLikes();
+		
+		Map<String, Integer> map=new HashMap<>();
+		map.put("likes", likes);
+		
+		return map;
 	}
 	
 	
 	@PostMapping("/community/ainsert")
 	@ResponseBody
-	public void ainsert(BoardAnswerDto bdto) {
-
+	public void ainsert(BoardAnswerDto bdto,HttpSession session) {
+		String id=(String)session.getAttribute("myid");
+		String name=lser.getName(id);
+		bdto.setId(id);
+		bdto.setName(name);
 		ser.insertAnswer(bdto);
 	}
 	
 	@GetMapping("/community/alist")
 	@ResponseBody
-	public List<BoardAnswerDto> alist() {
+	public List<BoardAnswerDto> alist(int num) {
 		//Map<String, Object>map=new HashMap<>();
-		List<BoardAnswerDto> list=ser.getAlist();
+		List<BoardAnswerDto> list=ser.getAlist(num);
 		return list;
+	}
+	
+	@GetMapping("/community/adelete")
+	@ResponseBody
+	public void answerdelete(int idx) {
+		ser.deleteAnswer(idx);
+	}
+	
+	@GetMapping("/community/auform")
+	@ResponseBody
+	public BoardAnswerDto auform(int idx){
+		BoardAnswerDto bdto=ser.getAnsData(idx);
+		return bdto;
+	}
+	
+	@PostMapping("/community/aupdate")
+	@ResponseBody
+	public void aupdate(BoardAnswerDto bdto){
+		ser.updateAnswer(bdto);
 	}
 	
 }

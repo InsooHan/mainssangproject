@@ -44,8 +44,8 @@
 	</update>
 	
 	<insert id="insertBoard" parameterType="community">
-		insert into community (id,name,subject,photo,content,regroup,restep,relevel,writeday,category,likes,readcount,notice) 
-		values (#{id},#{name},#{subject},#{photo},#{content},#{regroup},#{restep},#{relevel},now(),#{category},0,0,#{notice})
+		insert into community (id,name,subject,content,regroup,restep,relevel,writeday,category,likes,readcount,notice) 
+		values (#{id},#{name},#{subject},#{content},#{regroup},#{restep},#{relevel},now(),#{category},0,0,#{notice})
 	</insert>
 	
 	<select id="getList" resultType="community" parameterType="Map">
@@ -106,11 +106,26 @@
 	
 	<!-- 댓글 -->
 	<insert id="insertAnswer" parameterType="badto">
-		insert into boardanswer (idx,num,content,writeday,ans_regroup,ans_restep,ans_relevel) values (#{idx},#{num},#{content},now(),#{ans_regroup},#{ans_restep},#{ans_relevel})
+		insert into boardanswer (num,content,writeday,name,id) values (#{num},#{content},now(),#{name},#{id})
 	</insert>
 	
-	<select id="getAlist" resultType="badto">
-		select * from boardanswer order by ans_regroup desc,ans_restep asc
+	<!-- 댓글리스트 -->
+	<select id="getAlist" resultType="badto" parameterType="int">
+		select * from boardanswer where num=#{num} order by idx
 	</select>
 	
+	<!-- 댓글수정창 -->
+	<select id="getAnsData" parameterType="int" resultType="badto">
+		select * from boardanswer where idx=#{idx}
+	</select>
+	
+	<!-- 댓글수정 -->
+	<update id="updateAnswer" parameterType="badto">
+		update boardanswer set content=#{content} where idx=${idx}
+	</update>
+	
+	<!-- 댓글삭제 -->
+	<delete id="deleteAnswer" parameterType="int">
+		delete from boardanswer where idx=#{idx}
+	</delete>
 </mapper>

@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 
 import org.apache.ibatis.type.Alias;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 
@@ -13,10 +15,10 @@ public class BoardAnswerDto {
 	private int idx;
 	private int num;
 	private String content;
+	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
 	private Timestamp writeday;
-	private int ans_regroup;
-	private int ans_restep;
-	private int ans_relevel;
+	private String name;
+	private String id;
 
 	
 }

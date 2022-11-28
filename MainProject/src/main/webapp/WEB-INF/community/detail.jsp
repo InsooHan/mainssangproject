@@ -17,16 +17,23 @@ p{
 color: black !important;
 }
 
+span.writer{
+color: red !important;
+border: 1px solid red;
+background-color: white !important;
+font-size: 0.7em; 
+}
 </style>
 </head>
 <body>
 
 
-
+<!-- 상세보기 출력 start -->
 <table class="table table" style=" width: 1000px; margin: 40px;">
 	
 	<tr>
 		<td>
+			<input type="hidden" value="${dto.id }" id="dtoid"> 
 			<span style="color: #339EB2; font-size: 17px; padding: 5px;">${dto.category} ></span>
 			&nbsp;&nbsp;<h3 style="padding-top: 10px; padding-bottom: 5px;"><span>${dto.subject }</span></h3>
 			&nbsp;<b>${dto.name }</b><br>
@@ -43,12 +50,13 @@ color: black !important;
 			<br><br><br><br><br><br><br><br><br>
 			
 		   <div style="cursor: pointer;" id="likes" num=${dto.num }>
-		   <button type="button" class="btn btn-outline-danger">
+		   <button type="button" class="btn btn-outline-danger likes">
 		   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
   				<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-			</svg> 좋아요 ${dto.likes }</button>
+			</svg><span >&nbsp;좋아요 ${dto.likes }</span> </button>
 		  
 			</div>
+			<div id="likesnum"></div>
 			</td>
 		
 		</tr>
@@ -60,29 +68,35 @@ color: black !important;
 			<!-- 댓글리스트 -->
 			<h5><b>댓글</b></h5>
 				<div id="answer">
-					
 				</div>
+
 				
 			<!-- 댓글입력폼 -->
 				<div>
-					<form action="" class="form-inline" name="aform" id="aform">
-					<input type="hidden" name="idx" value="${idx }">
+					<form action="" class="form-inline" name="aform" id="aform" num=${num }>
 					<input type="hidden" name="num" value="${num }">
 					<input type="hidden" name="currentPage" value="${currentPage }">
-					<input type="hidden" name="ans_regroup" value="${ans_regroup }">
-					<input type="hidden" name="ans_restep" value="${ans_restep }">
-					<input type="hidden" name="ans_relevel" value="${ans_relevel}">
+
+					
+					<c:if test="${sessionScope.loginok!=null }">
 					<textarea style="width: 850px; height: 100px;" class="form-control" name="content" required="required">
-					</textarea>
-					<button type="submit" class="btn btn-info ainsert" style="width: 100px; height: 100px; margin-left: 10px;" content=${bdto.conetnt }>등록</button>
+					</textarea>		
+					<button type="submit" class="btn btn-info ainsert" style="width: 100px; height: 100px; margin-left: 10px;">등록</button>	
+					</c:if>	
+						
+					<c:if test="${sessionScope.loginok==null }">
+					<textarea style="width: 850px; height: 100px;" class="form-control" name="content" placeholder="로그인 후 댓글을 작성할 수 있습니다."></textarea>		
+					<button type="button" class="btn btn-info ainsert" style="width: 100px; height: 100px; margin-left: 10px;" disabled="disabled">등록</button>	
+					</c:if>		
 					</form>
 					<br>
 				</div>
-			
+				<!-- 댓글입력폼 end -->
 			</td>
 		</tr>
 		
 		<tr>
+		<!-- 글쓰기, 답글, 목록, 수정, 삭제버튼 -->
 			<td align="center">
 				<button class="btn btn btn-light" onclick="location.href='writeform'">
 				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
@@ -117,11 +131,46 @@ color: black !important;
 			</td>
 		</tr>
 </table>
+
+<!-- 댓글수정 모달창 -->
+<!-- Modal -->
+
+<div class="modal" tabindex="-1" id="upModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <form action="" name="auform">
+		<input type="hidden" name="idx" value="" id="uidx" >
+		<input type="hidden" name="currentPage" value="${currentPage }">
+		<input type="hidden" name="num" value="${num }">
+      <div class="modal-header">
+        <h5 class="modal-title"><span class="uname" name="name"></span> </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <textarea style="height: 100px; width: 450px;" id="ucontent" name="content"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <button type="submit" class="btn btn-primary" id="aupbutton">수정</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 </body>
+
+
 <script type="text/javascript">
+$(function(){
+	list();
+})
+
+
 //좋아요
 $("#likes").click(function(){
 	var num=$(this).attr("num");
+	var tag=$(this);
 	
 	<c:if test="${sessionScope.loginok==null }">
 		alert("로그인이 필요합니다");
@@ -130,10 +179,18 @@ $("#likes").click(function(){
 	
 	$.ajax({
 		data:{"num":num},
-		dataType:"html",
+		dataType:"json",
 		url:"likes",
-		success:function(){
-			location.reload();
+		success:function(res){
+
+			var s="";
+			s+="<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-heart' viewBox='0 0 16 16'>";
+			s+="<path d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z'/>";
+			s+="</svg>";
+			s+="&nbsp;좋아요&nbsp;"+res.likes;
+			
+			$("button.likes").html(s);
+			//$("button.likes").html(res.likes);
 		}
 	})
 })
@@ -141,9 +198,9 @@ $("#likes").click(function(){
 //게시글 삭제
 $("#delete").click(function(){
 	var num=$(this).attr("num");
-	confirm("삭제하시겠습니까?");
+	var check=confirm("삭제하시겠습니까?");
 	
-	if(confirm){
+	if(check){
 	$.ajax({
 		data:{"num":num},
 		dataType:"html",
@@ -155,10 +212,10 @@ $("#delete").click(function(){
 }
 })
 
-
+//댓글인서트
 $("button.ainsert").click(function(){
 	var formdata=$("#aform").serialize();
-	alert(formdata);
+	//alert(formdata);
 	
 	$.ajax({
 		type:"post",
@@ -166,12 +223,137 @@ $("button.ainsert").click(function(){
 		url:"ainsert",
 		data:formdata,
 		success:function(data){
-			alert("인서트성공");
+			//alert("인서트성공");
 		}
 	})
 })
 
-	
+//댓글리스트
+function list(){
+var num=$("#aform").attr("num");
+var boardid=$("#dtoid").val();
+//alert(boardid);
+
+$.ajax({
+	type:"get",
+	dataType:"json",
+	url:"alist",
+	data:{"num":num},
+	success:function(data){
+		var s="";
+		var myid = '<%=(String)session.getAttribute("myid")%>';
+		
+
+		s+="<table style='width: 900px;'>";
+		$.each(data,function(i,elt){
+			s+="<tr><td>";
+			s+="<input id='dd' type='hidden' value='"+elt.id+"'>"
+			s+="<span><b>"+elt.name+"</b>";
+			if(boardid==elt.id){
+				s+="&nbsp;<span class='badge rounded-pill text-bg-light writer'>작성자</span>"
+			}
+			s+="</span><br>";
+			s+="<span>"+elt.content+"</span><br><br>";
+			s+="<span style='color:gray;'>"+elt.writeday+"</span>&nbsp;&nbsp;&nbsp;";
+			if(myid==elt.id){
+			s+="<span style='color:gray;'><a style='cursor:pointer;' id='aupdate' idx='"+elt.idx+"'>수정</a>&nbsp;";	
+			s+="/"
+			s+="&nbsp;<a style='cursor:pointer;' idx='"+elt.idx+"' id='adelete'>삭제</a></span>";	}
+
+			s+="<br>";
+			s+="<div id='aa'></div>"
+			s+="</tr></td>";
 			
+			
+		});
+		s+="<br>";
+		$("#answer").html(s);
+	}
+})	
+}
+		
+<%--
+$(document).on("click","#reanswer",function(){
+	
+	var s="";
+	s+="<form class='form-inline' name='areform' id='aform' style='width:700px;'>";
+	s+="<input type='hidden' name='idx' value='${idx }'>";
+	s+="<input type='text' name='num' value='${num }'>";
+	s+="<input type='hidden' name='currentPage' value='${currentPage }'>";
+	s+="<input type='hidden' name='ans_regroup' value='${ans_regroup }''>";
+	s+="<input type='hidden' name='ans_restep' value='${ans_restep }'>";
+	s+="<input type='hidden' name='ans_relevel' value='${ans_relevel}'>";
+	s+="<textarea></textarea>";
+	s+="<button type='submit' class='btn btn-info ainsert from-inline' style='width: 100px; height: 100px; margin-left: 10px;'>등록</button>";
+	s+="</form>";
+	s+="<br>";
+	
+
+	
+	$(this).append(s);
+})	--%>
+
+
+//댓글수정창
+$(document).on("click","#aupdate",function(){
+	var idx=$(this).attr("idx");
+	
+	$.ajax({
+		type:"get",
+		dataType:"json",
+		url:"auform",
+		data:{"idx":idx},
+		success:function(data){
+			$("span.uname").html(data.name);
+			$("#ucontent").html(data.content);
+			$("#uidx").val(data.idx);
+		}
+	})
+
+	  $("#upModal").modal('show');
+})	
+
+
+
+//댓글수정
+$("#aupbutton").click(function(){
+	var idx=$("#uidx").val();
+	var content=$("#ucontent").val();
+
+	
+	$.ajax({
+		type:"post",
+		dataType:"html",
+		url:"aupdate",
+		data:{"idx":idx,"content":content},
+		success:function(data){
+			location.reload();
+
+		}
+	})
+	
+})
+
+
+//댓글삭제
+$(document).on("click","#adelete",function(){
+	var idx=$(this).attr("idx");
+	
+	var check=confirm("삭제하시겠습니까?");
+	
+	if(check){
+	$.ajax({
+		type:"get",
+		dataType:"html",
+		url:"adelete",
+		data:{"idx":idx},
+		success:function(data){
+			location.reload();
+		}
+	})
+	}
+	
+})	
+
 </script>
 </html>

@@ -22,5 +22,6 @@ public class CommunityDto {
 	private String content;
 	private String category;
 	private Timestamp writeday;
+	private int anscount;	//댓글개수
 	
 }
