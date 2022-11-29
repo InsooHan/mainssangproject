@@ -21,6 +21,10 @@ public interface StoreServiceInter {
 	public StoreDto getStore(String store_num);
 	//로그인 된 id에 맞는 num 값 조회
 	public String getNumById(String id);
+	//admin일 때 store 수정
+	public void updateStore(StoreDto dto);
+	//admin일 때 store 삭제
+	public void deleteStore(String store_num);
 	
 	//cart에 추가
 	public void insertCart(CartDto cdto);
@@ -34,5 +38,9 @@ public interface StoreServiceInter {
 	public void deleteCart(String cart_idx);
 	//storecart 수정
 	public void updateCartCnt(int cart_cnt, String cart_idx);
+	//기존에 장바구니에 있는 상품인지 확인 - 있으면 cnt만 추가, 없으면 새로 장바구니 추가하게..
+	public int checkCart(String store_num);
+	//상품이 있으면 cnt만 추가
+	public void plusCartCnt(int cart_cnt, String store_num);
 	
 }

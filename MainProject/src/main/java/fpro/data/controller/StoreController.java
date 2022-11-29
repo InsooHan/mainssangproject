@@ -8,11 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -69,6 +71,81 @@ public class StoreController {
 		return "redirect:list";
 	}
 	
+	//상품 수정 폼으로 이동
+	@GetMapping("/store/updateform")
+	public String updateform(@RequestParam String store_num,
+			Model model) {
+		
+		StoreDto dto = service.getStore(store_num);
+
+		model.addAttribute("dto", dto);
+		
+		return "/store/storeupdateform";
+	}
+	
+	//상품 수정하기
+	@PostMapping("/store/updatestore")
+	public String updatestore(@ModelAttribute StoreDto dto,
+			@RequestParam MultipartFile upload,
+			HttpSession session) {
+		
+		//업로드 될 실제 경로
+		String realPath=session.getServletContext().getRealPath("/save");
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		
+		String oldfilename = service.getStore(dto.getStore_num()).getStore_photo();
+		
+		
+		if(upload.getOriginalFilename().equals(""))
+			dto.setStore_photo(oldfilename);
+		else {
+			String newfilename="p_"+sdf.format(new Date())+upload.getOriginalFilename();
+			
+			dto.setStore_photo(newfilename);
+			
+			try {
+				upload.transferTo(new File(realPath+"/"+newfilename));
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		service.updateStore(dto);
+		
+		return "redirect:list";
+	}
+	
+	//delete- 이미지 파일 삭제 메서드
+	public void deleteFile(String path, String fileName) {
+		File file = new File(path+"\\"+fileName);
+		
+		if(file.exists()) { //해당 경로에 파일이 있는 경우 true 값 반환
+			file.delete();
+			System.out.println("파일 삭제 완료");
+		}
+		
+	}
+	
+	//상품 삭제
+	@GetMapping("/store/storedelete")
+	public String deleteStore(@RequestParam String store_num,
+			HttpServletRequest request) {
+		
+		String path = request.getServletContext().getRealPath("/save");
+		String filename = service.getStore(store_num).getStore_photo();
+		
+		deleteFile(path, filename);
+		
+		service.deleteStore(store_num);
+		
+		return "redirect:list";
+	}
 	
 	
 	
@@ -150,10 +227,11 @@ public class StoreController {
 		String id = (String)session.getAttribute("myid");
 		
 		List<CartDto> cartlist = service.getCartById(id);
-
+		
 		int cartlistcount = cartlist.size();
 		
 		mview.addObject("cartlist", cartlist);
+		
 		mview.addObject("cartlistcount", cartlistcount);
 		
 		mview.setViewName("/store/storecart");
@@ -165,9 +243,19 @@ public class StoreController {
 	//디테일 페이지에서 제품num, 회원num, cnt 장바구니 테이블에 insert
 	@PostMapping("/store/cartinsert")
 	@ResponseBody
-	public void cartinsert(@ModelAttribute CartDto dto) {
+	public void cartinsert(@ModelAttribute CartDto dto,
+			@RequestParam int cart_cnt,
+			@RequestParam String store_num) {
 		
-		service.insertCart(dto);
+		//카트에 이미 상품이 있는지 확인
+		var result = service.checkCart(store_num);
+		
+		//카트에 상품이 없으면 장바구니 db에 새롭게 추가
+		if(result==0) {
+			service.insertCart(dto);
+		}else { //상품이 있으면 이미 있는 db의 cart_cnt만 추가
+			service.plusCartCnt(cart_cnt, store_num);
+		}
 		
 	}
 	
@@ -185,5 +273,6 @@ public class StoreController {
 			@RequestParam String cart_idx) {
 		service.updateCartCnt(cart_cnt, cart_idx);
 	}
+	
 	
 }

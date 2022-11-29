@@ -32,29 +32,7 @@
 		
 	});
 	
-	var IMP = window.IMP;   // 생략 가능
-	IMP.init("imp62053265"); // 예: imp00000000 
-
-    function requestPay() {
-        IMP.request_pay({
-            pg : 'html5_inicis',
-            pay_method : 'card',
-            merchant_uid: "merchant_" + new Date().getTime(), 
-            name : '당근 10kg',
-            amount : 100,
-            buyer_email : 'Iamport@chai.finance',
-            buyer_name : '아임포트 기술지원팀',
-            buyer_tel : '010-1234-5678',
-            buyer_addr : '서울특별시 강남구 삼성동',
-            buyer_postcode : '123-456'
-        }, function (rsp) { // callback
-            if (rsp.success) {
-                console.log(rsp);
-            } else {
-                console.log(rsp);
-            }
-        });
-    }
+	
 </script>
 <style type="text/css">
 
@@ -143,13 +121,44 @@
 					<button type="button" class="btn btn-megabox" onclick="requestPay()">결제하기</button>
 				</div>
 				<br>
-				
+				<!-- 결제창에 상품명, 가격 띄우기 -->
+				<input type="hidden" class="payapiproduct" value="${sdto.store_product }">
+				<input type="hidden" class="payapiprice" value="${cdto.cart_cnt * sdto.store_price }">
+				<input type="hidden" class="payapiname" value="${sdto.store_product }">
 			</div>
 		</div>
 		
 	</div>
 </div>
 
+
+
+<script type="text/javascript">
+	
+var IMP = window.IMP;   // 생략 가능
+IMP.init("imp62053265"); // 예: imp00000000 
+
+function requestPay() {
+    IMP.request_pay({
+        pg : 'html5_inicis',
+        pay_method : 'card',
+        merchant_uid: "merchant_" + new Date().getTime(), 
+        name : $(".payapiproduct").val(),
+        amount : $(".payapiprice").val(),
+        buyer_email : 'Iamport@chai.finance',
+        buyer_name : '쌍용교육센터 파이널 프로젝트',
+        buyer_tel : '010-1234-5678',
+        buyer_addr : '서울특별시 강남구 역삼동',
+        buyer_postcode : '123-456'
+    }, function (rsp) { // callback
+        if (rsp.success) {
+            console.log(rsp);
+        } else {
+            console.log(rsp);
+        }
+    });
+}
+</script>
 	
 </body>
 </html>
