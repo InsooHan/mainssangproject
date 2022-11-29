@@ -5,4 +5,20 @@
 	<select id="getSomeDatas" resultType="moviedto">
 		select * from movie where sang=0
 	</select>
+	<!-- 전체리스트 -->
+	<select id="getAllDatas" resultType="moviedto">
+		select * from movie order by opendate desc
+	</select>
+	<!-- 최신영화 전체개수 -->
+	<select id="getNewTotalCount" resultType="int">
+		select count(*) from movie where sang=0
+	</select>
+	<!-- 상영예정 전체개수 -->
+	<select id="getCommingTotalCount" resultType="int">
+		select count(*) from movie where sang=1
+	</select>
+	<!-- 상영예정 가나다순 -->
+	<select id="getDatasAsc" resultType="moviedto">
+		select * from movie order by name asc
+	</select>
 </mapper>
