@@ -121,6 +121,11 @@ $(function(){
 	<div class="detail_title">
 		<p style="font-size: 2em; font-weight: 700; color: #2E2E2E;">${dto.store_product }</p>
 		<p style="font-size: 1.2em; font-weight: 400; color: #848484;">${dto.store_content }</p>
+		<!-- 관리자만 보이는 상품 수정/삭제 버튼 -->
+		<c:if test="${sessionScope.loginok!=null && sessionScope.myid=='admin'}">
+			<button type="button" class="btn btn-danger" style="float: right;" onclick="location.href='storedelete?store_num=${dto.store_num}'">상품 삭제</button>
+			<button type="button" class="btn btn-warning" style="float: right;" onclick="location.href='updateform?store_num=${dto.store_num}'">상품 수정</button>&nbsp;
+		</c:if>
 	</div>
 	<hr>
 	<div class="detail_content" style="width: 100%;">

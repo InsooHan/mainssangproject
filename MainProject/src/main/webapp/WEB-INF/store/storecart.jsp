@@ -11,6 +11,8 @@
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 <script src="https://kit.fontawesome.com/a47cf79e39.js" crossorigin="anonymous"></script>
 <title>Insert title here</title>
 <script type="text/javascript">
@@ -22,9 +24,11 @@
 			console.log(paysel);			
 			
 			if(paysel=="pay_card"){
-				$("#pay_cardlist").show();
+				$("#pay_kakaobtn").hide();
+				$("#pay_cardbtn").show();
 			}else{
-				$("#pay_cardlist").hide();
+				$("#pay_cardbtn").hide();
+				$("#pay_kakaobtn").show();
 			}
 		})
 	   
@@ -109,7 +113,7 @@
    //사용자 함수
    $(document).ready(function(){
 	   
-	   var totalcartprice = 0;
+	   totalcartprice = 0;
 	   
 	   $(".cart_info_hidden").each(function(idx, ele){
 		   
@@ -163,7 +167,15 @@
             <tr class="cartlist">
                <td style="text-align: center; vertical-align: middle;">${i.count}</td>
                <td style="text-align: center; vertical-align: middle;">
-                  <img alt="" src="../save/${cdto.store_photo }" style="width: 200px;"> ${cdto.store_product }
+                  <img alt="" src="../save/${cdto.store_photo }" style="width: 200px;"> ${cdto.store_product}
+                  <!-- 결제창에 상품명, 가격 띄우기 -->
+					<c:if test="${cartlistcount==1}">
+						<input type="hidden" class="payapiproduct" value="${cdto.store_product}">
+					</c:if>
+					<c:if test="${cartlistcount>1}">
+						<input type="hidden" class="payapiproduct" value="${cdto.store_product}외 다수">
+					</c:if>
+				
                </td>
                <td style="text-align: center; vertical-align: middle;">사용가능처</td>
                <td style="text-align: center; vertical-align: middle;">
@@ -195,7 +207,7 @@
 			<div class="buypage_title">
 				<p style="font-size: 1.8em; font-weight: 400; color: #503396;">최종 결제</p>
 			</div>
-			<div style="text-align:center; border: 1px #555555 solid; border-radius:10px; background-color: #555555; width: 100%; height: 300px;">
+			<div style="text-align:center; border: 1px #555555 solid; border-radius:10px; background-color: #555555; width: 100%; height: 350px;">
 				<div class="calc" style="margin-top: 30px; display: flex; justify-content:center; align-items:center;">
 					 <div class="price" style="width: 200px; height: 80px; display: inline-block;">
 					 	<p style="color: white;">총 상품 금액</p>
@@ -226,27 +238,70 @@
 					<p style="color: white;">결제수단 선택</p>
 					<input type="radio" name="payinput" id="pay_card" value="pay_card">
 					<span style="color: white;">신용/체크카드</span>
-						<span id="pay_cardlist" style="display: none;">
-							<select name="cardlist" id="cardlist">
-								<option value="">카드선택</option>
-								<option value="shinhan">신한카드</option>
-								<option value="woori">우리카드</option>
-								<option value="lotte">롯데카드</option>
-								<option value="hana">하나카드</option>
-								<option value="samsung">삼성카드</option>
-								<option value="hyundai">현대카드</option>
-							</select>						
-						</span>
 					<br>
 					<input type="radio" name="payinput" id="pay_bank" value="pay_bank">
-					<span style="color: white;">무통장 입금</span>
+					<span style="color: white;">카카오페이</span>
 				</div>
 				<br>
+					<button type="button" id="pay_cardbtn" class="btn btn-megabox" style="display: none;" onclick="requestPay1()"> 신용/체크카드 결제</button>						
+					<button type="button" id="pay_kakaobtn" class="btn btn-megabox" style="display: none;" onclick="requestPay2()"> 카카오페이 결제</button>	
+				
 				
 			</div>
    
 	</div>
 	<!-- 결제 내역 end -->
+	
+	<!-- 결제 api -->
+<script type="text/javascript">
+	
+var IMP = window.IMP;   // 생략 가능
+IMP.init("imp62053265"); // 예: imp00000000 
+
+//신용/체크카드
+function requestPay1() {
+    IMP.request_pay({
+        pg : 'html5_inicis',
+        pay_method : 'card',
+        merchant_uid: "merchant_" + new Date().getTime(), 
+        name : $(".payapiproduct").val(),
+        amount : totalcartprice,
+        buyer_email : 'Iamport@chai.finance',
+        buyer_name : '쌍용교육센터 파이널 프로젝트',
+        buyer_tel : '010-1234-5678',
+        buyer_addr : '서울특별시 강남구 역삼동',
+        buyer_postcode : '123-456'
+    }, function (rsp) { // callback
+        if (rsp.success) {
+            console.log(rsp);
+        } else {
+            console.log(rsp);
+        }
+    });
+}
+
+//카카오페이
+function requestPay2() {
+    IMP.request_pay({
+        pg : 'kakaopay',
+        pay_method : 'card',
+        merchant_uid: "merchant_" + new Date().getTime(), 
+        name : $(".payapiproduct").val(),
+        amount : totalcartprice,
+        buyer_email : 'Iamport@chai.finance',
+        buyer_name : '쌍용교육센터 파이널 프로젝트',
+        buyer_tel : '010-1234-5678',
+        buyer_addr : '서울특별시 강남구 역삼동',
+        buyer_postcode : '123-456'
+    }, function (rsp) { // callback
+        if (rsp.success) {
+            console.log(rsp);
+        } else {
+            console.log(rsp);
+        }
+    });
+}
+</script>
 
 </body>
 </html>

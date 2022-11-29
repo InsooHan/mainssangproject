@@ -86,7 +86,7 @@
 	      	<input type="password" name="pass" class="form-control" placeholder="비밀번호" required="required" style="width: 300px; margin-top: 10px;">
 	      	<input type="checkbox" name="cbsave" ${sessionScope.saveok==null?"":"checked"}><span style="font-size: 11px; color: gray;">아이디 저장</span>
 	      	<button type="submit">로그인</button>
-	      	<button type="button" class="btn btn-info btn-m" onclick="location.href='${root }/member/memberform'">회원가입</button>
+	      	<button type="button" class="btn btn-outline-dark btn-m" onclick="location.href='${root }/member/memberform'">회원가입</button>
 	      </form>
 	      </div>
 	

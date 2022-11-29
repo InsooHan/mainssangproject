@@ -95,6 +95,36 @@ public class StoreService implements StoreServiceInter {
 		mapperInter.updateCartCnt(map);
 	
 	}
+
+	@Override
+	public int checkCart(String store_num) {
+		// TODO Auto-generated method stub
+		return mapperInter.checkCart(store_num);
+	}
+
+	@Override
+	public void plusCartCnt(int cart_cnt, String store_num) {
+		// TODO Auto-generated method stub
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("cart_cnt", cart_cnt);
+		map.put("store_num", store_num);
+		
+		mapperInter.plusCartCnt(map);
+	}
+
+	@Override
+	public void updateStore(StoreDto dto) {
+		// TODO Auto-generated method stub
+		mapperInter.updateStore(dto);
+	}
+
+	@Override
+	public void deleteStore(String store_num) {
+		// TODO Auto-generated method stub
+		mapperInter.deleteStore(store_num);
+	}
 	
 
 }

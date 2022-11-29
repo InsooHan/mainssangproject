@@ -25,9 +25,10 @@
 </script>
 </head>
 <body>
-<form action="insert" method="post" enctype="multipart/form-data">
+<form action="updatestore" method="post" enctype="multipart/form-data">
+<input type="hidden" name="store_num" value="${dto.store_num }">
 <table class="table table-bordered" style="margin: 50px 50px;">
-	<caption><h3>상품 등록</h3></caption>
+	<caption><h3>상품 수정</h3></caption>
 		<tr bgcolor="pink">
 			<th style="width: 150px;">상품명</th>
 			<th>카테고리</th>
@@ -38,7 +39,7 @@
 		</tr>
 		<tr>
 			<td>
-				<input type="text" class="form-control" name="store_product" required="required">
+				<input type="text" class="form-control" name="store_product" required="required" value="${dto.store_product }">
 			</td>
 			<td>
 				<select name="store_category" class="form-control" required="required">
@@ -48,23 +49,23 @@
 				</select>
 			</td>
 			<td>
-				<input type="text" class="form-control" name="store_price" required="required">
+				<input type="text" class="form-control" name="store_price" required="required" value="${dto.store_price }">
 			</td>
 			<td>
-				<input type="text" class="form-control" name="store_content" required="required">
+				<input type="text" class="form-control" name="store_content" required="required" value="${dto.store_content }">
 			</td>
 			<td>
-				<input type="file" class="form-control" name="upload" onchange="readURL(this);" required="required">
+				<input type="file" class="form-control" name="upload" onchange="readURL(this);">
 			</td>
 			<td>
 				<div style="margin: 20px 20px;">
-				    <img id="uploadimg" src="" alt="상품 이미지를 등록해주세요"  style="width: 150px; height: 150px;" />
+				    <img id="uploadimg" src="../save/${dto.store_photo }" alt="상품 이미지를 등록해주세요"  style="width: 150px; height: 150px;" />
 				</div>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="5" align="center">
-				<button type="submit" class="btn btn-primary">등록하기</button>
+				<button type="submit" class="btn btn-primary">수정하기</button>
 				<button type="button" class="btn btn-seconday" onclick="location.href='list'">목록으로</button>
 			</td>
 		</tr>

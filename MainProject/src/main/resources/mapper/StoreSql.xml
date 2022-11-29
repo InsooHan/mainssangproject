@@ -12,6 +12,16 @@
 		insert into store (store_product, store_price, store_photo, store_content, store_category) values(#{store_product},#{store_price},#{store_photo},#{store_content},#{store_category})
 	</insert>
 	
+	<!-- store 수정 -->
+	<update id="updateStore" parameterType="storedto">
+		update store set store_product=#{store_product}, store_price=#{store_price}, store_photo=#{store_photo}, store_content=#{store_content}, store_category=#{store_category} where store_num=#{store_num}
+	</update>
+	
+	<!-- store 삭제 -->
+	<delete id="deleteStore" parameterType="String">
+		delete from store where store_num=#{store_num}
+	</delete>
+	
 	<!-- store 전체 리스트 출력 -->
 	<select id="getAllStores" resultType="storedto">
 		select * from store order by store_num
@@ -62,5 +72,14 @@
 		update storecart set cart_cnt=#{cart_cnt} where cart_idx=#{cart_idx}
 	</update>
 
+	<!-- storecart에 제품 있는지 확인 -->
+	<select id="checkCart" resultType="int" parameterType="String">
+		select count(*) from storecart where store_num=#{store_num}
+	</select>
+	
+	<!-- storecart에 제품이 있는 상태이면 기존 cart_cnt에 구매하려는 갯수 더하기 -->
+	<update id="plusCartCnt" parameterType="map">
+		update storecart set cart_cnt=cart_cnt+#{cart_cnt} where store_num=#{store_num}
+	</update>
 	
 </mapper>
