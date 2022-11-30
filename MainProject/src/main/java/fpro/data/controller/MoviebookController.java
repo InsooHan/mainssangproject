@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fpro.data.dto.DemovieDto;
 import fpro.data.dto.MovieDto;
+import fpro.data.dto.SangDto;
 import fpro.data.dto.TheaterDto;
 import fpro.data.service.DemovieService;
 import fpro.data.service.MovieService;
@@ -26,6 +27,19 @@ public class MoviebookController {
 	MovieService mservice;
 	@Autowired
 	DemovieService dservice;
+	
+	@GetMapping("/book/listtwo")
+	public ModelAndView moveListTwo(@RequestParam String moviename,@RequestParam String theater,@RequestParam String sangnum) {
+		ModelAndView mview=new ModelAndView();
+		
+		SangDto sdto=dservice.getSangData(sangnum);
+		
+		mview.addObject("sdto", sdto);
+		
+		mview.setViewName("/mbook/listtwo");
+		
+		return mview;
+	}
 	
 	@GetMapping("/book/list")
 	public ModelAndView moveList() {
@@ -51,6 +65,7 @@ public class MoviebookController {
 	public List<DemovieDto> movietimelist(@RequestParam String moviename,@RequestParam String theater){
 		return dservice.getSomeDatas(theater, moviename);
 	}
-
+	
+	
 	
 }
