@@ -54,15 +54,23 @@ white-space: nowrap;
 width: 230px;
 background-color: #dcdcdc;
 }
-
-
+div.ddddd div.detailtable
+{
+display:inline-block;
+border:1px solid gray;
+border-radius:10px;
+text-align:center;
+width:100px;
+height:50px;
+cursor: pointer;
+}
 </style>
 <script type="text/javascript">
 $(function() {
 	var to=new Date();
 	var q="";
 	var today="";
-	
+	var realtoday="";
 	function getDayOfWeek(a){
 
 	    const week = ['일', '월', '화', '수', '목', '금', '토'];
@@ -76,10 +84,12 @@ $(function() {
 	for(var i=0;i<7;i++){
 		
 		today=to.getDate();
-		
+		realtoday=to.getFullYear()+":"+(to.getMonth()+1)+":"+today;
 		var q="&nbsp;<div style='display:inline-block; font-size: 1.1em; color:white; background-color:gray; width:30px; height:30px; line-height:30px; text-align:center; border-radius:100px; position:relative;'>";
 		
-		q+="<span id='msche' style='cursor:pointer;'>"+today+"</span>\n"+getDayOfWeek(to.getDay())+"</div>&nbsp;&nbsp;";
+		q+="<span class='five' id='msche' style='cursor:pointer;'>";
+		q+="<p style='display:none;'>"+realtoday+"</p>";
+		q+=today+"</span>\n"+getDayOfWeek(to.getDay())+"</div>&nbsp;&nbsp;";
 
 		to.setDate(to.getDate()+1);
 
@@ -124,36 +134,6 @@ $(function() {
 		theater=$(this).find('b').text();
 		$(".three").css("background-color","white");
 		
-		$.ajax({
-			type:"get",
-			url:"listmovie",
-			dataType:"json",
-			success:function(res){
-				
-				var t="";
-				
-/* 				$.each(res,function(idx,item){
-					t+="<a class='list-group-item list-group-item-action st four'>&nbsp;";
-					t+="<span style='border-radius: 100px; font-size:7pt; color:white;";
-					
-						if(item.age==12){
-							t+=" background-color:#46AAFF;";
-						}if(item.age==15){
-							t+=" background-color:orange;";
-						}if(item.age==19){
-							t+=" background-color:#FF5675;";
-						}
-						
-					t+="'>&nbsp;";
-					t+=item.age+"&nbsp;</span>";
-					t+=item.name+"</a>";
-					
-				});
-				
-				$("#movie").html(t); */
-				
-			}
-		});
 		$(this).css("background-color","#FF5050");
 	});
 	
@@ -164,9 +144,9 @@ $(function() {
 	});
 	
 	$(document).on("click","#msche",function(){
-		
+		var mtime=$(this).find('p').text();
 		$(".movietime").text("");
-		//alert(moviename);
+		//alert(mtime);
 		//location.href="movielist";
 		
  		 $.ajax({
@@ -177,26 +157,80 @@ $(function() {
 			success:function(res){
 				//alert(res); //object Object가 들어와야하지만 여기는 null이 출력됨
 				//alert(Object.keys(res[0]).includes('movietime'));
-				
-  				var v="";
+				function formatDate(date) {
+					var d = new Date(date),
+				    
+				    time=d.getHours();
+				    min=d.getMinutes();
+				    
+				    return time+":"+min;
+			    }
+
+				function realtoday(date){
+					var to = new Date(date)
+					
+					return to.getFullYear()+":"+(to.getMonth()+1)+":"+to.getDate();
+				}
+
+				var i=1; 
+  				var s="<div class='ddddd'>";
 				
 				$.each(res,function(idx,item){
-					v+="<a class='list-group-item list-group-item-action st three'><b>";
-					v+=item.movietime+"</b>";
-					v+="</a>";
+					
+				if(mtime==realtoday(item.movietime)){
+					
+					s+="&nbsp;<div class='detailtable'>"; // data-bs-toggle='modal' data-bs-target='#bookModal'>"
+					s+="<span>"+item.capacity+"</span>";
+					s+="<span class='mmmtime'><br>";
+					s+=formatDate(item.movietime);
+					s+="</span><b style='display:none;'>"+item.sang_num+"</b>";
+					s+="</div>&nbsp;&nbsp;";
+					if((i+4)%4==0)
+						s+="</div><div>"; i++;
+						
+						
+						//The Modal
+					/* s+=	"<div class='modal' id='bookModal'>";
+					s+=	  "<div class='modal-dialog'>";
+					s+=	    "<div class='modal-content'>";
+
+						      //Modal Header
+					s+=	      "<div class='modal-header'>";
+					s+=	        "<h4 class='modal-title'>"+res[]+"~</h4>";
+					s+=	        "<button type='button' class='btn-close' data-bs-dismiss='modal'></button>";
+					s+=	      "</div>";
+
+						      //Modal body
+					s+=	      "<div class='modal-body' style='text-align:center;'>";
+					s+=	        "<span style='font-size: 9pt;'>본 영화는 <b style='color: orange; font-size: 11pt;'>만 "+item.age+"세 이상 관람가</b> 영화입니다.<br>";
+					s+=         "만 15세 미만 고객님(영,유아 포함)은 반드시 부모님 또는 성인 보호자의 동반하에 관람이 가능합니다. 연령 확인 불가 시 입장이 제한될 수 있습니다.</span>";
+					s+=	      "</div>";
+
+						      //Modal footer
+					s+=	      "<div class='modal-footer'>";
+					s+=	        "<button type='button' class='btn btn-danger' data-bs-dismiss='modal'>취소</button>";
+					s+=	        "<button type='button' class='btn btn-dark' data-bs-dismiss='modal'>인원/좌석 선택</button>";
+					s+=	      "</div>";
+
+					s+=	    "</div>";
+					s+=	  "</div>";
+					s+=	"</div>"; */
+				}
 				});
-				
 				/* $.each(res[0], function(key, value){
-				    v+=key; 
-				    v+=value;
-				});  */
-				
-				$(".movietime").html(v); 
+				    s+=key 
+				    s+=value;
+				}); */
+				$(".movietime").html(s); 
 			}
-			
-			
 		});  
+	});
+	
+	$(document).on("click",".detailtable",function(){
 		
+		var sangnum=$(this).find('b').text();
+		//alert(sangnum);
+		location.href="listtwo?moviename="+moviename+"&theater="+theater+"&sangnum="+sangnum;
 		
 	});
 	
@@ -253,6 +287,58 @@ $(function() {
 		</div>
 	</div>
 
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="bookModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Modal body..
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- The Modal -->
+<div class="modal" id="bookModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" id="modalbody">
+	  	
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
 </div>
 </body>
 </html>
