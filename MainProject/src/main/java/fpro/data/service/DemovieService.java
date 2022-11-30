@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fpro.data.dto.DemovieDto;
+import fpro.data.dto.SangDto;
 import fpro.data.mapper.DemovieMapperInter;
 
 @Service
@@ -25,6 +26,12 @@ public class DemovieService implements DemovieServiceInter {
 		map.put("moviename", moviename);
 		
 		return mapperInter.getSomeDatas(map);
+	}
+
+	@Override
+	public SangDto getSangData(String num) {
+		// TODO Auto-generated method stub
+		return mapperInter.getSangData(num);
 	}
 	
 	
