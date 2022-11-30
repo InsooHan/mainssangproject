@@ -14,6 +14,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="container">
 <h2>공지/뉴스</h2>
 <table class="table table-bordered" style="width: 700px;">
 	<tr>
@@ -49,7 +50,7 @@
 		<!-- 로그인 중이면서 세션의 아이디와 글의 아이디가 같을 경우에만 수정 삭제 나오게 -->
 		<c:if test="${sessionScope.loginok!=null and sessionScope.myid=='admin' }">
 		<button type="button" class="btn btn-outline-info"
-		onclick="location.href='updateform?num=${dto.num}&currentPage=${currentapge }'">수정</button>
+		onclick="location.href='updateform?num=${dto.num}&currentPage=${currentPage }'">수정</button>
 		<button type="button" class="btn btn-outline-info"
 		onclick="location.href='delete?num=${dto.num}'">삭제</button>
 		</c:if>
@@ -58,5 +59,6 @@
 
 
 </table>
+</div>
 </body>
 </html>

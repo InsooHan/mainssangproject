@@ -13,10 +13,16 @@
 <script src="https://kit.fontawesome.com/a47cf79e39.js" crossorigin="anonymous"></script>
 <title>Insert title here</title>
 </head>
+
 <body>
+
+
+<div class="container">
 <form action="update" method="post" enctype="multipart/form-data">
 	<table class="table table-bordered" style="width: 500px;">
 	<input type="hidden" name="num" value="${dto.num }">
+	<input type="hidden" name="currentPage" value="${currentPage }">
+	
 		<caption><b>공지 수정</b></caption>
 		<tr>
 			<th width="120" bgcolor="pink">제목</th>
@@ -31,7 +37,7 @@
 					<input type="radio" name="division" 
 					value='시스템점검'>시스템점검
 					<input type="radio" name="division" 
-					value='극장'>극장
+					value='극장'  >극장
 					<input type="radio" name="division"
 					value='기타' >기타
 				</td>
@@ -39,7 +45,8 @@
 		<tr>
 			<th width="120" bgcolor="pink">사진</th>
 				<td>
-					<input type="file" name="upload" class="form-control">
+					<input type="file" name="upload" class="form-control"
+					value="${dto.photo }">
 				</td>
 		</tr>
 		<tr>
@@ -58,5 +65,6 @@
 		</tr>
 	</table>
 </form>
+</div>
 </body>
 </html>

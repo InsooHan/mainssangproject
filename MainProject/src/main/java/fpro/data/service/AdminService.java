@@ -62,7 +62,7 @@ public class AdminService implements AdminServiceInter {
 
 
 	@Override
-	public List<AdminDto> getList(String searchcolumn, String searchword, int start, int perpage) {
+	public List<AdminDto> getListAll(String searchcolumn, String searchword, int start, int perpage) {
 		// TODO Auto-generated method stub
 		Map<String, Object> map=new HashMap<>();
 		map.put("searchcolumn", searchcolumn);
@@ -70,10 +70,44 @@ public class AdminService implements AdminServiceInter {
 		map.put("start", start);
 		map.put("perpage", perpage);
 		
-		return mapperInter.getList(map);
+		return mapperInter.getListAll(map);
 	}
 
+	@Override
+	public List<AdminDto> getListSystem(String searchcolumn, String searchword, int start, int perpage) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map=new HashMap<>();
+		map.put("searchcolumn", searchcolumn);
+		map.put("searchword", searchword);
+		map.put("start", start);
+		map.put("perpage", perpage);
+		
+		return mapperInter.getListSystem(map);
+	}
 
+	@Override
+	public List<AdminDto> getListTheater(String searchcolumn, String searchword, int start, int perpage) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map=new HashMap<>();
+		map.put("searchcolumn", searchcolumn);
+		map.put("searchword", searchword);
+		map.put("start", start);
+		map.put("perpage", perpage);
+		
+		return mapperInter.getListTheater(map);
+	}
+	
+	@Override
+	public List<AdminDto> getListOther(String searchcolumn, String searchword, int start, int perpage) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map=new HashMap<>();
+		map.put("searchcolumn", searchcolumn);
+		map.put("searchword", searchword);
+		map.put("start", start);
+		map.put("perpage", perpage);
+		
+		return mapperInter.getListOther(map);
+	}
 	@Override
 	public void updateReadcount(int num) {
 		// TODO Auto-generated method stub
@@ -125,6 +159,8 @@ public class AdminService implements AdminServiceInter {
 		// TODO Auto-generated method stub
 		mapperInter.deleteAdmin(num);
 	}
+
+	
 
 
 
