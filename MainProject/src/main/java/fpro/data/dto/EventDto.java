@@ -16,6 +16,7 @@ public class EventDto {
 	private String  subject;
 	private MultipartFile  uploadfile;
 	private String  content;
-	private Timestamp  eventday;
+	private Timestamp  startday;
+	private Timestamp  endday;
 	private Timestamp  wirteday;
 }
