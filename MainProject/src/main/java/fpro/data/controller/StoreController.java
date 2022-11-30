@@ -1,5 +1,6 @@
 package fpro.data.controller;
 
+import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -151,7 +152,7 @@ public class StoreController {
 	
 	//스토어 상품 리스트 출력
 	@GetMapping("/store/list")
-	public ModelAndView list() {
+	public ModelAndView list(HttpSession session) {
 		
 		ModelAndView mview = new ModelAndView();
 		
@@ -166,6 +167,14 @@ public class StoreController {
 		//메가티켓 목록만 출력
 		List<StoreDto> mtlist = service.getMegaticket();
 		mview.addObject("mtlist", mtlist);
+		
+		//장바구니 갯수 출력
+		String id = (String)session.getAttribute("myid");
+		List<CartDto> cartlist = service.getCartById(id);
+		
+		int cartlistcount = cartlist.size();
+		
+		mview.addObject("cartlistcount", cartlistcount);
 		 
 		mview.setViewName("/store/storelist");
 		
@@ -250,7 +259,7 @@ public class StoreController {
 		//카트에 이미 상품이 있는지 확인
 		var result = service.checkCart(store_num);
 		
-		//카트에 상품이 없으면 장바구니 db에 새롭게 추가
+		//카트에 해당 상품이 없으면 장바구니 db에 새롭게 추가
 		if(result==0) {
 			service.insertCart(dto);
 		}else { //상품이 있으면 이미 있는 db의 cart_cnt만 추가

@@ -77,7 +77,7 @@ $(function(){
 	//장바구니 클릭했을 때 추가 후 이동
 	$("#btncart").click(function(){
 		
-			var formdata = $("#frm").serialize();
+			 var formdata = $("#frm").serialize();
 			//alert(formdata);	
 
 			$.ajax({
