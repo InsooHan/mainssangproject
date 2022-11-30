@@ -34,22 +34,49 @@
 		insert into admin values(null,#{division},#{subject},#{photo},#{content},0,now())
 	</insert>
 	
-	<select id="getList" parameterType="Map" resultType="addto">
+	<select id="getListAll" parameterType="Map" resultType="addto">
 		select * from admin 
 		<if test="searchcolumn!=null and searchword!=null">
 			where ${searchcolumn} like concat('%',#{searchword},'%')
 		</if>
 		order by num desc limit #{start},#{perpage}
 	</select>
+	
+	<select id="getListSystem" parameterType="Map" resultType="addto">
+		select * from admin where division = '시스템점검' 
+		<if test="searchcolumn!=null and searchword!=null">
+			and ${searchcolumn} like concat('%',#{searchword},'%')
+		</if>
+		order by num desc limit #{start},#{perpage}
+	</select>
+	<select id="getListTheater" parameterType="Map" resultType="addto">
+		select * from admin where division = '극장' 
+		<if test="searchcolumn!=null and searchword!=null">
+			and ${searchcolumn} like concat('%',#{searchword},'%')
+		</if>
+		order by num desc limit #{start},#{perpage}
+	</select>
+	<select id="getListOther" parameterType="Map" resultType="addto">
+		select * from admin where division = '기타' 
+		<if test="searchcolumn!=null and searchword!=null">
+			and ${searchcolumn} like concat('%',#{searchword},'%')
+		</if>
+		order by num desc limit #{start},#{perpage}
+	</select>
+	
+	
+	
 	<update id="updateReadcount" parameterType="int">
 		update admin set readcount=readcount+1 where num=#{num}
 	</update>
+	
 	<select id="getData" parameterType="int" resultType="addto">
 		select * from admin where num=#{num}
 	</select>
 		<select id="getMaxNum" resultType="int">
 		select ifnull(max(num),0) from admin
 	</select>
+	
 	<update id="updateAdmin"  parameterType="addto">
 		update admin set division=#{division},subject=#{subject},content=#{content}
 		<if test="photo!=null">
@@ -57,6 +84,7 @@
 		</if>
 		where num=#{num}
 	</update>
+	
 	<delete id="deleteAdmin" parameterType="int">
 		delete from admin where num=#{num}
 	</delete>

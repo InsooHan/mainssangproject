@@ -14,6 +14,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="container">
 <form action="insert" method="post" enctype="multipart/form-data">
 	<table class="table table-bordered" style="width: 500px;">
 		<caption><b>공지</b></caption>
@@ -43,8 +44,9 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-			<input type="text" style="width: 490px; height: 150px;" class="form-control"
-			name="content" required="required">
+			<!-- <input type="text" style="width: 490px; height: 150px;" class="form-control"
+			name="content" required="required"> -->
+			<textarea style="width: 490px;height: 150px;" name="content" class="form-control"></textarea>
 			</td>
 		</tr>
 		<tr>
@@ -57,5 +59,6 @@
 		</tr>
 	</table>
 </form>
+</div>
 </body>
 </html>

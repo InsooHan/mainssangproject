@@ -15,7 +15,10 @@ public interface AdminMapperInter {
 	public int getTheaterCount(Map<String, String> map);
 	public int getOtherCount(Map<String, String> map);
 	public void insertAdmin(AdminDto dto);
-	public List<AdminDto> getList(Map<String, Object> map);
+	public List<AdminDto> getListAll(Map<String, Object> map);
+	public List<AdminDto> getListSystem(Map<String, Object> map);
+	public List<AdminDto> getListTheater(Map<String, Object> map);
+	public List<AdminDto> getListOther(Map<String, Object> map);
 	public void updateReadcount(int num);
 	public AdminDto getData(int num);
 	public int getMaxNum();

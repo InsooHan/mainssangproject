@@ -1,4 +1,4 @@
-	<%@ page language="java" contentType="text/html; charset=utf-8"
+<%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -11,17 +11,15 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="https://kit.fontawesome.com/a47cf79e39.js" crossorigin="anonymous"></script>
-
 <title>Insert title here</title>
 </head>
 <body>
 <div class="container">
-<h2>공지/뉴스</h2>
+<h2>시스템 점검</h2>
 <p>CGV의 주요한 이슈 및 여러가지 소식들을 확인하실 수 있습니다.</p>
-
-<div class="searcharea " style="width:100%; ">
+<div class="searcharea" style="width:100%; ">
 	<!-- 검색창 -->
-	<form action="list" class="form-inline">
+	<form action="system" class="form-inline">
 		<div style="width: 500px; display: flex;" >
 			<select class="form-select" style="width: 100px; " name="searchcolumn">
 				<option value="subject">제목</option>
@@ -46,16 +44,16 @@
 <!-- 카테고리 메뉴 -->
 	  <ul class="nav nav-tabs" role="tablist" style="text-align: center;">
 	    <li class="nav-item" style="width: 150px">
-	      <button class="nav-link active" data-bs-toggle="tab" onclick="location.href='list'">전체</button>
+	      <button class="nav-link " data-bs-toggle="tab" onclick="location.href='list'">전체</button>
 	    </li>
 	    <li class="nav-item" style="width: 150px">
-	      <button class="nav-link " data-bs-toggle="tab" onclick="location.href='system'">시스템점검</button>
+	      <button class="nav-link active" data-bs-toggle="tab" onclick="location.href='system'">시스템점검</button>
 	    </li>
 	    <li class="nav-item" style="width: 150px">
-	      <button class="nav-link " data-bs-toggle="tab" onclick="location.href='theater'">극장</button>
+	      <button class="nav-link" data-bs-toggle="tab" onclick="location.href='theater'">극장</button>
 	    </li>
 	    <li class="nav-item" style="width: 150px">
-	      <button class="nav-link  " data-bs-toggle="tab" onclick="location.href='other'">기타</button>
+	      <button class="nav-link " data-bs-toggle="tab" onclick="location.href='other'">기타</button>
 	    </li>
 	  </ul>
 	  
@@ -104,19 +102,22 @@
 			<!-- 이전 -->
 			<c:if test="${startPage>1  }">
 			<li>
-				<a style="text-align: center;" class="container p-1 my-5 border" href="list?currentPage=${startPage-1 }">이전</a>
+				<a style="text-align: center;" class="container p-1 my-5 border" 
+				href="system?currentPage=${startPage-1 }">이전</a>
 			</li>
 			</c:if>
 			<c:forEach var="pp" begin="${startPage }" end="${endPage }"> 
 				<c:if test="${currentPage==pp }">
 					<li class="active">
-						<a class="container p-1 my-5 border" href="list?currentPage=${pp }">${pp }</a>
+						<a class="container p-1 my-5 border" 
+						href="system?currentPage=${pp }">${pp }</a>
 					</li>
 				</c:if>
 				
 				<c:if test="${currentPage!=pp }">
 					<li>
-						<a class="container p-1 my-5 border" href="list?currentPage=${pp }">${pp }</a>
+						<a class="container p-1 my-5 border" 
+						href="system?currentPage=${pp }">${pp }</a>
 					</li>
 				</c:if>
 				
@@ -125,7 +126,8 @@
 			<!-- 다음 -->
 			<c:if test="${endPage<totalPage }">
 			<li>
-				<a class="container p-1 my-5 border" href="list?currentPage=${endPage+1 }">다음</a>
+				<a class="container p-1 my-5 border" 
+				href="system?currentPage=${endPage+1 }">다음</a>
 			</li>
 			</c:if>
 					
@@ -134,12 +136,7 @@
 		
 	</c:if>
 </div>
-
-
 </div>
-
-
-
 
 </div>
 </body>
