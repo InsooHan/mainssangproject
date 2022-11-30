@@ -77,11 +77,6 @@ $(function(){
 		$("span.passsuccess").text("");
 	});
 });
-function check(){
-	if($("#myphoto").val()==''){
-		alert("사진을 넣어주십시오");
-		return false;
-	}
 	
 	if($("span.idsuccess").text()!='가능한 아이디입니다'){
 		alert("아이디 중복체크가 필요합니다");
@@ -144,10 +139,16 @@ function check(){
 			</div><br>
 			
 			
-				<div>
+			<div>
 			<label for="email" class="form-label">&nbsp;Email</label>
 			<input type="email" name="email" id="email" class="form-control" style="width:200px"
 			 placeholder="Email" required="required">
+			</div><br>
+			
+			<div>
+			<label for="birth" class="form-label">&nbsp;Birth</label>
+			<input type="date" name="birth" id="birth" class="form-control" style="width:200px"
+			 placeholder="Birth" required="required">
 			</div><br>
 			
 			<button type="submit" class="btn btn-dark">회원가입</button>

@@ -47,29 +47,8 @@ public class MemberController {
    }
    
    @PostMapping("/member/insert")
-   public String insert(@ModelAttribute MemberDto dto,
-         @RequestParam MultipartFile myphoto,
-         HttpSession session)
+   public String insert(@ModelAttribute MemberDto dto)
    {
-      String path=session.getServletContext().getRealPath("/photo");
-      System.out.println(path);
-      
-      if(myphoto.getOriginalFilename().equals(""))
-         dto.setPass(null);
-      else {
-         
-         SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
-         String photo="f_"+sdf.format(new Date())+myphoto.getOriginalFilename();
-         
-         dto.setPass(photo);
-      
-         try {
-            myphoto.transferTo(new File(path+"/"+photo));
-         } catch (IllegalStateException | IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-         }
-      }
    
       service.insertMember(dto);
       
