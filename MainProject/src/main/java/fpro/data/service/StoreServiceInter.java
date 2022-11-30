@@ -39,8 +39,10 @@ public interface StoreServiceInter {
 	//storecart 수정
 	public void updateCartCnt(int cart_cnt, String cart_idx);
 	//기존에 장바구니에 있는 상품인지 확인 - 있으면 cnt만 추가, 없으면 새로 장바구니 추가하게..
-	public int checkCart(String store_num);
+	public int checkCart(String store_num, String member_num);
 	//상품이 있으면 cnt만 추가
 	public void plusCartCnt(int cart_cnt, String store_num);
+	//장바구니 결제 완료하면 해당 회원의 cart 목록 삭제
+	public void deleteCartByMem(String member_num);
 	
 }

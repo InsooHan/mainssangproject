@@ -18,7 +18,7 @@
 <script type="text/javascript">
    $(function(){
       
-	 //신용/체크카드 선택시 카드 목록 show
+	 //신용/체크카드 선택시 kg이니시스, 카카오페이 선택시 카카오페이
 		$("input:radio[name=payinput]").click(function(){
 			var paysel = $("input[name=payinput]:checked").val();
 			console.log(paysel);			
@@ -30,7 +30,7 @@
 				$("#pay_cardbtn").hide();
 				$("#pay_kakaobtn").show();
 			}
-		})
+		});
 	   
       //수량에 따라 가격 변경(foreach문이라서 tr을 찾고 그에 맞는 td값들이 바뀌도록 해줘야 함)
       $("input.cnt").change(function(){
@@ -173,7 +173,7 @@
 						<input type="hidden" class="payapiproduct" value="${cdto.store_product}">
 					</c:if>
 					<c:if test="${cartlistcount>1}">
-						<input type="hidden" class="payapiproduct" value="${cdto.store_product}외 다수">
+						<input type="hidden" class="payapiproduct" value="${cdto.store_product} 외 다수">
 					</c:if>
 				
                </td>
@@ -274,6 +274,7 @@ function requestPay1() {
     }, function (rsp) { // callback
         if (rsp.success) {
             console.log(rsp);
+            
         } else {
             console.log(rsp);
         }

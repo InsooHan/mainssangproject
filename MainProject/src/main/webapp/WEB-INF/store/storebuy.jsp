@@ -18,17 +18,72 @@
 <script type="text/javascript">
 	$(function(){
 		
-		//신용/체크카드 선택시 카드 목록 show
+		//신용/체크카드 선택시 kg이니시스, 카카오페이 선택시 카카오페이
 		$("input:radio[name=payinput]").click(function(){
 			var paysel = $("input[name=payinput]:checked").val();
 			console.log(paysel);			
 			
 			if(paysel=="pay_card"){
-				$("#pay_cardlist").show();
+				$("#pay_kakaobtn").hide();
+				$("#pay_cardbtn").show();
 			}else{
-				$("#pay_cardlist").hide();
+				$("#pay_cardbtn").hide();
+				$("#pay_kakaobtn").show();
 			}
-		})
+		});
+		
+		//수량에 따라 가격 변경
+	      $("input.cnt").change(function(){
+	    	  
+	    	  totalprice = 0;
+	    	  
+	    	  var cnt = $("input.cnt").val();
+	    	  var price= $('input.storeprice').val();
+	    	  console.log(cnt+","+price);
+	    	  var val = $("input.cnt").val() * $('input.storeprice').val();
+	    	  console.log(val);
+	    	  console.log(totalprice);
+	    	  
+	    	  totalprice = val;
+	    	  
+	    	  result = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+	    	  $(".totalprice").text(result+" 원");
+	         
+	      });
+	      
+	      //변경 버튼 누르면 storecart db 수정
+	      $(".cartupdate").click(function(){
+	    	  
+	    	  var cart_idx = $(this).attr("cart_idx");
+	    	  console.log(cart_idx);
+	    	  
+	    	  var cart_cnt = $("input.cnt").val()
+	    	  console.log(cart_cnt);
+	    	  
+	    	  var a = confirm("장바구니에서 수량을 변경하시겠습니까?");
+	    	  
+	 			if(a){
+	 				
+	 				$.ajax({
+			    		  
+					      type:"post",
+					      dataType:"html",
+					      url:"cartcntupdate",
+					      data:{"cart_idx":cart_idx,"cart_cnt":cart_cnt},
+						  success: function(res){
+							  
+							  alert("수량을 변경했습니다.");
+							  location.reload();
+
+						  }
+	 				
+					     }); 
+		    	  
+	    		}
+	    	 
+			
+	      });
 		
 	});
 	
@@ -61,10 +116,16 @@
 						${sdto.store_product }
 					</td>
 					<td style="vertical-align: middle;">사용 가능 극장</td>
-					<td style="vertical-align: middle;">${cdto.cart_cnt }</td>
-					<td style="vertical-align: middle;">
-					<fmt:formatNumber value="${cdto.cart_cnt * sdto.store_price }" type="currency" />
-					</td>
+					<%-- <td style="vertical-align: middle;">${cdto.cart_cnt }</td> --%>
+					<td style="text-align: center; vertical-align: middle;">
+                  <input type="number" min="1" max="8" step="1" name="cart_cnt" class="cnt" id="cnt" value="${cdto.cart_cnt }" style="width: 50px;">
+                  <button type="button" class="btn btn-primary btn-sm cartupdate" cart_idx="${cdto.cart_idx}">변경</button>
+               </td>
+               <td style="text-align: center; vertical-align: middle;">
+                  <input type="hidden" class="storeprice" id="storeprice" value="${sdto.store_price }">
+                  <p style="font-size: 1.2em; color: black;" class="totalprice">
+                     <fmt:formatNumber value="${cdto.cart_cnt * sdto.store_price }" pattern="#,###" /> 원
+                  </p>
 				</tr>
 			</tbody>
 		</table>
@@ -78,7 +139,9 @@
 					 <div class="price" style="width: 180px; height: 80px; display: inline-block;">
 					 	<p style="color: white;">총 상품 금액</p>
 					 	<p style="font-size: 2em; color: white; font-weight: 500">
-							<fmt:formatNumber value="${cdto.cart_cnt * sdto.store_price }" type="currency" />
+							<span class="totalprice">
+					 		<fmt:formatNumber value="${cdto.cart_cnt * sdto.store_price }"/> 원
+					 		</span>
 						</p>
 					 </div>
 					 <i class="fa-solid fa-minus" style="display: inline-block; color: white;"></i>
@@ -92,7 +155,9 @@
 					 <div class="finalprice" style="width: 180px; height: 80px; display: inline-block;">
 					 	<p style="color: white;">최종 결제 금액</p>
 					 	<p style="font-size: 2em; color: #339EB2; font-weight: 500">
-					 		<fmt:formatNumber value="${cdto.cart_cnt * sdto.store_price }" type="currency" />
+					 		<span class="totalprice">
+					 		<fmt:formatNumber value="${cdto.cart_cnt * sdto.store_price }"/> 원
+					 		</span>
 					 	</p>
 					 </div>
 				</div>
@@ -100,32 +165,24 @@
 				<hr style="width: 80%; color: white; margin: 0px auto;">
 				<br>
 				<div class="pay">
+					<div class="pay">
 					<p style="color: white;">결제수단 선택</p>
 					<input type="radio" name="payinput" id="pay_card" value="pay_card">
 					<span style="color: white;">신용/체크카드</span>
-						<span id="pay_cardlist" style="display: none;">
-							<select name="cardlist" id="cardlist">
-								<option value="">카드선택</option>
-								<option value="shinhan">신한카드</option>
-								<option value="woori">우리카드</option>
-								<option value="lotte">롯데카드</option>
-								<option value="hana">하나카드</option>
-								<option value="samsung">삼성카드</option>
-								<option value="hyundai">현대카드</option>
-							</select>						
-						</span>
 					<br>
 					<input type="radio" name="payinput" id="pay_bank" value="pay_bank">
-					<span style="color: white;">무통장 입금</span>
-					<br><br>
-					<button type="button" class="btn btn-megabox" onclick="requestPay()">결제하기</button>
+					<span style="color: white;">카카오페이</span>
 				</div>
 				<br>
+					<button type="button" id="pay_cardbtn" class="btn btn-megabox" style="display: none;" onclick="requestPay1()"> 신용/체크카드 결제</button>						
+					<button type="button" id="pay_kakaobtn" class="btn btn-megabox" style="display: none;" onclick="requestPay2()"> 카카오페이 결제</button>	
+				
+			</div>
 				<!-- 결제창에 상품명, 가격 띄우기 -->
 				<input type="hidden" class="payapiproduct" value="${sdto.store_product }">
-				<input type="hidden" class="payapiprice" value="${cdto.cart_cnt * sdto.store_price }">
+				<input type="hidden" class="payapiprice" value="${sdto.store_price * cdto.cart_cnt}">
 				<input type="hidden" class="payapiname" value="${sdto.store_product }">
-			</div>
+				
 		</div>
 		
 	</div>
@@ -138,13 +195,37 @@
 var IMP = window.IMP;   // 생략 가능
 IMP.init("imp62053265"); // 예: imp00000000 
 
-function requestPay() {
+//신용/체크카드
+function requestPay1() {
     IMP.request_pay({
         pg : 'html5_inicis',
         pay_method : 'card',
         merchant_uid: "merchant_" + new Date().getTime(), 
         name : $(".payapiproduct").val(),
-        amount : $(".payapiprice").val(),
+        amount : totalprice,
+        buyer_email : 'Iamport@chai.finance',
+        buyer_name : '쌍용교육센터 파이널 프로젝트',
+        buyer_tel : '010-1234-5678',
+        buyer_addr : '서울특별시 강남구 역삼동',
+        buyer_postcode : '123-456'
+    }, function (rsp) { // callback
+        if (rsp.success) {
+            console.log(rsp);
+            
+        } else {
+            console.log(rsp);
+        }
+    });
+}
+
+//카카오페이
+function requestPay2() {
+    IMP.request_pay({
+        pg : 'kakaopay',
+        pay_method : 'card',
+        merchant_uid: "merchant_" + new Date().getTime(), 
+        name : $(".payapiproduct").val(),
+        amount : totalprice,
         buyer_email : 'Iamport@chai.finance',
         buyer_name : '쌍용교육센터 파이널 프로젝트',
         buyer_tel : '010-1234-5678',

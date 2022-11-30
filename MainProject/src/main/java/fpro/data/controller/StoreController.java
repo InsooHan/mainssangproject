@@ -197,6 +197,14 @@ public class StoreController {
 		String m_num = service.getNumById(id);
 		mview.addObject("member_num", m_num);
 		
+		//장바구니 갯수 출력
+		List<CartDto> cartlist = service.getCartById(id);
+		
+		int cartlistcount = cartlist.size();
+		
+		mview.addObject("cartlistcount", cartlistcount);
+		 
+		
 		mview.setViewName("/store/storedetail");
 		
 		return mview;
@@ -254,10 +262,11 @@ public class StoreController {
 	@ResponseBody
 	public void cartinsert(@ModelAttribute CartDto dto,
 			@RequestParam int cart_cnt,
-			@RequestParam String store_num) {
+			@RequestParam String store_num,
+			@RequestParam String member_num) {
 		
 		//카트에 이미 상품이 있는지 확인
-		var result = service.checkCart(store_num);
+		var result = service.checkCart(store_num, member_num);
 		
 		//카트에 해당 상품이 없으면 장바구니 db에 새롭게 추가
 		if(result==0) {

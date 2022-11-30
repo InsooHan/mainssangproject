@@ -42,9 +42,11 @@ public interface StoreMapperInter {
 	//storecart 수정
 	public void updateCartCnt(Map<String, Object> map);
 	//기존에 장바구니에 있는 상품인지 확인 - 있으면 cnt만 추가, 없으면 새로 장바구니 추가하게..
-	public int checkCart(String store_num);
+	public int checkCart(Map<String, String> map);
 	//상품이 있으면 cnt만 추가
 	public void plusCartCnt(Map<String, Object> map);
+	//장바구니 결제 완료하면 해당 회원의 cart 목록 삭제
+	public void deleteCartByMem(String member_num);
 	
 	
 }
