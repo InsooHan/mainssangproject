@@ -17,5 +17,7 @@ public class DemovieDto {
 	private Timestamp movietime;
 	
 	private int capacity;
+	private String name;
+	private String age;
 	
 }

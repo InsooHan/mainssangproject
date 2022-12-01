@@ -47,7 +47,7 @@
 	  });
 	  
 	  
-	  //탈뢰
+	  //탈퇴
 	  $(".btndelete").click(function(){
 			
 			var num=$(this).attr("num");

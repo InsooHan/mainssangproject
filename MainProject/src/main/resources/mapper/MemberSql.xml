@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="fpro.data.mapper.MemberMapperInter">
      <insert id="insertMember" parameterType="member">
-       insert into member (name,id,pass,photo,hp,addr,email,gaipday) values (#{name},#{id},#{pass},#{photo},#{hp},#{addr},#{email},now())
+       insert into member (name,id,pass,hp,addr,email,birth,gaipday) values (#{name},#{id},#{pass},#{hp},#{addr},#{email},#{birth},now())
      </insert>
      <select id="getAllMembers" resultType="member">
  		select count(*) from member where id=#{id}

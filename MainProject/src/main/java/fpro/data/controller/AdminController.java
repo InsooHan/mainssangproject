@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,7 +32,7 @@ public class AdminController {
 	AdminService service;
 	
 	@GetMapping("/admin/list")
-	public ModelAndView adminlist(@RequestParam(defaultValue = "1")int currentPage, //얘는 default값 1
+	public ModelAndView adminlist(@RequestParam(defaultValue = "1")int currentPage,
 			@RequestParam(value = "searchcolumn",required =false) String sc,//searchcolumn은 boardlist에선언한 name
 			@RequestParam(value = "searchword",required =false) String sw //serachword도 리스트에선언 requier false는 값이없을때 null값표시
 			) {
@@ -44,55 +45,38 @@ public class AdminController {
 				int startPage; //각블럭의 시작페이지
 				int endPage; //각블럭의 끝페이지
 				int start; //각페이지의 시작번호
-				int perPage=5; //한페이지에 보여질 글의 갯수
-				int perBlock=5; //한블럭당 보여지는 페이지개수
+				int perPage=3; //한페이지에 보여질 글의 갯수
+				int perBlock=3; //한블럭당 보여지는 페이지개수
 				
 				
-				int otherCount=service.getOtherCount(sc, sw);
-				int systemCount=service.getSystemCount(sc, sw);
-				int theaterCount=service.getTheaterCount(sc, sw);
-				int systemPage;
-				int systemendPage; //각블럭의 끝페이지
-				int systemstart; //각페이지의 시작번호
-				int systemperPage=5; //한페이지에 보여질 글의 갯수
-				int systemperBlock=5; //한블럭당 보여지는 페이지개수
-
 				//총갯수:
 				//총페이지갯수 구하기
 					totalPage=totalCount/perPage+(totalCount%perPage==0?0:1);
-				
-				/*추가*/
-					
-
+	
 				//각블럭의 시작페이지(현재페이지 3: 시작:1 끝:5)
 				//각블럭의 시작페이지(현재페이지 6: 시작:6 끝:10)
 					startPage=(currentPage-1)/perBlock*perBlock+1;
 					endPage=startPage+perBlock-1;
-
+					
+		
 				//총페이지수가 8 ..2번재 블럭은 startpage6 endpage 10...endpage 8로수정
 					if(endPage>totalPage)
 						endPage=totalPage;
+		
 
 				//각페이지에서 불러올 시작번호
 				//현재페이지가 1일경우 strt 1, 2일경우 6
 					start=(currentPage-1)*perPage;
 
 				//각페이지에서 필요한 게시글불러오기
-					List<AdminDto>list=service.getList(sc, sw, start, perPage);
-				
-				
-				//list의 각글에 대한 댓글개수 추가하기
-				/*for(BoardDto d:list)
-				{
-					d.setAcount(adao.getAnswerList(d.getNum()).size());
-				}*/
+					List<AdminDto>list=service.getListAll(sc, sw, start, perPage);
+					
 
 				//각글앞에 붙힐 시작번호
 				//총글이 만약에 20..1페이지는 20부터 2페이지는 15부터
 				//출력해서 1씩 감소하면서 출력
 					int	no=totalCount-(currentPage-1)*perPage;
-				
-				
+					
 				//출력에 필요한 변수들을 request에 저장
 					mview.addObject("list", list);  //댓글이 포함된후 전달
 					mview.addObject("startPage", startPage);
@@ -100,28 +84,118 @@ public class AdminController {
 					mview.addObject("endPage", endPage);
 					mview.addObject("no", no);
 					mview.addObject("currentPage", currentPage);
-					mview.addObject("otherCount", otherCount);
-					mview.addObject("systemCount", systemCount);
-					mview.addObject("theaterCount", theaterCount);
 					mview.addObject("totalCount", totalCount);
-
 					
 					mview.setViewName("/admin/adminlist");
 					
 					return mview;
 				
 	}
-	
-	@GetMapping("/admin/form")
-	public String form() {
-		
-	
-		return "/admin/writeform";
+	@GetMapping("/admin/system")
+	public ModelAndView system(@RequestParam(defaultValue = "1")int currentPage,
+			@RequestParam(value = "searchcolumn",required =false) String sc,//searchcolumn은 boardlist에선언한 name
+			@RequestParam(value = "searchword",required =false) String sw //serachword도 리스트에선언 requier false는 값이없을때 null값표시
+			) {
+					ModelAndView mview=new ModelAndView();		
+					int totalCount=service.getSystemCount(sc, sw);
+					int totalPage;
+					int startPage;
+					int endPage;
+					int start;
+					int perPage=3;
+					int perBlock=3;				
+					totalPage=totalCount/perPage+(totalCount%perPage==0?0:1);			
+					startPage=(currentPage-1)/perBlock*perBlock+1;
+					endPage=startPage+perBlock-1;					
+					if(endPage>totalPage)
+						endPage=totalPage;				
+					start=(currentPage-1)*perPage;		
+					List<AdminDto>list=service.getListSystem(sc, sw, start, perPage);					
+					int	no=totalCount-(currentPage-1)*perPage;					
+					mview.addObject("list", list);
+					mview.addObject("startPage", startPage);
+					mview.addObject("totalPage", totalPage);
+					mview.addObject("endPage", endPage);
+					mview.addObject("no", no);
+					mview.addObject("currentPage", currentPage);
+					mview.addObject("totalCount", totalCount);						
+					mview.setViewName("/admin/system");					
+					return mview;
+				
 	}
 
+	@GetMapping("/admin/theater")
+	public ModelAndView theater(@RequestParam(defaultValue = "1")int currentPage,
+			@RequestParam(value = "searchcolumn",required =false) String sc,//searchcolumn은 boardlist에선언한 name
+			@RequestParam(value = "searchword",required =false) String sw //serachword도 리스트에선언 requier false는 값이없을때 null값표시
+			) {		
+					ModelAndView mview=new ModelAndView();		
+					int totalCount=service.getTheaterCount(sc, sw);
+					int totalPage;
+					int startPage; 
+					int endPage; 
+					int start; 
+					int perPage=3;
+					int perBlock=3;				
+					totalPage=totalCount/perPage+(totalCount%perPage==0?0:1);	
+					startPage=(currentPage-1)/perBlock*perBlock+1;
+					endPage=startPage+perBlock-1;					
+					if(endPage>totalPage)
+						endPage=totalPage;		
+					start=(currentPage-1)*perPage;
+					List<AdminDto>list=service.getListTheater(sc, sw, start, perPage);					
+					int	no=totalCount-(currentPage-1)*perPage;
+					mview.addObject("list", list); 
+					mview.addObject("startPage", startPage);
+					mview.addObject("totalPage", totalPage);
+					mview.addObject("endPage", endPage);
+					mview.addObject("no", no);
+					mview.addObject("currentPage", currentPage);
+					mview.addObject("totalCount", totalCount);						
+					mview.setViewName("/admin/theater");					
+					return mview;
+				
+	}
+	@GetMapping("/admin/other")
+	public ModelAndView other(@RequestParam(defaultValue = "1")int currentPage,
+			@RequestParam(value = "searchcolumn",required =false) String sc,
+			@RequestParam(value = "searchword",required =false) String sw 
+			) {
+		
+					ModelAndView mview=new ModelAndView();
+		
+		
+					int totalCount=service.getOtherCount(sc, sw);
+					int totalPage; 
+					int startPage; 
+					int endPage;
+					int start; 
+					int perPage=3; 
+					int perBlock=3; 			
+					totalPage=totalCount/perPage+(totalCount%perPage==0?0:1);	
+					startPage=(currentPage-1)/perBlock*perBlock+1;
+					endPage=startPage+perBlock-1;					
+					if(endPage>totalPage)
+						endPage=totalPage;
+					start=(currentPage-1)*perPage;
+					List<AdminDto>list=service.getListOther(sc, sw, start, perPage);				
+					int	no=totalCount-(currentPage-1)*perPage;
+					mview.addObject("list", list);
+					mview.addObject("startPage", startPage);
+					mview.addObject("totalPage", totalPage);
+					mview.addObject("endPage", endPage);
+					mview.addObject("no", no);
+					mview.addObject("currentPage", currentPage);
+					mview.addObject("totalCount", totalCount);
+					mview.setViewName("/admin/other");					
+					return mview;
+				
+	}
 	
 	@PostMapping("/admin/insert")
-	public String insert(AdminDto dto, List<MultipartFile> upload,HttpSession session) {
+	public String insert(AdminDto dto, List<MultipartFile> upload,HttpSession session
+			,int currentPage
+			) {
 		//경로
 		String path=session.getServletContext().getRealPath("/save");
 		//업로드안했을때 0번지 파일이 ""이된다
@@ -157,10 +231,17 @@ public class AdminController {
 		//db insert
 		service.insertAdmin(dto);
 		
-		return "redirect:list";
+		//return "redirect:list";
 		//return "redirect:content?num="+service.getMaxNum();
-		//return "redirect:list?currentPage="+currentPage;
+		return "redirect:list?currnetPage="+currentPage;	
+		}
+	@GetMapping("/admin/form")
+	public String form() {
+		
+	
+		return "/admin/writeform";
 	}
+	
 	@GetMapping("/admin/detail")
 	public ModelAndView detail(int num,int currentPage) {
 		ModelAndView mview=new ModelAndView();
@@ -180,16 +261,17 @@ public class AdminController {
 	}
 	@GetMapping("/admin/updateform") //requestmapping해서 짧아진거
 	public String uform(int num,Model model //Model은 저장하기위해 num은 값을가져와야되니 parameter써도됨
-			) {
+			,int currentPage) {
 		AdminDto dto=service.getData(num);
 		
 		model.addAttribute("dto", dto); //"dto"인이유는 updateform에서 value값을 dto로받았기때문에
-		
+		model.addAttribute("currentPage", currentPage);	
 		return "/admin/updateform";
 	}
 	
 	@PostMapping("/admin/update")
-	public String update(AdminDto dto, List<MultipartFile> upload,HttpSession session) {
+	public String update(@ModelAttribute AdminDto dto, List<MultipartFile> upload,HttpSession session,
+			int currentPage) {
 		//경로
 		String path=session.getServletContext().getRealPath("/save");
 		//업로드안했을때 0번지 파일이 ""이된다
@@ -225,9 +307,10 @@ public class AdminController {
 		//db insert
 		service.updateAdmin(dto);
 		
-		return "redirect:list";
+		//return "redirect:list";
 		//return "redirect:content?num="+service.getMaxNum();
 		//return "redirect:list?currentPage="+currentPage;
+		return "redirect:detail?num="+dto.getNum()+"&currentPage="+currentPage;	
 	}
 	
 	@GetMapping("/admin/delete")
