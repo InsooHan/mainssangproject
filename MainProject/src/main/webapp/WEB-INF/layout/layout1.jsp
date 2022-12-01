@@ -57,8 +57,8 @@ div.layout div.title{
    div.layout div.main{
    	  width: 100%;
    	  height: auto;
-      padding-top: 150px; 
-      padding-bottom: 200px;
+      padding-top: 100px; 
+      padding-bottom: 100px;
    }
    
      

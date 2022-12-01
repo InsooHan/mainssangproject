@@ -32,62 +32,67 @@
 			}
 		});
 		
+	
+  	  
+	
+		var cnt = $("input.cnt").val();
+		var price = $('input.storeprice').val();
+
+		totalprice = cnt*price;
+		console.log(totalprice);
+
 		//수량에 따라 가격 변경
-	      $("input.cnt").change(function(){
-	    	  
-	    	  totalprice = 0;
-	    	  
-	    	  var cnt = $("input.cnt").val();
-	    	  var price= $('input.storeprice').val();
-	    	  console.log(cnt+","+price);
-	    	  var val = $("input.cnt").val() * $('input.storeprice').val();
-	    	  console.log(val);
-	    	  console.log(totalprice);
-	    	  
-	    	  totalprice = val;
-	    	  
-	    	  result = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		$("input.cnt").change(function() {
 
-	    	  $(".totalprice").text(result+" 원");
-	         
-	      });
-	      
-	      //변경 버튼 누르면 storecart db 수정
-	      $(".cartupdate").click(function(){
-	    	  
-	    	  var cart_idx = $(this).attr("cart_idx");
-	    	  console.log(cart_idx);
-	    	  
-	    	  var cart_cnt = $("input.cnt").val()
-	    	  console.log(cart_cnt);
-	    	  
-	    	  var a = confirm("장바구니에서 수량을 변경하시겠습니까?");
-	    	  
-	 			if(a){
-	 				
-	 				$.ajax({
-			    		  
-					      type:"post",
-					      dataType:"html",
-					      url:"cartcntupdate",
-					      data:{"cart_idx":cart_idx,"cart_cnt":cart_cnt},
-						  success: function(res){
-							  
-							  alert("수량을 변경했습니다.");
-							  location.reload();
+			console.log(cnt + "," + price);
+			val = $("input.cnt").val() * $('input.storeprice').val();
+			console.log(val);
 
-						  }
-	 				
-					     }); 
-		    	  
-	    		}
-	    	 
+			result = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+			totalprice = val;
+
 			
-	      });
-		
+
+			$(".totalprice").text(result + " 원");
+
+		});
+
+		//변경 버튼 누르면 storecart db 수정
+		$(".cartupdate").click(function() {
+
+			var cart_idx = $(this).attr("cart_idx");
+			console.log(cart_idx);
+
+			var cart_cnt = $("input.cnt").val()
+			console.log(cart_cnt);
+
+			var a = confirm("장바구니에서 수량을 변경하시겠습니까?");
+
+			if (a) {
+
+				$.ajax({
+
+					type : "post",
+					dataType : "html",
+					url : "cartcntupdate",
+					data : {
+						"cart_idx" : cart_idx,
+						"cart_cnt" : cart_cnt
+					},
+					success : function(res) {
+
+						alert("수량을 변경했습니다.");
+						location.reload();
+
+					}
+
+				});
+
+			}
+
+		});
+
 	});
-	
-	
 </script>
 <style type="text/css">
 
