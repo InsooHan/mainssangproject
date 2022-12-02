@@ -66,7 +66,6 @@ div.layout div.title{
 	  position: absolute;
 	  width: 100%;
 	  bottom: 0; 
-	  left: 0;
    }
    
 
