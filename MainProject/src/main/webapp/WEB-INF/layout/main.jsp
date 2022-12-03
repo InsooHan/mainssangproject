@@ -37,9 +37,9 @@
 				console.log(res);
 				
 				var result = "";
-				
-					result +="<table class='table table-dark table-hover' style='border:1px solid black; border-radius: 16px; box-shadow:inset 0 0 8px #deb13a; width:400px; color: white; text-align:center;'>";
-						result +="<caption style='caption-side: top; color: white; font-size:1.8em; font-weight: 500; text-align:center;'>박스오피스 순위<span style='font-size:0.5em;'>("+year+"."+month+"."+day+")</span></caption>";
+					result +="<div>";
+					result +="<table class='table table-dark table-hover' style='border:1px solid black; box-shadow:inset 0 0 8px #deb13a; width:400px; color: white; text-align:center;'>";
+						result +="<caption class='s1' style='caption-side: top; color: white; font-size:1.8em; font-weight: 500; text-align:center;'>박스오피스 순위<span style='font-size:0.5em;'>("+year+"."+month+"."+day+")</span></caption>";
 						result +="<tr>";
 							result +="<th style='background-color:#339EB2; width:100px;'>순위</th>";
 							result +="<th style='background-color:#339EB2; width:300px;'>영화</th>";
@@ -66,6 +66,7 @@
 						result +="</tr>";
 					}
 					result +="</table>";
+					result +="</div>";
 				
 				//div에 출력
 				$(".boxoffice").html(result);
@@ -75,20 +76,57 @@
 		
 	});
 						
+	//test
+	function test(){
+		alert("test");
+	}
+						
 						
 </script>
 <style type="text/css">
-	body{
+body {
 	font-family: Noto Sans KR;
-	}
-	
-	.main{
+}
+
+.main {
 	background-color: #555555;
 	font-family: Noto Sans KR;
 	margin-top: 0px;
-	}
-	
-	
+}
+
+.s1 {
+	text-shadow: 2px 2px 2px gray;
+}
+
+.s2 {
+	text-shadow: 2px 4px 2px gray;
+}
+
+.s3 {
+	text-shadow: 2px 6px 2px gray;
+}
+
+.img-fluid {
+   position: relative;
+}
+
+.card .cardbtn{
+   position: absolute;
+   top: 150px;
+   left: 40px;   
+   opacity: 0;
+}
+
+.hovertest:hover .cardbtn{
+	opacity: 1;
+}
+
+.hovertest:hover .img-fluid{
+	filter: brightness(70%);
+}
+
+
+
 </style>
 </head>
 <body>
@@ -125,150 +163,204 @@
 	</div>
 	<!-- 광고 슬라이드 end -->
 	
-<div style="height: 650px; background-color:#212529; padding-top: 10px; padding-left: 100px; padding-right: 100px; padding-bottom: 100px;">
-	
-	<!-- 박스 오피스 api-->
-	<div class="boxoffice" style="margin-top:20px; margin-bottom: 100px;"></div>
+<div style="height: 650px; background-color:#212529; background-color:rgba(0,0,0,0.6); padding-top: 10px; padding-left: 100px; padding-right: 100px; padding-bottom: 100px;">
+
 	<!-- 영화 리스트 캐러셀-->
-	<section class="pt-5 pb-5" style="width: 60%;" >
-	    <div class="container" style="float: right;">
-	        <div class="row">
-	            <div class="col-6">
-	                <h3 class="mb-3" style="color: #339EB2; font-family: Noto Sans KR;">영화 리스트</h3>
-	            </div>
-	            <div class="col-6 text-right">
-	                <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
-	                    <i class="fa fa-arrow-left"></i>
-	                </a>
-	                <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
-	                    <i class="fa fa-arrow-right"></i>
-	                </a>
-	            </div>
-	            <div class="col-12">
-	                <div id="carouselExampleIndicators2" class="carousel slide carousel-fade" data-ride="carousel">
+	<div class="container" style="float: right; width: 75%; margin-top: 30px;">
+		<div class="row">
+			<div class="col-6">
+				<p class="mb-3 s1" style="color: white; font-family: Noto Sans KR; font-weight: 500; font-size: 1.8em;">최신 개봉작</p>
+			</div>
+			<div class="col-6 text-right">
+				<a class="btn btn-primary mb-3 mr-1"
+					href="#carouselExampleIndicators_movie" role="button" data-slide="prev">
+					<i class="fa fa-arrow-left"></i>
+				</a> <a class="btn btn-primary mb-3 "
+					href="#carouselExampleIndicators_movie" role="button" data-slide="next">
+					<i class="fa fa-arrow-right"></i>
+				</a>
+			</div>
+			<div class="col-12">
+				<div id="carouselExampleIndicators_movie"
+					class="carousel slide carousel-fade" data-ride="carousel">
+
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<div class="row">
+
+								<!-- 4개 반복문 -->
+								<c:forEach var="movie" items="${mlist }" begin="0" end="3">
+									<div class="col-md-3 mb-3">
+										<div class="card" style="width: 250px;">
+											<div class="hovertest">
+											<img class="img-fluid" alt="100%x280" src="../save/${movie.poster}" style="width: 280px;">
+												<div class="cardbtn" style="text-align: center;">
+												<button class="btn btn-m detailbtn" type="button" style="background-color: #339EB2; color: white;" onclick="test()">상세보기</button>	
+												&nbsp;&nbsp;
+												<button class="btn btn-m bookbtn" type="button" style="background-color: #503396; color: white;" onclick="#">예매하기</button>	
+												</div>
+											</div>
+											<div class="card-body">
+												<h5 class="card-title" style="font-family: Noto Sans KR; text-align: center;">${movie.name }</h5>
+												<div style="text-align: center;">개봉일: <fmt:formatDate value="${movie.opendate }" pattern="yyyy.MM.dd"/></div>
+											</div>
 	
-	                    <div class="carousel-inner">
-	                        <div class="carousel-item active">
-	                            <div class="row">
+										</div>
+									</div>
+								
+								</c:forEach>
+							</div>
+						</div>
+						<!-- 첫 캐러셀 3개 end -->
+						
+						<!-- 다음 페이지 캐러셀 3개 start -->
+						<div class="carousel-item">
+							<div class="row">
+
+								<!-- 4개 반복문 -->
+								<c:forEach var="movie" items="${mlist }" begin="4" end="7">
+									<div class="col-md-3 mb-3">
+										<div class="card" style="width: 250px;">
+											<div class="hovertest">
+											<img class="img-fluid" alt="100%x280" src="../save/${movie.poster}" style="width: 280px;">
+												<div class="cardbtn" style="text-align: center;">
+												<button class="btn btn-m detailbtn" type="button" style="background-color: #339EB2; color: white;" onclick="test()">상세보기</button>	
+												&nbsp;&nbsp;
+												<button class="btn btn-m bookbtn" type="button" style="background-color: #503396; color: white;" onclick="#">예매하기</button>	
+												</div>
+											</div>
+											<div class="card-body">
+												<h5 class="card-title" style="font-family: Noto Sans KR; text-align: center;">${movie.name }</h5>
+												<div style="text-align: center;">개봉일: <fmt:formatDate value="${movie.opendate }" pattern="yyyy.MM.dd"/></div>
+											</div>
 	
-	                                <div class="col-md-4 mb-3">
-	                                    <div class="card">
-	                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532781914607-2031eca2f00d?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=7c625ea379640da3ef2e24f20df7ce8d">
-	                                        <div class="card-body">
-	                                            <h4 class="card-title">Special title treatment</h4>
-	                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+										</div>
+									</div>
+								
+								</c:forEach>
+
+							</div>
+						</div>
+						<!-- 두번째 캐러셀 end -->
+						<!-- 세번째 캐러셀 start-->
+						<div class="carousel-item">
+							<div class="row">
+
+								<!-- 4개 반복문 -->
+								<c:forEach var="movie" items="${mlist }" begin="8" end="10">
+									<div class="col-md-3 mb-3">
+										<div class="card" style="width: 250px;">
+											<div class="hovertest">
+											<img class="img-fluid" alt="100%x280" src="../save/${movie.poster}" style="width: 280px;">
+												<div class="cardbtn" style="text-align: center;">
+												<button class="btn btn-m detailbtn" type="button" style="background-color: #339EB2; color: white;" onclick="test()">상세보기</button>	
+												&nbsp;&nbsp;
+												<button class="btn btn-m bookbtn" type="button" style="background-color: #503396; color: white;" onclick="#">예매하기</button>	
+												</div>
+											</div>
+											<div class="card-body">
+												<h5 class="card-title" style="font-family: Noto Sans KR; text-align: center;">${movie.name }</h5>
+												<div style="text-align: center;">개봉일: <fmt:formatDate value="${movie.opendate }" pattern="yyyy.MM.dd"/></div>
+											</div>
 	
-	                                        </div>
-	
-	                                    </div>
-	                                </div>
-	                                <div class="col-md-4 mb-3">
-	                                    <div class="card">
-	                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=42b2d9ae6feb9c4ff98b9133addfb698">
-	                                        <div class="card-body">
-	                                            <h4 class="card-title">Special title treatment</h4>
-	                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-	
-	                                        </div>
-	                                    </div>
-	                                </div>
-	                                <div class="col-md-4 mb-3">
-	                                    <div class="card">
-	                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3d2e8a2039c06dd26db977fe6ac6186a">
-	                                        <div class="card-body">
-	                                            <h4 class="card-title">Special title treatment</h4>
-	                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-	
-	                                        </div>
-	                                    </div>
-	                                </div>
-	
-	                            </div>
-	                        </div>
-	                        <div class="carousel-item">
-	                            <div class="row">
-	
-	                                <div class="col-md-4 mb-3">
-	                                    <div class="card">
-	                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532771098148-525cefe10c23?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3f317c1f7a16116dec454fbc267dd8e4">
-	                                        <div class="card-body">
-	                                            <h4 class="card-title">Special title treatment</h4>
-	                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-	
-	                                        </div>
-	
-	                                    </div>
-	                                </div>
-	                                <div class="col-md-4 mb-3">
-	                                    <div class="card">
-	                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532715088550-62f09305f765?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=ebadb044b374504ef8e81bdec4d0e840">
-	                                        <div class="card-body">
-	                                            <h4 class="card-title">Special title treatment</h4>
-	                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-	
-	                                        </div>
-	                                    </div>
-	                                </div>
-	                                <div class="col-md-4 mb-3">
-	                                    <div class="card">
-	                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=0754ab085804ae8a3b562548e6b4aa2e">
-	                                        <div class="card-body">
-	                                            <h4 class="card-title">Special title treatment</h4>
-	                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-	
-	                                        </div>
-	                                    </div>
-	                                </div>
-	
-	                            </div>
-	                        </div>
-	                        <div class="carousel-item">
-	                            <div class="row">
-	
-	                                <div class="col-md-4 mb-3">
-	                                    <div class="card">
-	                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=ee8417f0ea2a50d53a12665820b54e23">
-	                                        <div class="card-body">
-	                                            <h4 class="card-title">Special title treatment</h4>
-	                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-	
-	                                        </div>
-	
-	                                    </div>
-	                                </div>
-	                                <div class="col-md-4 mb-3">
-	                                    <div class="card">
-	                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532777946373-b6783242f211?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=8ac55cf3a68785643998730839663129">
-	                                        <div class="card-body">
-	                                            <h4 class="card-title">Special title treatment</h4>
-	                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-	
-	                                        </div>
-	                                    </div>
-	                                </div>
-	                                <div class="col-md-4 mb-3">
-	                                    <div class="card">
-	                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532763303805-529d595877c5?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=5ee4fd5d19b40f93eadb21871757eda6">
-	                                        <div class="card-body">
-	                                            <h4 class="card-title">Special title treatment</h4>
-	                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-	                                        </div>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</section>
+										</div>
+									</div>
+								
+								</c:forEach>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-	
-	
-	
+
+	<!-- 박스 오피스 api-->
+	<div class="boxoffice" style="margin-top: 20px; margin-bottom: 100px;"></div>
+
 </div>
-<div style="height: 500px; background-color: white;">
+
+<div style="height: 550px; background-color: white;">
+<!-- 스토어 캐러셀 -->
+<section class="pt-5 pb-5">
+    <div style="margin-left: 100px; margin-right: 100px;">
+        <div class="row">
+            <div class="col-6">
+                <h3 class="mb-3" style="font-family: Noto Sans KR; font-weight: 500;">메가박스 스토어</h3>
+            </div>
+            <div class="col-6 text-right">
+                <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators_store" role="button" data-slide="prev">
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+                <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators_store" role="button" data-slide="next">
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="col-12">
+                <div id="carouselExampleIndicators_store" class="carousel slide carousel-fade" data-ride="carousel">
+
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <c:forEach var="store" items="${slist }" begin="0" end="3">
+                                	<div class="col-md-3 mb-3">
+	                                    <div class="card" style="text-align: center;">
+	                                    	<a href="/store/detail?store_num=${store.store_num }">
+	                                        <img class="img-fluid" alt="100%x280" src="../save/${store.store_photo }" >
+	                                        </a>
+	                                        <div class="card-body" style="text-align: center;">
+	                                            <h4 class="card-title" style="font-family: Noto Sans KR;">${store.store_product }</h4>
+	                                            <p class="card-text">${store.store_content }</p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+                                </c:forEach>
+                                
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+
+                                 <c:forEach var="store" items="${slist }" begin="4" end="7">
+                                	<div class="col-md-3 mb-3">
+	                                    <div class="card" style="text-align: center;">
+	                                        <a href="/store/detail?store_num=${store.store_num }">
+	                                        <img class="img-fluid" alt="100%x280" src="../save/${store.store_photo }" >
+	                                        </a>
+	                                        <div class="card-body" style="text-align: center;">
+	                                            <h4 class="card-title" style="font-family: Noto Sans KR;">${store.store_product }</h4>
+	                                            <p class="card-text">${store.store_content }</p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+                                </c:forEach>
+
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+
+                                <c:forEach var="store" items="${slist }" begin="8" end="11">
+                                	<div class="col-md-3 mb-3">
+	                                    <div class="card" style="text-align: center;">
+	                                        <a href="/store/detail?store_num=${store.store_num }">
+	                                        <img class="img-fluid" alt="100%x280" src="../save/${store.store_photo }" >
+	                                        </a>
+	                                        <div class="card-body" style="text-align: center;">
+	                                            <h4 class="card-title" style="font-family: Noto Sans KR;">${store.store_product }</h4>
+	                                            <p class="card-text">${store.store_content }</p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 </div>
 <div style="height: 500px; background-color: #503396;">
