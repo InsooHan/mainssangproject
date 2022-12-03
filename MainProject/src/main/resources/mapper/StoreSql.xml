@@ -73,13 +73,20 @@
 	</update>
 
 	<!-- storecart에 제품 있는지 확인 -->
-	<select id="checkCart" resultType="int" parameterType="String">
-		select count(*) from storecart where store_num=#{store_num}
+	<select id="checkCart" resultType="int" parameterType="map">
+		select count(*) from storecart where store_num=#{store_num} and member_num = #{member_num}
 	</select>
 	
 	<!-- storecart에 제품이 있는 상태이면 기존 cart_cnt에 구매하려는 갯수 더하기 -->
 	<update id="plusCartCnt" parameterType="map">
 		update storecart set cart_cnt=cart_cnt+#{cart_cnt} where store_num=#{store_num}
 	</update>
+	
+	<!-- storecart에 member_num에 해당하는 데이터 삭제 -->
+	<delete id="deleteCartByMem" parameterType="String">
+		delete from storecart where member_num = #{member_num}
+	</delete>
+	
+	
 	
 </mapper>

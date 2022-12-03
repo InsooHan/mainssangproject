@@ -97,9 +97,14 @@ public class StoreService implements StoreServiceInter {
 	}
 
 	@Override
-	public int checkCart(String store_num) {
+	public int checkCart(String store_num, String member_num) {
 		// TODO Auto-generated method stub
-		return mapperInter.checkCart(store_num);
+		Map<String, String> map = new HashMap<>();
+		
+		map.put("store_num", store_num);
+		map.put("member_num", member_num);
+		
+		return mapperInter.checkCart(map);
 	}
 
 	@Override
@@ -124,6 +129,12 @@ public class StoreService implements StoreServiceInter {
 	public void deleteStore(String store_num) {
 		// TODO Auto-generated method stub
 		mapperInter.deleteStore(store_num);
+	}
+
+	@Override
+	public void deleteCartByMem(String member_num) {
+		// TODO Auto-generated method stub
+		mapperInter.deleteCartByMem(member_num);
 	}
 	
 
