@@ -15,6 +15,7 @@ public class DemovieDto {
 	private String sang_num;
 	private String theater_num;
 	private Timestamp movietime;
+	private String seat;
 	
 	private int capacity;
 	private String name;
