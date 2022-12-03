@@ -179,7 +179,7 @@ $(function() {
 					
 				if(mtime==realtoday(item.movietime)){
 					
-					s+="&nbsp;<div class='detailtable'>"; // data-bs-toggle='modal' data-bs-target='#bookModal'>"
+					s+="&nbsp;<div class='detailtable' cartnum='"+item.cart_num+"'>"; // data-bs-toggle='modal' data-bs-target='#bookModal'>"
 					s+="<span>"+item.capacity+"</span>";
 					s+="<span class='mmmtime'><br>";
 					s+=formatDate(item.movietime);
@@ -229,8 +229,9 @@ $(function() {
 	$(document).on("click",".detailtable",function(){
 		
 		var sangnum=$(this).find('b').text();
-		//alert(sangnum);
-		location.href="listtwo?moviename="+moviename+"&theater="+theater+"&sangnum="+sangnum;
+		var cartnum=$(this).attr("cartnum");
+		//alert(cartnum);
+		location.href="listtwo?moviename="+moviename+"&theater="+theater+"&sangnum="+sangnum+"&cartnum="+cartnum;
 		
 	});
 	
@@ -289,57 +290,6 @@ $(function() {
 
 </div>
 
-<!-- The Modal -->
-<div class="modal" id="bookModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-        Modal body..
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-
-
-<!-- The Modal -->
-<div class="modal" id="bookModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body" id="modalbody">
-	  	
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-      </div>
-
-    </div>
-  </div>
-</div>
 </body>
 </html>
 

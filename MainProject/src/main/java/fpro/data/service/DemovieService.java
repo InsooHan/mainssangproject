@@ -33,7 +33,18 @@ public class DemovieService implements DemovieServiceInter {
 		// TODO Auto-generated method stub
 		return mapperInter.getSangData(num);
 	}
-	
+
+	@Override
+	public DemovieDto getbookedData(String cartnum) {
+		// TODO Auto-generated method stub
+		return mapperInter.getbookedData(cartnum);
+	}
+
+	@Override
+	public void updateSeat(DemovieDto dto) {
+		// TODO Auto-generated method stub
+		mapperInter.updateSeat(dto);
+	}
 	
 	
 }
