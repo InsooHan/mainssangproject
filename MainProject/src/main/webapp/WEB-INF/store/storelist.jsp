@@ -45,7 +45,16 @@
 		
 	<!-- 스토어 카테고리 -->
 	<div class="container mt-3">
-	  <p style="font-size: 2.5em; color: #252451; font-weight: 700;">스토어</p>
+	  	<!-- 장바구니 아이콘 -->
+	  	<div style="position: relative;">
+	  	<a href="cart" style="font-size: 2.0em; float: right; color:#503396;">
+	  	<i class="fa-solid fa-cart-shopping" style="margin-right: 100px;"></i>
+	  	</a>
+	  	<div style="border-radius: 100px; background-color: #339EB2; position:absolute; top: 0; right:88px; z-index:10; color: white; width: 25px; height: 25px; text-align: center; vertical-align: middle;">${cartlistcount }</div>
+	  	</div>
+	  	<!-- 장바구니 아이콘 end -->
+	  <p style="font-size: 2.5em; color: #252451; font-weight: 700;">스토어
+	  </p>
 	  <br>
 	  <!-- 카테고리 메뉴 -->
 	  <ul class="nav nav-tabs" role="tablist" style="text-align: center;">

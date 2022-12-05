@@ -77,7 +77,7 @@ $(function(){
 	//장바구니 클릭했을 때 추가 후 이동
 	$("#btncart").click(function(){
 		
-			var formdata = $("#frm").serialize();
+			 var formdata = $("#frm").serialize();
 			//alert(formdata);	
 
 			$.ajax({
@@ -117,7 +117,14 @@ $(function(){
 <!-- 장바구니 기능을 위해 hidden으로 제품num, 로그인 된 회원num -->
 <input type="hidden" name="store_num" value="${dto.store_num }">
 <input type="hidden" name="member_num" value="${member_num }">
-
+	<!-- 장바구니 아이콘 -->
+	  	<div style="position: relative;">
+	  	<a href="cart" style="font-size: 2.0em; float: right; color:#503396;">
+	  	<i class="fa-solid fa-cart-shopping" style="margin-right: 100px;"></i>
+	  	</a>
+	  	<div style="border-radius: 100px; background-color: #339EB2; position:absolute; top: 0; right:88px; z-index:10; color: white; width: 25px; height: 25px; text-align: center; vertical-align: middle;">${cartlistcount }</div>
+	  	</div>
+	  	<!-- 장바구니 아이콘 end -->
 	<div class="detail_title">
 		<p style="font-size: 2em; font-weight: 700; color: #2E2E2E;">${dto.store_product }</p>
 		<p style="font-size: 1.2em; font-weight: 400; color: #848484;">${dto.store_content }</p>

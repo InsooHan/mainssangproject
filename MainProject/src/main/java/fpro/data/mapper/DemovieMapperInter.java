@@ -12,4 +12,6 @@ import fpro.data.dto.SangDto;
 public interface DemovieMapperInter {
 	public List<DemovieDto> getSomeDatas(Map<String, String> map);
 	public SangDto getSangData(String num);
+	public void updateSeat(DemovieDto dto);
+	public DemovieDto getbookedData(String cartnum);
 }
