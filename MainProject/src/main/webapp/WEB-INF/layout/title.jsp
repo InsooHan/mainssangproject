@@ -11,8 +11,68 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="https://kit.fontawesome.com/a47cf79e39.js" crossorigin="anonymous"></script>
-
 <title>Insert title here</title>
+<style type="text/css">
+.modal-content {
+  width: 80%;
+  margin: 0 auto;
+}
+.modal-body {
+  padding: 0;
+}
+.btn-close {
+  position: absolute;
+  right: 15px;
+  padding: 1em;
+}
+h1 {
+  font-size: 2.3em;
+  font-weight: bold;
+  font-family: Noto Sans KR;
+}
+.myform {
+  padding: 2em;
+  max-width: 100%;
+  color: #fff;
+  box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
+}
+@media (max-width: 576px) {
+  .myform {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}
+.form-control:focus {
+  box-shadow: inset 0 -1px 0 #7e7e7e;
+}
+.form-control {
+  background-color: inherit;
+  color: #fff;
+  padding-left: 0;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 1px solid #fff;
+}
+.myform .btn {
+  width: 100%;
+  font-weight: 800;
+  background-color: #fff;
+  border-radius: 0;
+  padding: 0.5em 0;
+}
+.myform .btn:hover {
+  background-color: inherit;
+  color: #fff;
+  border-color: #fff;
+}
+p a {
+  color: #e1e1e1;
+  text-decoration: none;
+}
+p a:hover {
+  color: #fff;
+}
+</style>
 </head>
 <c:set var="root" value="<%=request.getContextPath() %>"></c:set>
 <body>
@@ -30,7 +90,7 @@
           <nav class="mx-auto site-navigation" style="text-align: center; ">
             <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">\
            	  <li><a href="${root }/movie/list">영화</a></li>
-              <li><a href="blog.html">예매</a></li>
+              <li><a href="${root }/book/list">예매</a></li>
               <li><a href="${root }/store/list">스토어</a></li>
               <li><a href="${root }/community/list">커뮤니티</a></li>
               <li class="has-children">
@@ -52,7 +112,7 @@
             	<!-- 로그인 유무에 따른 로그인/로그아웃 -->
             	<div class="login">
 					<c:if test="${sessionScope.loginok==null}">
-						<button type="button" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block" data-bs-toggle="modal" data-bs-target="#myModal" style="position:relative; z-index:999; background-color: #339EB2; border: 0px; color: white;">로그인</button>
+						<button type="button" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block" data-bs-toggle="modal" data-bs-target="#ModalForm" style="position:relative; z-index:999; background-color: #339EB2; border: 0px; color: white;">로그인</button>
 					</c:if>
 					<c:if test="${sessionScope.loginok!=null}">
 						<b style="color: white;">${sessionScope.myid }님 로그인 중</b>&nbsp;&nbsp;
@@ -68,7 +128,35 @@
     </header>
     </div>
     
-    <!-- The Modal -->
+    <!-- 로그인 모달창 -->
+    <div class="modal fade" id="ModalForm" tabindex="-1" aria-labelledby="ModalFormLabel" aria-hidden="true">
+	    <div class="modal-dialog modal-dialog-centered">
+	      <div class="modal-content">
+	        <div class="modal-body">
+	            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+	            <div class="myform bg-dark">
+	                <h1 class="text-center">로그인</h1>
+	                <!-- 어디서든 로그인 가능하게 -->
+	                <form action="${root }/login/loginprocess" method="post">
+	                    <div class="mb-3 mt-4">
+	                        <label for="exampleInputEmail1" class="form-label">아이디</label>
+	                        <input type="text" class="form-control" name="id" placeholder="아이디" value="${sessionScope.saveok==null?"":sessionScope.myid}" >
+	                    </div>
+	                    <div class="mb-3">
+	                        <label for="exampleInputPassword1" class="form-label">비밀번호</label>
+	                        <input type="password" class="form-control" name="pass" placeholder="비밀번호">
+	                    </div>
+	                    <input type="checkbox" name="cbsave" ${sessionScope.saveok==null?"":"checked"}><span style="font-size: 15px; color: gray;"> 아이디 저장</span>
+	                    <button type="submit" class="btn btn-light mt-3">LOGIN</button>
+	                    <p align="center;" style="padding-top : 2em;">아직 회원이 아니신가요? <a href="${root }/member/memberform">회원가입</a></p>
+	                </form>
+	            </div>
+	        </div>
+	      </div>
+	    </div>
+	</div>
+    
+    <%-- <!-- The Modal -->
 	<div class="modal" id="myModal">
 	  <div class="modal-dialog modal-lg">
 	    <div class="modal-content" >
@@ -97,7 +185,7 @@
 	
 	    </div>
 	  </div>
-	</div>
+	</div> --%>
     
     <!-- 템플릿 스크립트 -->
     <script src="js/jquery-3.3.1.min.js"></script>

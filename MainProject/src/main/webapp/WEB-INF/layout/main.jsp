@@ -125,6 +125,16 @@ body {
 	filter: brightness(70%);
 }
 
+.container_event{
+	display:grid;
+	width: 40%;
+	height: 450px;
+	margin-left: 100px;
+	grid-auto-columns: minmax(100px, auto);
+	grid-auto-rows: minmax(100px, auto);
+	gap: 10px;
+	
+}
 
 
 </style>
@@ -363,8 +373,29 @@ body {
 </section>
 
 </div>
-<div style="height: 500px; background-color: #503396;">
-
+<div style="height: 580px; background-color: #503396;">
+	<!-- 커뮤니티 -->
+	<div class="main_community" style="border: 1px solid black; border-radius:15px; background-color:white; width: 40%; height: 500px; float: right; margin-right: 130px; margin-top: 30px;">
+		<div style="background-color: #339EB2; border-radius:15px 15px 0px 0px; padding: 13px 20px 10px;"><h4 style="font-family: Noto Sans KR; font-weight: 500; color: white;">커뮤니티</h4></div>
+		<table class="table table-hover" style="width:700px; color: black; margin:0px 10px 10px 25px;">
+			<c:forEach var="community" items="${clist }" begin="0" end="9">
+				<tr>
+					<td style="width: 60%;"><a href="/community/detail?num=${community.num }&currentPage=1" style="color: black;">${community.subject }</a></td>
+					<td style="width: 25%; text-align: center;">${community.name }</td>
+					<td style="width: 15%; text-align: center;"><fmt:formatDate value="${community.writeday }" pattern="yyyy-MM-dd"/> </td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
+	<!-- 이벤트 -->
+	<h4 style="font-family: Noto Sans KR; font-weight: 500; color: white; padding-top: 40px; margin-left: 100px;">이벤트</h4>
+	<div class="container_event" style="border:1px solid white;">
+		<c:forEach var="event" items="${elist }" begin="0" end="3">
+			<div class="item">
+			a<%-- <img alt="#" src="../save/${event.num}" style="width: 100px; height: 100px;"> --%>
+			</div>
+		</c:forEach>
+	</div>
 </div>
 </body>
 </html>

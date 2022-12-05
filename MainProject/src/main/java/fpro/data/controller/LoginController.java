@@ -1,5 +1,6 @@
 package fpro.data.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class LoginController {
 	LoginService service;
 	
 	@GetMapping("/login/main")
-	public String loginform(HttpSession session, Model model) {
+	public String loginform(HttpSession session, HttpServletRequest request ,Model model) {
 			
 		//로그인 상태인지 아닌지 -> 상태에 따라 나오는 화면이 달라야 하니까
 		String loginok = (String)session.getAttribute("loginok"); //session에서 loginok를 가져와서 loginok라고 하겠다.
@@ -28,6 +29,9 @@ public class LoginController {
 		
 		//cbsave값 가져오기
 		String saveok = (String)session.getAttribute("saveok");
+		
+		//root
+		String root = request.getContextPath();
 		
 		
 		if(loginok==null) {
@@ -40,7 +44,10 @@ public class LoginController {
 			//request에 저장하기(model)
 			model.addAttribute("name", name);
 			
-			return "/login/logoutform";
+			//뒤로 가기
+			String referer = request.getHeader("Referer");
+			
+			return "redirect:"+referer;
 		}
 		
 	}
@@ -50,7 +57,8 @@ public class LoginController {
 	public String loginProc(@RequestParam String id,
 			@RequestParam String pass,
 			@RequestParam(required = false) String cbsave,
-			HttpSession session) {
+			HttpSession session,
+			HttpServletRequest request) {
 		
 		//id, pass 일치하는게 있는지 없는지
 		int check = service.getIdPassCheck(id, pass);
