@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import fpro.data.dto.CartDto;
+import fpro.data.dto.CommunityDto;
 import fpro.data.dto.MemberDto;
 import fpro.data.dto.StoreDto;
 
