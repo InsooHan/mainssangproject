@@ -73,6 +73,7 @@
 	<select id="getData" parameterType="int" resultType="addto">
 		select * from admin where num=#{num}
 	</select>
+	
 		<select id="getMaxNum" resultType="int">
 		select ifnull(max(num),0) from admin
 	</select>

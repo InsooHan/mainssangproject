@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fpro.data.mapper.EventMapperInter">
+	<select id="getTotalCount" parameterType="Map" resultType="int">
+		select count(*) from event
+		<if test="searchcolumn!=null and searchword!=null">
+			where ${searchcolumn} like concat('%',#{searchword},'%')
+		</if>
+	</select>
+	
+	 <insert id="insertEvent"  parameterType="evdto">
+      insert into event values(null,#{category},#{subject},#{photo},#{content},#{startday},#{endday},now())
+   	</insert>
+
+
+ <select id="getListAll" parameterType="Map" resultType="evdto">
+      select * from event 
+      
+       <if test="searchcolumn!=null and searchword!=null">
+         where ${searchcolumn} like concat('%',#{searchword},'%')
+      </if> 
+      
+      order by num desc<!--  limit #{start},#{perpage} -->
+   </select>
+   
+   
+     <!--  <select id="getListAll" parameterType="Map" resultType="evdto">
+      select * from event 
+       <if test="searchcolumn!=null and searchword!=null">
+         where ${searchcolumn} like concat('%',#{searchword},'%')
+      </if> 
+      order by num desc limit #{start},#{perpage}
+   </select>
+    -->
+	
+   <select id="getData" parameterType="int" resultType="evdto">
+		select * from event where num=#{num}
+	</select>
+	
+		<select id="getMaxNum" resultType="int">
+		select ifnull(max(num),0) from event
+	</select>
+	
+	<update id="updateEvent"  parameterType="evdto">
+		update event set category=#{category},subject=#{subject},photo=#{photo},content=#{content},startday=#{startday},endday=#{endday} where num=#{num}
+	</update>
+	
+	<delete id="deleteEvent" parameterType="int">
+		delete from event where num=#{num}
+	</delete>
+	
+	
+   
+ 
+ 
+   
+   
+   <select id="getMegapickCount" parameterType="Map" resultType="int">
+		select count(*) from event where category = '메가pick'
+		<if test="searchcolumn!=null and searchword!=null">
+			and ${searchcolumn} like concat('%',#{searchword},'%')
+		</if>
+	</select>
+	
+	<select id="getMovieCount" parameterType="Map" resultType="int">
+		select count(*) from event where category = '영화'
+		<if test="searchcolumn!=null and searchword!=null">
+			and ${searchcolumn} like concat('%',#{searchword},'%')
+		</if>
+	</select>
+	
+	<select id="getTheaterCount" parameterType="Map" resultType="int">
+		select count(*) from event where category = '극장'
+		<if test="searchcolumn!=null and searchword!=null">
+			and ${searchcolumn} like concat('%',#{searchword},'%')
+		</if>
+	</select>
+	
+	<select id="getDiscountCount" parameterType="Map" resultType="int">
+		select count(*) from event where category = '제휴/할인'
+		<if test="searchcolumn!=null and searchword!=null">
+			and ${searchcolumn} like concat('%',#{searchword},'%')
+		</if>
+	</select>
+	
+	<select id="getPreviewCount" parameterType="Map" resultType="int">
+		select count(*) from event where category = '시사회/무대인사'
+		<if test="searchcolumn!=null and searchword!=null">
+			and ${searchcolumn} like concat('%',#{searchword},'%')
+		</if>
+	</select>
+	
+	<select id="getListMegapick" parameterType="Map" resultType="evdto">
+      select * from event where category = '메가pick'
+      <if test="searchcolumn!=null and searchword!=null">
+        and ${searchcolumn} like concat('%',#{searchword},'%')
+      </if>
+      order by num desc <!-- limit #{start},#{perpage} -->
+   </select>
+   
+   <select id="getListMovie" parameterType="Map" resultType="evdto">
+      select * from event where category = '영화'
+      <if test="searchcolumn!=null and searchword!=null">
+         and ${searchcolumn} like concat('%',#{searchword},'%')
+      </if>
+      order by num desc <!-- limit #{start},#{perpage} -->
+   </select>
+   
+   <select id="getListTheater" parameterType="Map" resultType="evdto">
+      select * from event where category = '극장'
+      <if test="searchcolumn!=null and searchword!=null">
+         and ${searchcolumn} like concat('%',#{searchword},'%')
+      </if>
+      order by num desc <!-- limit #{start},#{perpage} -->
+   </select>
+   
+   <select id="getListDiscount" parameterType="Map" resultType="evdto">
+      select * from event where category = '제휴/할인'
+      <if test="searchcolumn!=null and searchword!=null">
+         and ${searchcolumn} like concat('%',#{searchword},'%')
+      </if>
+      order by num desc <!-- limit #{start},#{perpage} -->
+   </select>
+   
+   <select id="getListPreview" parameterType="Map" resultType="evdto">
+      select * from event where category = '시사회/무대인사'
+      <if test="searchcolumn!=null and searchword!=null">
+         and ${searchcolumn} like concat('%',#{searchword},'%')
+      </if>
+      order by num desc <!-- limit #{start},#{perpage} -->
+   </select>
+   
+</mapper>

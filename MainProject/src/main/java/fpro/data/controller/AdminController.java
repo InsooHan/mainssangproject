@@ -91,6 +91,147 @@ public class AdminController {
 					return mview;
 				
 	}
+
+	
+	@PostMapping("/admin/insert")
+	public String insert(AdminDto dto, List<MultipartFile> upload,HttpSession session
+			
+			) {
+		//경로
+		String path=session.getServletContext().getRealPath("/save");
+		//업로드안했을때 0번지 파일이 ""이된다
+		//업로드 안해도 upload size()는1
+		System.out.println(upload.size());
+		
+		if(upload.get(0).getOriginalFilename().equals(""))
+			dto.setPhoto("no");
+		else {
+			String photo="";
+			
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
+			
+			for(MultipartFile multi:upload) {
+				
+				String newName="f_"+sdf.format(new Date())+multi.getOriginalFilename();
+				photo+=newName+",";
+				
+				//업로드
+				try {
+					multi.transferTo(new File(path+"/"+newName));
+				} catch (IllegalStateException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			//마지막 그림,제거
+			photo=photo.substring(0,photo.length()-1);
+			//dto에 포토저장
+			dto.setPhoto(photo);
+		}
+		//db insert
+		service.insertAdmin(dto);
+		
+		return "redirect:list";
+		//return "redirect:content?num="+service.getMaxNum();
+		//return "redirect:list?currnetPage="+currentPage;	
+		}
+	@GetMapping("/admin/form")
+	public String form() {
+		
+	
+		return "/admin/writeform";
+	}
+	
+	@GetMapping("/admin/detail")
+	public ModelAndView detail(int num,int currentPage) {
+		ModelAndView mview=new ModelAndView();
+		//조회수 증가 갖고오기
+		service.updateReadcount(num);
+		
+		//num에 해당하는 dto
+		AdminDto dto=service.getData(num);
+		
+		//저장
+		mview.addObject("dto", dto);
+		mview.addObject("currentPage", currentPage);
+		//포워드
+		mview.setViewName("/admin/detail");
+		
+		return mview;
+	}
+	@GetMapping("/admin/updateform") //requestmapping해서 짧아진거
+	public String uform(int num,Model model //Model은 저장하기위해 num은 값을가져와야되니 parameter써도됨
+			,int currentPage) {
+		AdminDto dto=service.getData(num);
+		
+		model.addAttribute("dto", dto); //"dto"인이유는 updateform에서 value값을 dto로받았기때문에
+		model.addAttribute("currentPage", currentPage);	
+		return "/admin/updateform";
+	}
+	
+	@PostMapping("/admin/update")
+	public String update(@ModelAttribute AdminDto dto, List<MultipartFile> upload,HttpSession session
+			) {
+		//경로
+		String path=session.getServletContext().getRealPath("/save");
+		//업로드안했을때 0번지 파일이 ""이된다
+		//업로드 안해도 upload size()는1
+		System.out.println(upload.size());
+		
+		if(upload.get(0).getOriginalFilename().equals(""))
+			dto.setPhoto("no");
+		else {
+			String photo="";
+			
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
+			
+			for(MultipartFile multi:upload) {
+				
+				String newName="f_"+sdf.format(new Date())+multi.getOriginalFilename();
+				photo+=newName+",";
+				
+				//업로드
+				try {
+					multi.transferTo(new File(path+"/"+newName));
+				} catch (IllegalStateException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			//마지막 그림,제거
+			photo=photo.substring(0,photo.length()-1);
+			//dto에 포토저장
+			dto.setPhoto(photo);
+		}
+		//db insert
+		service.updateAdmin(dto);
+		
+		return "redirect:list";
+		//return "redirect:content?num="+service.getMaxNum();
+		//return "redirect:list?currentPage="+currentPage;
+		//return "redirect:detail?num="+dto.getNum()+"&currentPage="+currentPage;	
+	}
+	
+	@GetMapping("/admin/delete")
+	public String delete(int num, List<MultipartFile> upload,HttpSession session){
+		
+
+		String path=session.getServletContext().getRealPath("/save");//폴더
+		String uploadfile=service.getData(num).getPhoto();
+		
+		File file=new File(path+"\\"+uploadfile);
+		file.delete();
+		
+		service.deleteAdmin(num);
+		
+		return "redirect:list";
+		//return "redirect:list?currentPage="+currentPage;
+	
+	}
+	
+	
 	@GetMapping("/admin/system")
 	public ModelAndView system(@RequestParam(defaultValue = "1")int currentPage,
 			@RequestParam(value = "searchcolumn",required =false) String sc,//searchcolumn은 boardlist에선언한 name
@@ -190,144 +331,6 @@ public class AdminController {
 					mview.setViewName("/admin/other");					
 					return mview;
 				
-	}
-	
-	@PostMapping("/admin/insert")
-	public String insert(AdminDto dto, List<MultipartFile> upload,HttpSession session
-			,int currentPage
-			) {
-		//경로
-		String path=session.getServletContext().getRealPath("/save");
-		//업로드안했을때 0번지 파일이 ""이된다
-		//업로드 안해도 upload size()는1
-		System.out.println(upload.size());
-		
-		if(upload.get(0).getOriginalFilename().equals(""))
-			dto.setPhoto("no");
-		else {
-			String photo="";
-			
-			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
-			
-			for(MultipartFile multi:upload) {
-				
-				String newName="f_"+sdf.format(new Date())+multi.getOriginalFilename();
-				photo+=newName+",";
-				
-				//업로드
-				try {
-					multi.transferTo(new File(path+"/"+newName));
-				} catch (IllegalStateException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			}
-			//마지막 그림,제거
-			photo=photo.substring(0,photo.length()-1);
-			//dto에 포토저장
-			dto.setPhoto(photo);
-		}
-		//db insert
-		service.insertAdmin(dto);
-		
-		//return "redirect:list";
-		//return "redirect:content?num="+service.getMaxNum();
-		return "redirect:list?currnetPage="+currentPage;	
-		}
-	@GetMapping("/admin/form")
-	public String form() {
-		
-	
-		return "/admin/writeform";
-	}
-	
-	@GetMapping("/admin/detail")
-	public ModelAndView detail(int num,int currentPage) {
-		ModelAndView mview=new ModelAndView();
-		//조회수 증가 갖고오기
-		service.updateReadcount(num);
-		
-		//num에 해당하는 dto
-		AdminDto dto=service.getData(num);
-		
-		//저장
-		mview.addObject("dto", dto);
-		mview.addObject("currentPage", currentPage);
-		//포워드
-		mview.setViewName("/admin/detail");
-		
-		return mview;
-	}
-	@GetMapping("/admin/updateform") //requestmapping해서 짧아진거
-	public String uform(int num,Model model //Model은 저장하기위해 num은 값을가져와야되니 parameter써도됨
-			,int currentPage) {
-		AdminDto dto=service.getData(num);
-		
-		model.addAttribute("dto", dto); //"dto"인이유는 updateform에서 value값을 dto로받았기때문에
-		model.addAttribute("currentPage", currentPage);	
-		return "/admin/updateform";
-	}
-	
-	@PostMapping("/admin/update")
-	public String update(@ModelAttribute AdminDto dto, List<MultipartFile> upload,HttpSession session,
-			int currentPage) {
-		//경로
-		String path=session.getServletContext().getRealPath("/save");
-		//업로드안했을때 0번지 파일이 ""이된다
-		//업로드 안해도 upload size()는1
-		System.out.println(upload.size());
-		
-		if(upload.get(0).getOriginalFilename().equals(""))
-			dto.setPhoto("no");
-		else {
-			String photo="";
-			
-			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
-			
-			for(MultipartFile multi:upload) {
-				
-				String newName="f_"+sdf.format(new Date())+multi.getOriginalFilename();
-				photo+=newName+",";
-				
-				//업로드
-				try {
-					multi.transferTo(new File(path+"/"+newName));
-				} catch (IllegalStateException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			}
-			//마지막 그림,제거
-			photo=photo.substring(0,photo.length()-1);
-			//dto에 포토저장
-			dto.setPhoto(photo);
-		}
-		//db insert
-		service.updateAdmin(dto);
-		
-		//return "redirect:list";
-		//return "redirect:content?num="+service.getMaxNum();
-		//return "redirect:list?currentPage="+currentPage;
-		return "redirect:detail?num="+dto.getNum()+"&currentPage="+currentPage;	
-	}
-	
-	@GetMapping("/admin/delete")
-	public String delete(int num, List<MultipartFile> upload,HttpSession session){
-		
-
-		String path=session.getServletContext().getRealPath("/save");//폴더
-		String uploadfile=service.getData(num).getPhoto();
-		
-		File file=new File(path+"\\"+uploadfile);
-		file.delete();
-		
-		service.deleteAdmin(num);
-		
-		return "redirect:list";
-		//return "redirect:list?currentPage="+currentPage;
-	
 	}
 }
 

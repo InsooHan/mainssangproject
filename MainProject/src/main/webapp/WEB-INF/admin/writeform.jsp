@@ -15,9 +15,10 @@
 </head>
 <body>
 <div class="container">
+<h4><b>공지사항 추가</b></h4>
 <form action="insert" method="post" enctype="multipart/form-data">
 	<table class="table table-bordered" style="width: 500px;">
-		<caption><b>공지</b></caption>
+		
 		<tr>
 			<th width="120" bgcolor="pink">제목</th>
 				<td>
