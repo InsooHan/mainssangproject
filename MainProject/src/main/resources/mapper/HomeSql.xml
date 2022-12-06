@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fpro.data.mapper.HomeMapperInter">
+	<!-- 커뮤니티 게시물 가져오기 -->
+	<select id="getCommunityToMain" resultType="community">
+		select * from community order by num desc
+	</select>
+	<!-- 이벤트 게시물 가져오기 -->
+	<select id="getEventToMain" resultType="evdto">
+		select * from event order by num desc
+	</select>
+</mapper>
