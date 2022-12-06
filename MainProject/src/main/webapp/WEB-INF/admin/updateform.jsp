@@ -21,7 +21,7 @@
 <form action="update" method="post" enctype="multipart/form-data">
 	<table class="table table-bordered" style="width: 500px;">
 	<input type="hidden" name="num" value="${dto.num }">
-	<input type="hidden" name="currentPage" value="${currentPage }">
+
 	
 		<caption><b>공지 수정</b></caption>
 		<tr>

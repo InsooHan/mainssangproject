@@ -15,7 +15,8 @@
 </head>
 <body>
 <div class="container">
-<h2>극장</h2>
+<br><br>
+<p style="font-size: 2.5em; color: #252451; font-weight: 700;">극장
 <p>CGV의 주요한 이슈 및 여러가지 소식들을 확인하실 수 있습니다.</p>
 <div class="searcharea" style="width:100%; ">
 	<!-- 검색창 -->
