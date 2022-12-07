@@ -83,7 +83,9 @@ public class LoginController {
 	 //로그아웃
     @GetMapping("/login/logoutprocess")
 	public String logoutProc(HttpSession session) {
-		session.removeAttribute("loginok");
+		session.removeAttribute("loginok"); session.removeAttribute("myid");
+		
+    	
 		return "redirect:/";
 	}
 }

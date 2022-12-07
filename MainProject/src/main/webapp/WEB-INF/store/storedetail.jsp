@@ -36,13 +36,15 @@ $(function(){
 		
 	});
 	
-	//로그인 상태면 구매페이지, 로그인 없으면 로그인 모달
+	//로그인 상태면 구매페이지, 로그인 없으면 로그인 경고창
 	$("#btnbuy").click(function(){
 		
 		//세션에서 로그인 유무 받아오기
 		var loginok = "<%=(String)session.getAttribute("loginok")%>";
 		
-		if(loginok!=null){
+		console.log(loginok);
+		
+		if(loginok!="null"){
 			//alert("로그인 상태!");
 			
 			var formdata = $("#frm").serialize();
@@ -69,6 +71,7 @@ $(function(){
 			
 			
 		}else{
+			
 			alert("로그인이 필요합니다.");
 		}
 		
@@ -76,6 +79,11 @@ $(function(){
 	
 	//장바구니 클릭했을 때 추가 후 이동
 	$("#btncart").click(function(){
+		
+		//세션에서 로그인 유무 받아오기
+		var loginok = "<%=(String)session.getAttribute("loginok")%>";
+		
+		if(loginok!="null"){
 		
 			 var formdata = $("#frm").serialize();
 			//alert(formdata);	
@@ -101,6 +109,9 @@ $(function(){
 			           }
 			        }
 			     }); 
+			}else{
+				alert("로그인이 필요합니다.");
+			}
 			
 		});
 

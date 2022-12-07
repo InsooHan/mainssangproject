@@ -31,9 +31,6 @@
 				$("#pay_kakaobtn").show();
 			}
 		});
-		
-	
-  	  
 	
 		var cnt = $("input.cnt").val();
 		var price = $('input.storeprice').val();
@@ -120,7 +117,11 @@
 						<img alt="" src="/save/${sdto.store_photo}" style="width: 200px;">			
 						${sdto.store_product }
 					</td>
-					<td style="vertical-align: middle;">사용 가능 극장</td>
+					<td style="vertical-align: middle;">
+						<a href="#" title="사용 가능 극장" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="강남,강남대로(씨티),강동,군자,더 부티크 목동현대백화점,동대문,마곡,목동,상봉,상암월드컵경기장,성수,센트럴,송파,파크하비오,신촌,이수,창동,코엑스,홍대,화곡" style="font-weight:300; font-size: 1.2em; color: black;">
+			               사용 가능 극장
+			            </a>
+					</td>
 					<%-- <td style="vertical-align: middle;">${cdto.cart_cnt }</td> --%>
 					<td style="text-align: center; vertical-align: middle;">
                   <input type="number" min="1" max="8" step="1" name="cart_cnt" class="cnt" id="cnt" value="${cdto.cart_cnt }" style="width: 50px;">
@@ -186,7 +187,6 @@
 				<!-- 결제창에 상품명, 가격 띄우기 -->
 				<input type="hidden" class="payapiproduct" value="${sdto.store_product }">
 				<input type="hidden" class="payapiprice" value="${sdto.store_price * cdto.cart_cnt}">
-				<input type="hidden" class="payapiname" value="${sdto.store_product }">
 				
 		</div>
 		
@@ -199,6 +199,9 @@
 	
 var IMP = window.IMP;   // 생략 가능
 IMP.init("imp62053265"); // 예: imp00000000 
+
+cart_idx=${cdto.cart_idx};
+console.log(cart_idx);
 
 //신용/체크카드
 function requestPay1() {
@@ -216,6 +219,21 @@ function requestPay1() {
     }, function (rsp) { // callback
         if (rsp.success) {
             console.log(rsp);
+            
+            //결제 완료 후 삭제
+            $.ajax({
+            	  type:"get",
+  			      dataType:"html",
+  			      url:"buypagebuydelete",
+  			      data:{"cart_idx":cart_idx},
+  				  success: function(res){
+  					  
+  				  alert("결제 완료");
+  					  
+  				  location.href="/store/list";
+  				  
+  				  }
+            });
             
         } else {
             console.log(rsp);
@@ -239,6 +257,21 @@ function requestPay2() {
     }, function (rsp) { // callback
         if (rsp.success) {
             console.log(rsp);
+            
+          //결제 완료 후 삭제
+            $.ajax({
+            	  type:"get",
+  			      dataType:"html",
+  			      url:"buypagebuydelete",
+  			      data:{"cart_idx":cart_idx},
+  				  success: function(res){
+  					  
+  				  alert("결제 완료");
+  					  
+  				  location.href="/store/list";
+  				  
+  				  }
+            });
         } else {
             console.log(rsp);
         }

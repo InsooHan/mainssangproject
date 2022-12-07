@@ -44,5 +44,6 @@ public interface StoreServiceInter {
 	public void plusCartCnt(int cart_cnt, String store_num);
 	//장바구니 결제 완료하면 해당 회원의 cart 목록 삭제
 	public void deleteCartByMem(String member_num);
-	
+	//구매페이지 결제 완료하면 해당 주문 삭제(장바구니 가장 최근 데이터)
+	public void deleteBuyByMaxNum(String cart_idx);	
 }

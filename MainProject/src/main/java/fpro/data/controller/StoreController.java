@@ -243,6 +243,7 @@ public class StoreController {
 		
 		String id = (String)session.getAttribute("myid");
 		
+		
 		List<CartDto> cartlist = service.getCartById(id);
 		
 		int cartlistcount = cartlist.size();
@@ -250,6 +251,11 @@ public class StoreController {
 		mview.addObject("cartlist", cartlist);
 		
 		mview.addObject("cartlistcount", cartlistcount);
+		
+		//멤버 num
+		String member_num = service.getNumById(id);
+
+		mview.addObject("member_num", member_num);
 		
 		mview.setViewName("/store/storecart");
 		
@@ -292,5 +298,16 @@ public class StoreController {
 		service.updateCartCnt(cart_cnt, cart_idx);
 	}
 	
+	@GetMapping("/store/cartbuydelete")
+	@ResponseBody
+	public void cartbuydelete(@RequestParam String member_num) {
+		service.deleteCartByMem(member_num);
+	}
+	
+	@GetMapping("/store/buypagebuydelete")
+	@ResponseBody
+	public void buypagebuydelete(@RequestParam String cart_idx) {
+		service.deleteBuyByMaxNum(cart_idx);
+	}
 	
 }

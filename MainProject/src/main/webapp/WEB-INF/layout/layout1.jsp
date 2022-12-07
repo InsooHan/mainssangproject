@@ -29,44 +29,36 @@
 
 <title>Insert title here</title>
 <style type="text/css">
-html {
-	height: 100%;
-}
-body {
-	margin: 0;
-	height: 100%;
-}
+
 div.layout{
-	min-height: 100%;
-	position: relative;
-	padding-bottom: 348px;
+     position: relative;
+     min-height: 100%;
+     padding-bottom: 340px;
 }
-div.layout div{
-      border: 0px solid gray;
-   }
+
 div.layout div.title{
-      position: absolute;
-	  top: 0; 
-	  left: 0;
-	  height: 100px;
-	  width: 100%;
-      background-color: #100B0B;
+     position: absolute;
+     top: 0; 
+     left: 0;
+     height: 100px;
+     width: 100%;
+     background-color: #100B0B;
    }
    
 
    div.layout div.main{
-   	  width: 100%;
-   	  height: auto;
+      width: 100%;
+      height: auto;
       padding-top: 100px; 
       padding-bottom: 100px;
    }
    
      
    div.layout div.footer {
-	  position: absolute;
-	  width: 100%;
-	  bottom: 0; 
-   }
+      position: absolute;
+      width: 100%;
+      bottom: 0; 
+   } 
    
 
 </style>
