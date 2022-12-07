@@ -20,11 +20,11 @@ flex-direction: row;
 align-items: stretch;
 width: 1500px;
 height: 500px;
-background-color: lightblue;
+
 }
 .item
 {
-
+flex-shrink: 0;
 }
 div.item div.one
 {
@@ -32,7 +32,7 @@ height: 25%;
 text-align: center;
 line-height: 120px;
 font-size: 9pt;
-border: 1px groove gray;
+border: 1px solid gray;
 }
 a.st
 {
@@ -40,7 +40,8 @@ width: 150px;
 height: 35px;
 text-align: center;
 line-height:35px;
-border: 1px solid gray;
+cursor: pointer;
+font-weight: bold;
 }
 a.three
 {
@@ -57,12 +58,13 @@ background-color: #dcdcdc;
 div.ddddd div.detailtable
 {
 display:inline-block;
-border:1px solid gray;
+border:1px solid #bebebe;
 border-radius:10px;
 text-align:center;
 width:100px;
 height:50px;
 cursor: pointer;
+background-color: #f8f8ff;
 }
 </style>
 <script type="text/javascript">
@@ -88,13 +90,34 @@ $(function() {
 		var q="&nbsp;<div style='display:inline-block; font-size: 1.1em; color:white; background-color:gray; width:30px; height:30px; line-height:30px; text-align:center; border-radius:100px; position:relative;'>";
 		
 		q+="<span class='five' id='msche' style='cursor:pointer;'>";
-		q+="<p style='display:none;'>"+realtoday+"</p>";
-		q+=today+"</span>\n"+getDayOfWeek(to.getDay())+"</div>&nbsp;&nbsp;";
+		q+="<p style='display:none;'>"+realtoday+"</p><b>";
+		q+=today+"</b></span>\n<b style='color:black;'>"+getDayOfWeek(to.getDay())+"</b></div>&nbsp;&nbsp;&nbsp;";
 
 		to.setDate(to.getDate()+1);
 
 		$(".date").append(q);
 	}
+	
+	//마우스 호버 이벤트
+	$(".two").hover(function(){
+		$(this).css("border","1px groove orange");
+	},function(){
+		$(".two").css("border","");
+	});
+	
+	$(document).on("mouseover",".three",function(){
+		$(this).css("border","1px groove orange");
+	});
+	$(document).on("mouseleave",".three",function(){
+		$(this).css("border","");
+	});
+	
+	$(".four").hover(function(){
+		$(this).css("border","1px groove orange");
+	},function(){
+		$(".four").css("border","");
+	});
+	
 	
 	
 	$(".two").click(function() {
@@ -144,6 +167,8 @@ $(function() {
 	});
 	
 	$(document).on("click","#msche",function(){
+		$(".five").parent().css("background-color","gray");
+		$(this).parent().css("background-color","black");
 		var mtime=$(this).find('p').text();
 		$(".movietime").text("");
 		//alert(mtime);
@@ -174,16 +199,27 @@ $(function() {
 
 				var i=1; 
   				var s="<div class='ddddd'>";
-				
+					s+="<div style='display: block; height: 10px;'></div>";
 				$.each(res,function(idx,item){
 					
 				if(mtime==realtoday(item.movietime)){
 					
+					var seatnum=item.seat.length;
+					var seatarr="";
+					if(seatnum!=1){
+						var seata=item.seat.substring(2,(seatnum-1));
+						seatarr = seata.split("ll");
+					
+					}
+
+					
 					s+="&nbsp;<div class='detailtable' cartnum='"+item.cart_num+"'>"; // data-bs-toggle='modal' data-bs-target='#bookModal'>"
-					s+="<span>"+item.capacity+"</span>";
-					s+="<span class='mmmtime'><br>";
+					s+="<span><b>";
+					s+=seatarr.length;	
+					s+="/"+item.capacity+"</b></span>";
+					s+="<span class='mmmtime'><br><b>";
 					s+=formatDate(item.movietime);
-					s+="</span><b style='display:none;'>"+item.sang_num+"</b>";
+					s+="</b></span><p style='display:none;'>"+item.sang_num+"</p>";
 					s+="</div>&nbsp;&nbsp;";
 					if((i+4)%4==0)
 						s+="</div><div>"; i++;
@@ -228,7 +264,7 @@ $(function() {
 	
 	$(document).on("click",".detailtable",function(){
 		
-		var sangnum=$(this).find('b').text();
+		var sangnum=$(this).find('p').text();
 		var cartnum=$(this).attr("cartnum");
 		//alert(cartnum);
 		location.href="listtwo?moviename="+moviename+"&theater="+theater+"&sangnum="+sangnum+"&cartnum="+cartnum;
@@ -242,17 +278,18 @@ $(function() {
 </script>
 </head>
 <body>
+<div style="height: 800px; padding-top: 30px; background-color: #505050;">
 <div class="container">
 	<div class="item" style="flex-basis: 70px;">
 		<div class="one" style="background-color: #FF5050;"><b>상영시간</b></div>
-		<div class="one" style="background-color: lightgray;"><b>인원/좌석</b></div>
-		<div class="one" style="background-color: lightgray;"><b>결제</b></div>
-		<div class="one" style="background-color: lightgray;"><b>결제완료</b></div>
+		<div class="one" style="background-color: white;"><b>인원/좌석</b></div>
+		<div class="one" style="background-color: white;"><b>결제</b></div>
+		<div class="one" style="background-color: white;"><b>결제완료</b></div>
 	</div>
 	
-	<div class="item">	
+	<div class="item" style="border: 1px #d2d2d2 solid;">	
 		<div class="" style="height:100%; background-color:#dcdcdc;">
-			<a href="#" class="list-group-item list-group-item-action st">MY영화관</a>
+			<!-- <a href="#" class="list-group-item list-group-item-action st">MY영화관</a> -->
 			<a href="#" class="list-group-item list-group-item-action st two fon">서울</a>
 			<a href="#" class="list-group-item list-group-item-action st two">경기/인천</a>
 			<a href="#" class="list-group-item list-group-item-action st two">충청/대전</a>
@@ -264,11 +301,11 @@ $(function() {
 		</div>
 	</div>
 	
-	<div class="item" id="theater" style="background-color: white;">
+	<div class="item" id="theater" style="background-color: white; border: 1px solid #d2d2d2;">
 	
 	</div>
 	
-	<div class="item" id="movie" style="background-color: #dcdcdc;">
+	<div class="item" id="movie" style="background-color: #dcdcdc; border: 1px solid #d2d2d2;">
  		<c:forEach var="dto" items="${list}" varStatus="i">
 			<a class='list-group-item list-group-item-action st four'>&nbsp;
 			<span style='border-radius: 100px; font-size:7pt; color:white; background-color: 
@@ -278,18 +315,21 @@ $(function() {
 		</c:forEach>
 	</div>
 	
-	<div class="item">
-		<div class="date">
+	<div class="item" style="flex-grow: 1; background-color: white; border: 1px solid #d2d2d2;">
+		<div style="background-color: #f9f8f6; border: 1px solid #d2d2d2;">
+		<div class="date" style="text-align: center;">
+			<div style="display: block; height: 10px;"></div>
 			
 		</div>
-		
+		</div>
 		<div class="movietime">
+			<div style="display: block; height: 10px;"></div>
 			조회가능한 시간이 없습니다. 조건을 변경해주세요!
 		</div>
 	</div>
 
 </div>
-
+</div>
 </body>
 </html>
 
