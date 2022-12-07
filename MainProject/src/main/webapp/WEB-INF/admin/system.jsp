@@ -44,17 +44,17 @@
 
 <!-- 카테고리 메뉴 -->
 	  <ul class="nav nav-tabs" role="tablist" style="text-align: center;">
-	    <li class="nav-item" style="width: 150px">
-	      <button class="nav-link " data-bs-toggle="tab" onclick="location.href='list'">전체</button>
+	    <li class="nav-item" style="width: 120px">
+	      <button style="width: 100%"  class="nav-link " data-bs-toggle="tab" onclick="location.href='list'">전체</button>
 	    </li>
-	    <li class="nav-item" style="width: 150px">
-	      <button class="nav-link active" data-bs-toggle="tab" onclick="location.href='system'">시스템점검</button>
+	    <li class="nav-item" style="width: 120px">
+	      <button style="width: 100%"  class="nav-link active" data-bs-toggle="tab" onclick="location.href='system'">시스템점검</button>
 	    </li>
-	    <li class="nav-item" style="width: 150px">
-	      <button class="nav-link" data-bs-toggle="tab" onclick="location.href='theater'">극장</button>
+	    <li class="nav-item" style="width: 120px">
+	      <button style="width: 100%"  class="nav-link" data-bs-toggle="tab" onclick="location.href='theater'">극장</button>
 	    </li>
-	    <li class="nav-item" style="width: 150px">
-	      <button class="nav-link " data-bs-toggle="tab" onclick="location.href='other'">기타</button>
+	    <li class="nav-item" style="width: 120px">
+	      <button style="width: 100%"  class="nav-link " data-bs-toggle="tab" onclick="location.href='other'">기타</button>
 	    </li>
 	  </ul>
 	  

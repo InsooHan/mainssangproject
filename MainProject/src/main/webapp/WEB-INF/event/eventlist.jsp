@@ -11,6 +11,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="https://kit.fontawesome.com/a47cf79e39.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css" />
 
 
 <title>Insert title here</title>
@@ -22,6 +23,11 @@ div.look {
 		margin-right: 10px;
 	}
 	
+.event1 {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(25%, auto));
+	
+}
 	
 div.carousel-item {
 
@@ -31,9 +37,9 @@ div.carousel-item {
 </head>
 <body>
 
-<div class="container" >
+<div class="container mt-3" >
 <br><br>
-<p style="font-size: 2.5em; color: #252451; font-weight: 700;">이벤트
+<p style="font-size: 2.5em; color: #252451; font-weight: 700;">진행중인 이벤트
 
 	<!-- admin만 글 작성가능 -->
 	<c:if test="${sessionScope.loginok!=null && sessionScope.myid=='admin'}">
@@ -44,22 +50,22 @@ div.carousel-item {
 	<div class="container mt-3">
 	  <ul class="nav nav-tabs" role="tablist" style="text-align: center;">
 	    <li class="nav-item" style="width: 16%">
-	      <button class="nav-link active" data-bs-toggle="tab" onclick="location.href='list'">전체</button>
+	      <button style="width: 100%"  class="nav-link active" data-bs-toggle="tab" onclick="location.href='list'">전체</button>
 	    </li>
 	    <li class="nav-item" style="width: 16%">
-	      <button class="nav-link " data-bs-toggle="tab" onclick="location.href='megapick'">메가pick</button>
+	      <button style="width: 100%" class="nav-link " data-bs-toggle="tab" onclick="location.href='megapick'">메가pick</button>
 	    </li>
 	    <li class="nav-item" style="width: 16%">
-	      <button class="nav-link " data-bs-toggle="tab" onclick="location.href='movie'">영화</button>
+	      <button style="width: 100%" class="nav-link " data-bs-toggle="tab" onclick="location.href='movie'">영화</button>
 	    </li>
 	    <li class="nav-item" style="width: 16%">
-	      <button class="nav-link" data-bs-toggle="tab" onclick="location.href='theater'">극장</button>
+	      <button style="width: 100%" class="nav-link" data-bs-toggle="tab" onclick="location.href='theater'">극장</button>
 	    </li>
 	    <li class="nav-item" style="width: 16%">
-	      <button class="nav-link " data-bs-toggle="tab" onclick="location.href='discount'">제휴/할인</button>
+	      <button style="width: 100%" class="nav-link " data-bs-toggle="tab" onclick="location.href='discount'">제휴/할인</button>
 	    </li>
 	     <li class="nav-item" style="width: 16%">
-	      <button class="nav-link " data-bs-toggle="tab" onclick="location.href='preview'">시사회/무대인사</button>
+	      <button style="width: 100%" class="nav-link " data-bs-toggle="tab" onclick="location.href='preview'">시사회/무대인사</button>
 	    </li>
 	  </ul>
 	 </div>
@@ -97,9 +103,19 @@ div.carousel-item {
 		
       </div>
       <div style="display: flex;">
+      	<div style="width: 50%; display: flex;">
+      		<p style="font-size: 19px;color: #222222;">수능 끝! 새로운 시작 응원해📣 </p>
+      		<p style=" font-size: 14px;margin-left: 240px;">2022-11-17~2022-12-13 </p>
+      	</div>
+      	<div style="width: 50%; display: flex;" >
+      		<p style="font-size: 19px;color: #222222">[에버랜드X메가박스] 제휴 할인 프로모션!</p>
+      		<p style="font-size: 14px; margin-left: 150px;">2022-06-01~2022-12-31 </p>
+      	</div>
+      </div>
+      <!-- <div style="display: flex;">
       <p style="width: 50%;margin-left: 200px; ">수능 끝! 새로운 시작 응원해📣 </p>
       <p style="width: 50%; margin-left: 150px;">[에버랜드X메가박스] 제휴 할인 프로모션!</p>
-	   </div>
+	   </div> -->
     </div>
 	    
     <!-- 2 -->
@@ -118,9 +134,15 @@ div.carousel-item {
 		
       </div>
       <div style="display: flex;">
-      <p style="width: 50%;margin-left: 200px;">[에버랜드X메가박스] 제휴 할인 프로모션!</p>
-      <p style="width: 50%;margin-left: 150px;">[메가박스X더쎈카드] 더쎈카드 연말정산 이벤트</p>
-	   </div>
+      	<div style="width: 50%; display: flex;">
+      		<p style="font-size: 19px;color: #222222">[에버랜드X메가박스] 제휴 할인 프로모션!</p>
+      		<p style="font-size: 14px; margin-left: 150px;">2022-06-01~2022-12-31 </p>
+      	</div>
+      	<div style="width: 50%; display: flex;" >
+      		<p style="font-size: 19px;color: #222222">[메가박스X더쎈카드] 더쎈카드 연말정산 이벤트!</p>
+      		<p style="font-size: 14px; margin-left: 90px;">2022-10-24~2023-01-01 </p>
+      	</div>
+      </div>
     </div>
 	    
 	    
@@ -139,10 +161,16 @@ div.carousel-item {
 		</a>
 		
       </div>
-      <div style="display: flex;">
-      <p style="width: 50%;margin-left: 200px;">[메가박스X더쎈카드] 더쎈카드 연말정산 이벤트!</p>
-      <p style="width: 50%;margin-left: 180px;">수능 끝! 새로운 시작 응원해📣</p>
-	   </div>
+       <div style="display: flex;">
+      	<div style="width: 50%; display: flex;">
+      		<p style="font-size: 19px;color: #222222">[메가박스X더쎈카드] 더쎈카드 연말정산 이벤트!</p>
+      		<p style="font-size: 14px; margin-left: 90px;">2022-10-24~2023-01-01 </p>
+      	</div>
+      	<div style="width: 50%; display: flex;" >
+      		<p style="font-size: 19px;color: #222222;">수능 끝! 새로운 시작 응원해📣 </p>
+      		<p style=" font-size: 14px;margin-left: 240px;">2022-11-17~2022-12-13 </p>
+      	</div>
+      </div>
     </div>
     
 	  </div>
@@ -165,15 +193,15 @@ div.carousel-item {
 	     		 <a style="margin-left: 1100px; color: #444444; color: #444444 " href='megapick'>더보기 ></a>
 	     		 </div>
 	     		  <table class="table table-border" style="text-align: center;">
-		      		<tr >
+		      		<tr class="event1" >
 		    			<c:forEach var="dto" items="${megapick}" varStatus="i" begin="0" end="3">
 		    			<td >
 		    			<a  href="detail?num=${dto.num }">
 		    				<div class="look" style="height: 352px;">
 		    				<img style="width:233px; height: 233px; border-radius: 10%; "  alt="" src="../save/${dto.photo }">
-		    					<b>${dto.subject }</b>
+		    					<b style="color: black;">${dto.subject }</b>
 		    					<br>
-		    					<b> ${dto.startday }~${dto.endday }</b>
+		    					<b style="font-size: 14px;color: gray"> ${dto.startday }~${dto.endday }</b>
 		    				</div>
 		    			</a>
 		    		</td> 
@@ -189,15 +217,15 @@ div.carousel-item {
 	     		 </div>
 	     		 
 	     		  <table class="table table-border" style="text-align: center;">
-		      		<tr >
+		      		<tr class="event1" >
 		    			<c:forEach var="dto" items="${movie}" varStatus="i" begin="0" end="3">
 		    			<td >
 		    			<a href="detail?num=${dto.num }">
 		    				<div class="look" style="height: 352px;">
 		    				<img style="width:233px; height: 233px; border-radius: 10%; "  alt="" src="../save/${dto.photo }">
-		    					<b>${dto.subject }</b>
+		    					<b style="color: black;">${dto.subject }</b>
 		    					<br>
-		    					<b> ${dto.startday }~${dto.endday }</b>
+		    					<b style="font-size: 14px;color: gray"> ${dto.startday }~${dto.endday }</b>
 		    				</div>
 		    			</a>
 		    		</td> 
@@ -212,15 +240,15 @@ div.carousel-item {
 	     		 <a style="margin-left: 1160px;  color: #444444"  href='theater'>더보기 ></a>
 	     		 </div>
 	     		  <table class="table table-border" style="text-align: center;">
-		      		<tr >
+		      		<tr class="event1" >
 		    			<c:forEach var="dto" items="${theater}" varStatus="i" begin="0" end="3">
 		    			<td >
 		    			<a href="detail?num=${dto.num }">
 		    				<div class="look" style="height: 352px;">
 		    				<img style="width:233px; height: 233px; border-radius: 10%; "  alt="" src="../save/${dto.photo }">
-		    					<b>${dto.subject }</b>
+		    					<b style="color: black;" >${dto.subject }</b>
 		    					<br>
-		    					<b> ${dto.startday }~${dto.endday }</b>
+		    					<b style="font-size: 14px;color: gray"> ${dto.startday }~${dto.endday }</b>
 		    				</div>
 		    			</a>
 		    		</td> 
@@ -235,15 +263,15 @@ div.carousel-item {
 	     		<a style="margin-left: 1080px;  color: #444444"  href='discount'>더보기 ></a>
 	     		 </div>
 	     		  <table class="table table-border" style="text-align: center;">
-		      		<tr >
+		      		<tr class="event1" >
 		    			<c:forEach var="dto" items="${discount}" varStatus="i" begin="0" end="3">
 		    			<td >
 		    			<a href="detail?num=${dto.num }">
 		    				<div class="look" style="height: 352px;">
 		    				<img style="width:233px; height: 233px; border-radius: 10%; "  alt="" src="../save/${dto.photo }">
-		    					<b>${dto.subject }</b>
+		    					<b style="color: black;">${dto.subject }</b>
 		    					<br>
-		    					<b> ${dto.startday }~${dto.endday }</b>
+		    					<b style="font-size: 14px;color: gray"> ${dto.startday }~${dto.endday }</b>
 		    				</div>
 		    			</a>
 		    		</td> 
@@ -252,21 +280,21 @@ div.carousel-item {
 		      </table>
 	      	  </div>
 	      	  <!--  -->
-		      <div class="tab-content">
+		      <div class="tab-content" >
 	     		  <div style="display: flex;">
 	     		 <h2 style="color: #503396;">시사회/무대인사</h2>
 	     		 <a style="margin-left: 980px;  color: #444444" href='preview'">더보기 ></a>
 	     		 </div>
 	     		  <table class="table table-border" style="text-align: center;">
-		      		<tr >
+		      		<tr class="event1" >
 		    			<c:forEach var="dto" items="${preview}" varStatus="i" begin="0" end="3">
 		    			<td >
 		    			<a href="detail?num=${dto.num }">
 		    				<div class="look" style="height: 352px;">
-		    				<img style="width:233px; heig	ht: 233px; border-radius: 10%; "  alt="" src="../save/${dto.photo }">
-		    					<b>${dto.subject }</b>
+		    				<img style="width:233px; height: 233px; border-radius: 10%; "  alt="" src="../save/${dto.photo }">
+		    					<b style="color: black;">${dto.subject }</b>
 		    					<br>
-		    					<b> ${dto.startday }~${dto.endday }</b>
+		    					<b style="font-size: 14px;color: gray"> ${dto.startday }~${dto.endday }</b>
 		    				</div>
 		    			</a>
 		    		</td> 

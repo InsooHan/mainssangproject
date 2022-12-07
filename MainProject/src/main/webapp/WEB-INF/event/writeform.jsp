@@ -27,10 +27,10 @@
 <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>이벤트 추가</b></h4>
 <form action="insert" method="post" enctype="multipart/form-data"><!-- action insert로 번경 그리고 enctype은 설정다돼있으므로 추가안해도됨 -->
 	<!--  --><input type="hidden" name="num" value="${num }">
-		<input type="hidden" name="currentPage" value="${currentPage }">-->
+		<input type="hidden" name="currentPage" value="${currentPage }">-
 	<table class="table table-bordered" style="width: 800px;margin-left: 100px;">
 		<tr>
-			<th bgcolor="#fff0f5" width="200" >제목</th>
+			<th bgcolor="#fff0f5" width="200" required="required">제목</th>
 			<td >
 				<input type="text" name="subject" class="form-control"
 					required="required" style="width: 600px;">
@@ -55,7 +55,7 @@
 					
 			<th width="120" bgcolor="pink">썸네일</th>
 				<td>
-					<input type="file" name="upload" class="form-control">
+					<input type="file" name="upload" class="form-control" required="required">
 				</td>
 		
 			
