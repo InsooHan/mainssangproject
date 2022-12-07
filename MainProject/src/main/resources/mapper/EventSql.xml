@@ -3,9 +3,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fpro.data.mapper.EventMapperInter">
 	<select id="getTotalCount" parameterType="Map" resultType="int">
-		select count(*) from event
+		select count(*) from event where endday &lt; sysdate()
 		<if test="searchcolumn!=null and searchword!=null">
-			where ${searchcolumn} like concat('%',#{searchword},'%')
+			and ${searchcolumn} like concat('%',#{searchword},'%')
 		</if>
 	</select>
 	
@@ -15,25 +15,14 @@
 
 
  <select id="getListAll" parameterType="Map" resultType="evdto">
-      select * from event 
-      
-       <if test="searchcolumn!=null and searchword!=null">
-         where ${searchcolumn} like concat('%',#{searchword},'%')
-      </if> 
-      
-      order by num desc<!--  limit #{start},#{perpage} -->
+      select * from event where endday &lt; sysdate()
+      <if test="searchcolumn!=null and searchword!=null">
+         and ${searchcolumn} like concat('%',#{searchword},'%')
+      </if>
+      order by num desc  limit #{start},#{perpage} 
    </select>
    
-   
-     <!--  <select id="getListAll" parameterType="Map" resultType="evdto">
-      select * from event 
-       <if test="searchcolumn!=null and searchword!=null">
-         where ${searchcolumn} like concat('%',#{searchword},'%')
-      </if> 
-      order by num desc limit #{start},#{perpage}
-   </select>
-    -->
-	
+  
    <select id="getData" parameterType="int" resultType="evdto">
 		select * from event where num=#{num}
 	</select>
@@ -57,42 +46,42 @@
    
    
    <select id="getMegapickCount" parameterType="Map" resultType="int">
-		select count(*) from event where category = '메가pick'
+		select count(*) from event where category = '메가pick' and endday &gt; sysdate()
 		<if test="searchcolumn!=null and searchword!=null">
 			and ${searchcolumn} like concat('%',#{searchword},'%')
 		</if>
 	</select>
 	
 	<select id="getMovieCount" parameterType="Map" resultType="int">
-		select count(*) from event where category = '영화'
+		select count(*) from event where category = '영화' and endday &gt; sysdate()
 		<if test="searchcolumn!=null and searchword!=null">
 			and ${searchcolumn} like concat('%',#{searchword},'%')
 		</if>
 	</select>
 	
 	<select id="getTheaterCount" parameterType="Map" resultType="int">
-		select count(*) from event where category = '극장'
+		select count(*) from event where category = '극장' and endday &gt; sysdate()
 		<if test="searchcolumn!=null and searchword!=null">
 			and ${searchcolumn} like concat('%',#{searchword},'%')
 		</if>
 	</select>
 	
 	<select id="getDiscountCount" parameterType="Map" resultType="int">
-		select count(*) from event where category = '제휴/할인'
+		select count(*) from event where category = '제휴/할인' and endday &gt; sysdate()
 		<if test="searchcolumn!=null and searchword!=null">
 			and ${searchcolumn} like concat('%',#{searchword},'%')
 		</if>
 	</select>
 	
 	<select id="getPreviewCount" parameterType="Map" resultType="int">
-		select count(*) from event where category = '시사회/무대인사'
+		select count(*) from event where category = '시사회/무대인사' and endday &gt; sysdate()
 		<if test="searchcolumn!=null and searchword!=null">
 			and ${searchcolumn} like concat('%',#{searchword},'%')
 		</if>
 	</select>
 	
 	<select id="getListMegapick" parameterType="Map" resultType="evdto">
-      select * from event where category = '메가pick'
+      select * from event where category = '메가pick' and endday &gt; sysdate()
       <if test="searchcolumn!=null and searchword!=null">
         and ${searchcolumn} like concat('%',#{searchword},'%')
       </if>
@@ -100,7 +89,7 @@
    </select>
    
    <select id="getListMovie" parameterType="Map" resultType="evdto">
-      select * from event where category = '영화'
+      select * from event where category = '영화' and endday &gt; sysdate()
       <if test="searchcolumn!=null and searchword!=null">
          and ${searchcolumn} like concat('%',#{searchword},'%')
       </if>
@@ -108,7 +97,7 @@
    </select>
    
    <select id="getListTheater" parameterType="Map" resultType="evdto">
-      select * from event where category = '극장'
+      select * from event where category = '극장' and endday &gt; sysdate()
       <if test="searchcolumn!=null and searchword!=null">
          and ${searchcolumn} like concat('%',#{searchword},'%')
       </if>
@@ -116,7 +105,7 @@
    </select>
    
    <select id="getListDiscount" parameterType="Map" resultType="evdto">
-      select * from event where category = '제휴/할인'
+      select * from event where category = '제휴/할인' and endday &gt; sysdate()
       <if test="searchcolumn!=null and searchword!=null">
          and ${searchcolumn} like concat('%',#{searchword},'%')
       </if>
@@ -124,7 +113,7 @@
    </select>
    
    <select id="getListPreview" parameterType="Map" resultType="evdto">
-      select * from event where category = '시사회/무대인사'
+      select * from event where category = '시사회/무대인사' and endday &gt; sysdate()
       <if test="searchcolumn!=null and searchword!=null">
          and ${searchcolumn} like concat('%',#{searchword},'%')
       </if>

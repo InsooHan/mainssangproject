@@ -56,7 +56,8 @@
 					
 			<th width="120" bgcolor="pink">썸네일</th>
 				<td>
-					<input type="file" name="upload" class="form-control" value="${dto.photo }">
+					<input type="file" name="upload" class="form-control" "
+					required="required">
 				</td>
 		
 			

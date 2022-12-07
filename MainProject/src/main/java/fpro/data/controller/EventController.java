@@ -421,4 +421,94 @@ public class EventController {
 				
 	}
 	
+	@GetMapping("/event/endlist")
+	public ModelAndView endlist(@RequestParam(defaultValue = "1")int currentPage,
+			@RequestParam(value = "searchcolumn",required =false) String sc,//searchcolumn은 boardlist에선언한 name
+			@RequestParam(value = "searchword",required =false) String sw //serachword도 리스트에선언 requier false는 값이없을때 null값표시
+			) {
+		
+		ModelAndView mview=new ModelAndView();
+		
+		//페이징에 필요한 변수
+				int totalCount=service.getTotalCount(sc, sw);
+				int totalPage; //총페이지수
+				int startPage; //각블럭의 시작페이지
+				int endPage; //각블럭의 끝페이지
+				int start; //각페이지의 시작번호
+				int perPage=5; //한페이지에 보여질 글의 갯수
+				int perBlock=5; //한블럭당 보여지는 페이지개수
+				
+				int megapickCount=service.getMegapickCount(sc, sw);
+				int movieCount=service.getMovieCount(sc, sw);
+				int theaterCount=service.getTheaterCount(sc, sw);
+				int discountCount=service.getDiscountCount(sc, sw);
+				int previewCount=service.getPreviewCount(sc, sw);
+				
+				
+				
+				//총갯수:
+				//총페이지갯수 구하기
+					totalPage=totalCount/perPage+(totalCount%perPage==0?0:1);
+	
+				//각블럭의 시작페이지(현재페이지 3: 시작:1 끝:5)
+				//각블럭의 시작페이지(현재페이지 6: 시작:6 끝:10)
+					startPage=(currentPage-1)/perBlock*perBlock+1;
+					endPage=startPage+perBlock-1;
+					
+		
+				//총페이지수가 8 ..2번재 블럭은 startpage6 endpage 10...endpage 8로수정
+					if(endPage>totalPage)
+						endPage=totalPage;
+		
+
+				//각페이지에서 불러올 시작번호
+				//현재페이지가 1일경우 strt 1, 2일경우 6
+					start=(currentPage-1)*perPage;
+
+				//각페이지에서 필요한 게시글불러오기
+					List<EventDto>list=service.getListAll(sc, sw, start, perPage);
+					List<EventDto>megapick=service.getListMegapick(sc, sw, start, perPage);
+					List<EventDto>movie=service.getListMovie(sc, sw, start, perPage);
+					List<EventDto>theater=service.getListTheater(sc, sw, start, perPage);
+					List<EventDto>discount=service.getListDiscount(sc, sw, start, perPage);
+					List<EventDto>preview=service.getListPreview(sc, sw, start, perPage);
+					
+					
+
+
+				//각글앞에 붙힐 시작번호
+				//총글이 만약에 20..1페이지는 20부터 2페이지는 15부터
+				//출력해서 1씩 감소하면서 출력
+					int	no=totalCount-(currentPage-1)*perPage;
+					
+				//출력에 필요한 변수들을 request에 저장
+					mview.addObject("list", list);  //댓글이 포함된후 전달
+					mview.addObject("startPage", startPage);
+					mview.addObject("totalPage", totalPage);
+					mview.addObject("endPage", endPage);
+					mview.addObject("no", no);
+					mview.addObject("currentPage", currentPage);
+					mview.addObject("totalCount", totalCount);
+					
+					mview.addObject("megapick", megapick);
+					mview.addObject("movie", movie);
+					mview.addObject("theater", theater);
+					mview.addObject("discount", discount);
+					mview.addObject("preview", preview);
+					
+					mview.addObject("megapickCount", megapickCount);
+					mview.addObject("movieCount", movieCount);
+					mview.addObject("theaterCount", theaterCount);
+					mview.addObject("discountCount", discountCount);
+					mview.addObject("previewCount", previewCount);
+					
+					
+					
+					
+					
+					mview.setViewName("/event/endlist");
+					
+					return mview;
+				
+	}
 }
