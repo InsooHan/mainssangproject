@@ -21,4 +21,47 @@
 	<select id="getDatasAsc" resultType="moviedto">
 		select * from movie order by name asc
 	</select>
+	<!-- detail -->
+	<select id="getData" parameterType="String" resultType="moviedto">
+		select * from movie where num=#{num}
+	</select>
+	<!-- 좋아요 증가 -->
+	<update id="mlikesUpdate" parameterType="String">
+		update movie set likes=likes+1 where num=#{num}
+	</update>
+	<!-- 좋아요 감소 -->
+	<update id="mlikesCancel" parameterType="String">
+		<if test="likes>=1">
+		update movie set likes=likes-1 where num=#{num}
+		</if>
+	</update>
+
+	<!-- 관람평 등록(insert) -->
+	<insert id="insertReview" parameterType="mreviewdto">
+		insert into moviereview (num, name, myid, grade, content, writeday) values (#{num}, #{name}, #{myid}, #{grade}, #{content}, now())
+	</insert>
+	<!-- 영화에 대한 관람평 목록(최신순) -->
+	<select id="getReviewList" resultType="mreviewdto">
+		select * from moviereview where num=#{num} order by idx desc
+	</select>
+	<!-- 영화에 대한 관람평 목록(공감순) -->
+	<select id="getReviewListChu" resultType="mreviewdto">
+		select * from moviereview where num=#{num} order by likes desc
+	</select>
+	<!-- 영화에 대한 관람평 목록(평점순) -->
+	<select id="getReviewListGrade" resultType="mreviewdto">
+		select * from moviereview where num=#{num} order by grade desc
+	</select>
+	<!-- 관람평 Data -->
+	<select id="getReviewData" parameterType="String" resultType="mreviewdto">
+		select * from moviereview where idx=#{idx}
+	</select>
+	<!-- 관람평 수정 -->
+	<update id="updateReview" parameterType="mreviewdto">
+		update moviereview set grade=#{grade}, content=#{content} where idx=#{idx}
+	</update>
+	<!-- 관람평 삭제 -->
+	<delete id="deleteReview" parameterType="String">
+		delete from moviereview where idx=#{idx}
+	</delete>
 </mapper>

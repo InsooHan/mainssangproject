@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fpro.data.dto.MovieDto;
+import fpro.data.dto.MovieReviewDto;
 import fpro.data.mapper.MovieMapperInter;
 
 @Service
@@ -19,7 +20,7 @@ public class MovieService implements MovieServiceInter {
 		// TODO Auto-generated method stub
 		return mapperInter.getSomeDatas();
 	}
-	
+
 	//전체리스트
 	@Override
 	public List<MovieDto> getAllDatas() {
@@ -43,6 +44,67 @@ public class MovieService implements MovieServiceInter {
 	public List<MovieDto> getDatasAsc() {
 		// TODO Auto-generated method stub
 		return mapperInter.getDatasAsc();
+	}
+	//detail
+	@Override
+	public MovieDto getData(String num) {
+		// TODO Auto-generated method stub
+		return mapperInter.getData(num);
+	}
+	//영화 likes증가
+	@Override
+	public void mlikesUpdate(String num) {
+		// TODO Auto-generated method stub
+		mapperInter.mlikesUpdate(num);
+	}
+	//영화 likes감소
+	@Override
+	public void mlikesCancel(String num) {
+		// TODO Auto-generated method stub
+		mapperInter.mlikesCancel(num);
+	}
+
+	//관람평 등록
+	@Override
+	public void insertReview(MovieReviewDto mrdto) {
+		// TODO Auto-generated method stub
+		mapperInter.insertReview(mrdto);
+	}
+	//관람평 조회(최신순)
+	@Override
+	public List<MovieReviewDto> getReviewList(String num) {
+		// TODO Auto-generated method stub
+		return mapperInter.getReviewList(num);
+	}
+	//관람평 조회(공감순)
+	@Override
+	public List<MovieReviewDto> getReviewListChu(String num) {
+		// TODO Auto-generated method stub
+		return mapperInter.getReviewListChu(num);
+	}
+	//관람평 조회(평점순)
+	@Override
+	public List<MovieReviewDto> getReviewListGrade(String num) {
+		// TODO Auto-generated method stub
+		return mapperInter.getReviewListGrade(num);
+	}
+	//관람평 Data
+	@Override
+	public MovieReviewDto getReviewData(String idx) {
+		// TODO Auto-generated method stub
+		return mapperInter.getReviewData(idx);
+	}
+	//관란평 수정
+	@Override
+	public void updateReview(MovieReviewDto mrdto) {
+		// TODO Auto-generated method stub
+		mapperInter.updateReview(mrdto);
+	}
+	//관람평 삭제
+	@Override
+	public void deleteReview(String idx) {
+		// TODO Auto-generated method stub
+		mapperInter.deleteReview(idx);
 	}
 
 }
