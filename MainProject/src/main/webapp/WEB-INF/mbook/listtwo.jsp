@@ -20,7 +20,11 @@ flex-direction: row;
 align-items: stretch;
 width: 1500px;
 height: 500px;
-background-color: lightblue;
+
+}
+.item
+{
+flex-shrink: 0;
 }
 div.item div.one
 {
@@ -34,7 +38,7 @@ width: 70px;
 div.item:nth-child(2)
 {
 flex-grow: 1;
-background-color: teal;
+/* background-color: #828282; */
 }
 div.item div.two
 {
@@ -65,11 +69,17 @@ appearance: none;
 div.item div.four
 {
 background-color: black;
-height: 70%;
+height: 69%;
 line-height: 33px;
 text-align:  center;
 padding-top: 10px;
 color: white;
+}
+div.item div.five
+{
+height: 9%;
+/* float: right; */
+background-color: #828282;
 }
 
 </style>
@@ -77,7 +87,7 @@ color: white;
 $(function() {
 	//+-구현
 	var seatnumber=${sdto.capacity-bookednum};
-	
+	var mprice=0;
 	$(".fa-plus").click(function(){
 		var a=$(this).parent().find("input").val();
 		a++;
@@ -85,6 +95,8 @@ $(function() {
 		
 		if(totalseatnum!=seatnumber){
 			$(this).parent().find("input").val(a);
+			mprice=(${sdto.price}*parseInt($("#adult").val())+${sdto.price}*0.8*parseInt($("#youth").val()));
+			$("#mprice").text(mprice);
 		}
 		if(totalseatnum==seatnumber){
 			alert(seatnumber+"이상의 좌석을 예매할 수 없습니다.");
@@ -95,6 +107,8 @@ $(function() {
 		a--;
 		if(a!=-1){
 			$(this).parent().find("input").val(a);
+			mprice=(${sdto.price}*parseInt($("#adult").val())+${sdto.price}*0.8*parseInt($("#youth").val()));
+			$("#mprice").text(mprice);
 		}
 		if(a==-1){
 			alert("0보다 큰 수를 입력해주세요!");
@@ -225,18 +239,19 @@ $(function() {
 </script>
 </head>
 <body>
+<div style="height: 800px; padding-top: 30px; background-color:#505050;">
 <div class="container">
 	<div class="item fir" style="flex-basis: 70px;">
-		<div class="one" style="background-color: lightgray;"><b>상영시간</b></div>
+		<div class="one" style="background-color: white;"><b>상영시간</b></div>
 		<div class="one" style="background-color: #FF5050;"><b>인원/좌석</b></div>
-		<div class="one" style="background-color: lightgray;"><b>결제</b></div>
-		<div class="one" style="background-color: lightgray;"><b>결제완료</b></div>
+		<div class="one" style="background-color: white;"><b>결제</b></div>
+		<div class="one" style="background-color: white;"><b>결제완료</b></div>
 	</div>
 	<div class="item">
 		<div class="two">
 			<b>인원/좌석 선택</b>
 			<span style="float: right;">
-				<b>${bookednum}/${sdto.capacity}</b>
+				<b>${bookednum}/${sdto.capacity}&nbsp;</b>
 			</span>
 		</div>
 		<div class="three">
@@ -264,14 +279,17 @@ $(function() {
 		<div class="four">
 			
 		</div>
-		<div class="five" style="height: 8%; float: right;">
-			<button type="button" class="btn btn-info moviebtn">DB추가</button>
-			<button type="button" class="btn btn-info test">숫자체크</button>
-			<c:forEach var="bseat" items="${booklist}" varStatus="i">
-				<span>${bseat}</span>
-			</c:forEach>
+		<div class="five">
+			<span style="display: inline-block; width: 870px; height: 100%;">
+				&nbsp;&nbsp;&nbsp;
+				<b style="color: white; font-size: 12pt;">총 합계 : </b>
+				<b id="mprice" style="color: white; font-size: 14pt;">0</b>
+				<b style="color: white; font-size: 12pt;">&nbsp;원</b>
+			</span>
+			<button type="button" class="btn btn-danger moviebtn" style="height: 100%; width: 170px; color: white;"><b>결제하기</b></button>
 		</div>
 	</div>
+</div>
 </div>
 </body>
 </html>
