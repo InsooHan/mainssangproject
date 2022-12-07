@@ -55,4 +55,33 @@ public class MemberController {
       return "/layout/main";
    }
    
+   @GetMapping("/member/mypage")
+   public String mypage(@RequestParam String num, Model model) {
+	   
+	   MemberDto dto = service.getDataByNum(num);
+	   model.addAttribute("dto", dto);
+	   
+	   return "/member/mypage";
+   }
+   
+   @GetMapping("/member/updateform")
+   public String updateform(String num, Model model) {
+	   
+	   MemberDto dto = service.getDataByNum(num);
+	   model.addAttribute("dto", dto);
+	   
+	   return "/member/updateform";
+   }
+   
+	//회원탈퇴
+	@GetMapping("/member/deleteme")
+	@ResponseBody
+	public void deleteme(String num,HttpSession session)
+	{
+		service.deleteMember(num);
+		
+		session.removeAttribute("loginok");
+		session.removeAttribute("myid");
+	}
+   
 }

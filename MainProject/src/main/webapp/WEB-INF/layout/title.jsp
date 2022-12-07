@@ -88,7 +88,7 @@ p a:hover {
 
 		  <!-- 메뉴 탭 start -->
           <nav class="mx-auto site-navigation" style="text-align: center; ">
-            <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">\
+            <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
            	  <li><a href="${root }/movie/list">영화</a></li>
               <li><a href="${root }/book/list">예매</a></li>
               <li><a href="${root }/store/list">스토어</a></li>
@@ -115,7 +115,7 @@ p a:hover {
 						<button type="button" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block" data-bs-toggle="modal" data-bs-target="#ModalForm" style="position:relative; z-index:999; background-color: #339EB2; border: 0px; color: white;">로그인</button>
 					</c:if>
 					<c:if test="${sessionScope.loginok!=null}">
-						<b style="color: white;">${sessionScope.myid }님 로그인 중</b>&nbsp;&nbsp;
+						<span onclick="location.href='${root}/member/mypage?num=${getNum}'"><i class="fa-solid fa-user" style="color: #fff; font-size: 15pt; cursor: pointer; position:relative; z-index:999;"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;
 						<button type="button" class="btn btn-info btn-m" onclick="location.href='${root}/login/logoutprocess'" style="position:relative; z-index:999; background-color: #339EB2; border: 0px; color: white;">로그아웃</button>
 					</c:if>
 				</div>
