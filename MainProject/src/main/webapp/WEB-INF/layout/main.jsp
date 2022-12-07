@@ -127,19 +127,28 @@ body {
 
 .container_event{
 	display:grid;
-	width: 40%;
-	height: 450px;
+	width: 45%;
+	height: 420px;
 	margin-left: 100px;
-	grid-auto-columns: minmax(100px, auto);
-	grid-auto-rows: minmax(100px, auto);
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
 	gap: 10px;
+	place-items: center center;
 	
 }
 
+.container_boxoffice{
+	display: flex;
+}
+
+.boxoffice{
+	flex-shrink: 0;
+}
 
 </style>
 </head>
 <body>
+<div>
 	<!-- 메인 상단 광고 슬라이드 -->
 	<div id="demo" class="carousel slide carousel-fade" data-bs-ride="carousel">
 	
@@ -205,9 +214,9 @@ body {
 											<div class="hovertest">
 											<img class="img-fluid" alt="100%x280" src="../save/${movie.poster}" style="width: 280px;">
 												<div class="cardbtn" style="text-align: center;">
-												<button class="btn btn-m detailbtn" type="button" style="background-color: #339EB2; color: white;" onclick="test()">상세보기</button>	
+												<button class="btn btn-m detailbtn" type="button" style="background-color: #339EB2; color: white;" onclick="location.href='${root}/movie/detail?num=${movie.num }'">상세보기</button>	
 												&nbsp;&nbsp;
-												<button class="btn btn-m bookbtn" type="button" style="background-color: #503396; color: white;" onclick="#">예매하기</button>	
+												<button class="btn btn-m bookbtn" type="button" style="background-color: #503396; color: white;" onclick="location.href='${root}/book/list'">예매하기</button>	
 												</div>
 											</div>
 											<div class="card-body">
@@ -286,8 +295,9 @@ body {
 	</div>
 
 	<!-- 박스 오피스 api-->
+	<div class="container_boxoffice">
 	<div class="boxoffice" style="margin-top: 20px; margin-bottom: 100px;"></div>
-
+	</div>
 </div>
 
 <div style="height: 550px; background-color: white;">
@@ -388,14 +398,15 @@ body {
 		</table>
 	</div>
 	<!-- 이벤트 -->
-	<h4 style="font-family: Noto Sans KR; font-weight: 500; color: white; padding-top: 40px; margin-left: 100px;">이벤트</h4>
-	<div class="container_event" style="border:1px solid white;">
-		<c:forEach var="event" items="${elist }" begin="0" end="3">
+	<h4 style="font-family: Noto Sans KR; font-weight: 500; color: white; padding-top: 40px; margin-left: 100px;">이벤트</h4><br>
+	<div class="container_event" style="border:1px solid white; background-color: white; border-radius: 15px;">
+		<c:forEach var="event" items="${elist }" begin="0" end="7">
 			<div class="item">
-			a<%-- <img alt="#" src="../save/${event.num}" style="width: 100px; height: 100px;"> --%>
+			<a href="/event/detail?num=${event.num }"><img alt="#" src="../save/${event.photo}" style="width: 200px;"></a>
 			</div>
 		</c:forEach>
 	</div>
+</div>
 </div>
 </body>
 </html>

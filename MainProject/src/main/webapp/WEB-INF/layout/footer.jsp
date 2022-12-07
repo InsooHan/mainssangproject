@@ -28,10 +28,10 @@
           <!-- Grid column -->
           <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
             <h6 class="text-uppercase mb-4 font-weight-bold">
-              쌍용교육센터 파이널 프로젝트 1조
+              메가박스
             </h6>
             <p>
-              이 부분을 조원 내용으로 채울까요 아니면 메가박스 정보 그대로 넣을까요?
+			  대표자명: 홍정인 <br> 개인정보보호책임자: 공성진 <br> 사업자등록번호: 211-86-59478 <br> 통신판매업신고번호: 제 2020-서울마포-4545 호
             </p>
           </div>
           <!-- Grid column -->
@@ -44,7 +44,7 @@
           <!-- Grid column -->
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
             <h6 class="text-uppercase mb-4 font-weight-bold">
-              팀원
+              쌍용 교육센터 파이널 1조
             </h6>
            	<table class="table table-borderless" style="">
            		<tr style="color: white;">
@@ -68,10 +68,10 @@
           <!-- Grid column -->
           <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
             <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-            <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
-            <p><i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
-            <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-            <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+            <p><i class="fas fa-home mr-3"></i> 서울특별시 마포구 월드컵로 240, 지상2층(성산동, 월드컵주경기장) </p>
+            <p><i class="fas fa-envelope mr-3"></i> megaboxinfo@megabox.com</p>
+            <p><i class="fas fa-phone mr-3"></i> 1544-0070</p>
+            <p><i class="fas fa-print mr-3"></i>  1544-0070</p>
           </div>
           <!-- Grid column -->
         </div>
@@ -88,9 +88,9 @@
           <div class="col-md-7 col-lg-8 text-center text-md-start">
             <!-- Copyright -->
             <div class="p-3">
-              © 2020 Copyright:
+              COPYRIGHT © MegaboxJoongAng,
               <a class="text-white" href="https://mdbootstrap.com/"
-                 >MDBootstrap.com</a
+                 > Inc. All rights reserved</a
                 >
             </div>
             <!-- Copyright -->
