@@ -65,8 +65,6 @@ public class HomeController {
 			mview.addObject("memnum", memnum);
 		}
 		
-		
-		
 		mview.setViewName("/layout/main");
 		
 		return mview;
