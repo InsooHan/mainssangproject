@@ -10,13 +10,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import fpro.data.dto.MemberDto;
 import fpro.data.service.LoginService;
+import fpro.data.service.MemberService;
 
 @Controller
 public class LoginController {
 
 	@Autowired
 	LoginService service;
+	
+	@Autowired
+	MemberService memservice;
 	
 	@GetMapping("/login/main")
 	public String loginform(HttpSession session, HttpServletRequest request ,Model model) {
@@ -71,7 +76,10 @@ public class LoginController {
 			session.setAttribute("loginok", "yes"); //loginok를 yes로 저장
 			session.setAttribute("saveok", cbsave); //cbsave 값을 saveok로 저장, 체크 되어 있으면 'on', 체크 없으면 null
 			
+			
 			return "redirect:main"; //check==1인 경우에만 main으로 보내야 하니까..!(0이면 로그인 fail)
+			
+			
 			
 		}else {
 			
