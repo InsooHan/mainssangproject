@@ -136,6 +136,12 @@ public class StoreService implements StoreServiceInter {
 		// TODO Auto-generated method stub
 		mapperInter.deleteCartByMem(member_num);
 	}
+
+	@Override
+	public void deleteBuyByMaxNum(String cart_idx) {
+		// TODO Auto-generated method stub
+		mapperInter.deleteBuyByMaxNum(cart_idx);
+	}
 	
 
 }

@@ -87,6 +87,10 @@
 		delete from storecart where member_num = #{member_num}
 	</delete>
 	
+	<!-- 구매페이지에서 결제 완료 후 삭제 -->
+	<delete id="deleteBuyByMaxNum" parameterType="String">
+		delete from storecart where cart_idx = #{cart_idx}
+	</delete>
 	
 	
 </mapper>

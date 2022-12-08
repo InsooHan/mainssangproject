@@ -23,48 +23,57 @@
 
 </head>
 <body>
-<form action="update" method="post" enctype="multipart/form-data" >
-  <input type="hidden" name="num" value="${dto.num }">
-  <table class="table table-bordered" style="width: 600px;">
-    <caption><h4 class="alert alert-danger"><b>회원수정</b></h4></caption>
-      
-      <tr>
-         <th style="background-color: #ffe4e1; width: 150px;" >회원명</th>
-        <td>
-          <input type="text" name="name" class="form-control" style="width: 150px;"
-           value="${dto.name }">
-        </td>
-      </tr>
-      <tr>
-        <th style="background-color: #ffe4e1">이메일</th>
-        <td>
-          <input type="email" name="email" class="form-control" style="width: 200px;"
-          placeholder="이메일을 입력하세요" required="required" value="${dto.email }">
-        </td>
-      </tr>
-      <tr>
-        <th style="background-color: #ffe4e1">연락처</th>
-        <td>
-          <input type="tel" name="hp" class="form-control" style="width: 250px;"
-          placeholder="연락처를 입력하세요" required="required" value="${dto.hp }">
-        </td>
-      </tr>
-      <tr>
-       <th style="background-color: #ffe4e1">주소</th>
-        <td>
-          <input type="text" name="addr" class="form-control" style="width: 250px;"
-          placeholder="주소 입력하세요" required="required" value="${dto.addr }">
-        </td>
-      </tr>
-      
-      
-      <tr>
-        <td colspan="2" align="center">
-          <button type="submit" class="btn btn-info" style="width: 200px;">정보수정</button>
-        </td>
-      </tr>
-  </table>
-
-</form>
+	<div class="w3-content w3-container w3-margin-top">
+		<div class="w3-container w3-card-4">
+			<div class="w3-center w3-large w3-margin-top" align="center">
+				<br><h3>회원정보 수정</h3>
+				<br>
+			</div>
+			<div align="center">
+				<form id="myForm" action="../member/update_mypage.do" method="post">
+					<p>
+						<label>Name</label> 
+						<input class="w3-input" type="text" id="name" name="name" value="${ dto.name }" required> 
+					</p>
+					<p>
+						<label>Hp</label> 
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="w3-input" type="text" id="hp" name="hp" value="${ dto.hp }" required> 
+					</p>
+					<p>
+						<label>Email</label> 
+						<input class="w3-input" type="text" id="email" name="email" value="${ dto.email }" required> 
+					</p>
+					<p>
+						<label>Address</label> 
+						<input class="w3-input" type="text" id="addr" name="addr" value="${ dto.addr }" required> 
+					</p>
+					<p class="w3-center">
+						<button type="submit" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">회원정보 변경</button>
+					</p>
+				</form>
+				<br />
+				<form id="pwForm" action="../member/update_pw.do" method="post">	
+					<input type="hidden" name="id" value="${ member.id }">
+					<p>
+						<label>Password</label>
+						<input class="w3-input" id="old_pw" name="old_pw" type="password" required>
+					</p>
+					<p>
+						<label>New Password</label> 
+						<input class="w3-input" id="pw" name="pw" type="password" required>
+					</p>
+					<p>
+						<label>Confirm</label>
+						<input class="w3-input" type="password" id="pw2" type="password" required>
+					</p>
+					<p class="w3-center">
+						<button type="submit" id="joinBtn" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">비밀번호 변경</button>
+					<br>
+					<br>
+					</p>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

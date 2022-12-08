@@ -130,6 +130,8 @@
 	   
    });
    
+   
+   
 
 </script>
 </head>
@@ -177,7 +179,11 @@
 					</c:if>
 				
                </td>
-               <td style="text-align: center; vertical-align: middle;">사용가능처</td>
+               <td style="text-align: center; vertical-align: middle;">
+	               <a href="#" title="사용 가능 극장" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="강남,강남대로(씨티),강동,군자,더 부티크 목동현대백화점,동대문,마곡,목동,상봉,상암월드컵경기장,성수,센트럴,송파,파크하비오,신촌,이수,창동,코엑스,홍대,화곡" style="font-weight:300; font-size: 1.2em; color: black;">
+	               사용 가능 극장
+	               </a>
+	           </td>
                <td style="text-align: center; vertical-align: middle;">
                   <input type="number" min="1" max="8" step="1" name="cart_cnt" class="cnt" id="cnt" value="${cdto.cart_cnt }" style="width: 50px;">
                   <button type="button" class="btn btn-primary btn-sm cartupdate" cart_idx="${cdto.cart_idx}">변경</button>
@@ -246,7 +252,7 @@
 					<button type="button" id="pay_cardbtn" class="btn btn-megabox" style="display: none;" onclick="requestPay1()"> 신용/체크카드 결제</button>						
 					<button type="button" id="pay_kakaobtn" class="btn btn-megabox" style="display: none;" onclick="requestPay2()"> 카카오페이 결제</button>	
 				
-				
+					
 			</div>
    
 	</div>
@@ -254,6 +260,9 @@
 	
 	<!-- 결제 api -->
 <script type="text/javascript">
+
+member_num = ${member_num};
+console.log(member_num);
 	
 var IMP = window.IMP;   // 생략 가능
 IMP.init("imp62053265"); // 예: imp00000000 
@@ -274,6 +283,21 @@ function requestPay1() {
     }, function (rsp) { // callback
         if (rsp.success) {
             console.log(rsp);
+            
+            
+            $.ajax({
+          	  type:"get",
+			      dataType:"html",
+			      url:"cartbuydelete",
+			      data:{"member_num":member_num},
+				  success: function(res){
+					  
+				  alert("결제 완료");
+					  
+				  location.reload();
+				  
+				  }
+          });
             
         } else {
             console.log(rsp);
@@ -297,11 +321,31 @@ function requestPay2() {
     }, function (rsp) { // callback
         if (rsp.success) {
             console.log(rsp);
+            
+            $.ajax({
+            	  type:"get",
+  			      dataType:"html",
+  			      url:"cartbuydelete",
+  			      data:{"member_num":member_num},
+  				  success: function(res){
+  					  
+  			 	  alert("결제 완료");
+  				  location.reload();
+  				  
+  				  }
+            });
+            
+            
         } else {
             console.log(rsp);
         }
     });
 }
+
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+  return new bootstrap.Popover(popoverTriggerEl)
+})
 </script>
 
 </body>

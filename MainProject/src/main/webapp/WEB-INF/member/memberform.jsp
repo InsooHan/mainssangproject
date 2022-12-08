@@ -98,7 +98,7 @@ $(function(){
 	<br>			
 			   
 					<div>
-					 <label for="id" class="form-label">&nbsp;ID</label>
+					 <i class="fa-solid fa-user"></i>&nbsp;<label for="id" class="form-label">&nbsp;ID</label>
 						<input type="text" placeholder="ID" id="id" name="id"
 							class="form-control" style="width: 135px" required="required">
 						<button type="button" class="btn btn-outline-dark btn-sm"
@@ -109,7 +109,7 @@ $(function(){
 				
 				
 					 <div>
-					 <label for="pass" class="form-label">&nbsp;Password</label>
+					 <i class="fa-solid fa-lock"></i>&nbsp;<label for="pass" class="form-label">&nbsp;Password</label>
 					<input type="password" style="width:120px" class="form-control" name="pass" 
 					id="pass" placeholder="****" required="required">
 					
@@ -126,27 +126,27 @@ $(function(){
 			</div><br>
 			
 		<div>
-			<label for="addr" class="form-label">&nbsp;Address</label>
+			<i class="fa-solid fa-map-location-dot"></i>&nbsp;<label for="addr" class="form-label">&nbsp;Address</label>
 			<input type="text" id="addr" name="addr" placeholder="주소를 입력하세요"
 			class="form-control" style="width:340px" required="required">
 			</div><br>
 			
 			
 			<div>
-			<label for="hp" class="form-label">&nbsp;Hp</label>
+			<i class="fa-solid fa-mobile-screen-button"></i>&nbsp;<label for="hp" class="form-label">&nbsp;Hp</label>
 			<input type="text" id="hp" name="hp" placeholder="Hp"
 			class="form-control" style="width:220px" required="required">
 			</div><br>
 			
 			
 			<div>
-			<label for="email" class="form-label">&nbsp;Email</label>
+			<i class="fa-solid fa-envelope"></i>&nbsp;<label for="email" class="form-label">&nbsp;Email</label>
 			<input type="email" name="email" id="email" class="form-control" style="width:200px"
 			 placeholder="Email" required="required">
 			</div><br>
 			
 			<div>
-			<label for="birth" class="form-label">&nbsp;Birth</label>
+			<i class="fa-solid fa-calendar-days"></i>&nbsp;<label for="birth" class="form-label">&nbsp;Birth</label>
 			<input type="date" name="birth" id="birth" class="form-control" style="width:200px"
 			 placeholder="Birth" required="required">
 			</div><br>
