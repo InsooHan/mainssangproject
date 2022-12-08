@@ -90,10 +90,12 @@ public class LoginController {
 	
 	 //로그아웃
     @GetMapping("/login/logoutprocess")
-	public String logoutProc(HttpSession session) {
+	public String logoutProc(HttpSession session, HttpServletRequest request) {
 		session.removeAttribute("loginok"); session.removeAttribute("myid");
 		
-    	
-		return "redirect:/";
+		//뒤로 가기
+		String referer = request.getHeader("Referer");
+		
+		return "redirect:"+referer;
 	}
 }
