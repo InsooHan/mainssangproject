@@ -36,9 +36,10 @@ div.layout{
      padding-bottom: 340px;
 }
 
-div{
-	border: 0px solid black;
-}
+div.layout div{
+      border: 0px solid gray;
+   }
+
 
 div.layout div.title{
      position: absolute;
