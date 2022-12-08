@@ -12,6 +12,27 @@
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="https://kit.fontawesome.com/a47cf79e39.js" crossorigin="anonymous"></script>
 <title>Insert title here</title>
+<script type="text/javascript">
+$(function(){
+	
+	$("#bookmenu").click(function(){
+		
+		if(${sessionScope.loginok!=null}){
+			location.href="${root}/book/list";
+		}else{
+			
+			alert("로그인이 필요합니다.");
+			
+			$("#loginbtn").trigger("click");
+		}
+		
+	})
+		
+		
+	
+	
+})
+</script>
 <style type="text/css">
 .modal-content {
   width: 80%;
@@ -90,7 +111,7 @@ p a:hover {
           <nav class="mx-auto site-navigation" style="text-align: center; ">
             <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
            	  <li><a href="${root }/movie/list">영화</a></li>
-              <li><a href="${root }/book/list">예매</a></li>
+              <li><a href="#" id="bookmenu">예매</a></li>
               <li><a href="${root }/store/list">스토어</a></li>
               <li><a href="${root }/community/list">커뮤니티</a></li>
               <li class="has-children">
@@ -113,7 +134,7 @@ p a:hover {
             	<!-- 로그인 유무에 따른 로그인/로그아웃 -->
             	<div class="login">
 					<c:if test="${sessionScope.loginok==null}">
-						<button type="button" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block" data-bs-toggle="modal" data-bs-target="#ModalForm" style="position:relative; z-index:999; background-color: #339EB2; border: 0px; color: white;">로그인</button>
+						<button type="button" id="loginbtn" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block" data-bs-toggle="modal" data-bs-target="#ModalForm" style="position:relative; z-index:999; background-color: #339EB2; border: 0px; color: white;">로그인</button>
 					</c:if>
 					<c:if test="${sessionScope.loginok!=null}">
 						<span onclick="location.href='${root}/member/mypage?num=${memnum }'"><i class="fa-solid fa-user" style="color: #fff; font-size: 15pt; cursor: pointer; position:relative; z-index:999;"></i></span>&nbsp;&nbsp;
