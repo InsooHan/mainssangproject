@@ -94,7 +94,7 @@ div.look {
 		    	
 		    	</tr>
 		    	
-		    	<tr>
+		    	<tr class="event1">
 		    	
 		    	</c:if>
 		    	</c:forEach>

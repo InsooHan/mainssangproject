@@ -22,6 +22,7 @@ div.look {
 .event1 {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(25%, auto));
+	
 }
 
 </style>
@@ -94,7 +95,7 @@ div.look {
 		    	
 		    	</tr>
 		    	
-		    	<tr>
+		    	<tr class="event1">
 		    	
 		    	</c:if>
 		    	</c:forEach>

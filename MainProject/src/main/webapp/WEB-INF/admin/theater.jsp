@@ -12,6 +12,18 @@
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="https://kit.fontawesome.com/a47cf79e39.js" crossorigin="anonymous"></script>
 <title>Insert title here</title>
+<style type="text/css">
+div.look {
+		width: 233px;
+		float: left;
+		margin-right: 10px;
+	}
+.event1 {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(25%, auto));
+}
+
+</style>
 </head>
 <body>
 <div class="container">
