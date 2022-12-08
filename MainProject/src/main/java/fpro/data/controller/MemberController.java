@@ -73,6 +73,15 @@ public class MemberController {
 	   return "/member/updateform";
    }
    
+// 회원 정보 수정
+	@PostMapping("/member/updateMembers")
+	public String updateMembers(@ModelAttribute MemberDto dto) {
+		service.updateMember(dto);
+		//mapper.updateMembers(vo);
+		return "redirect:/member/mypage?num="+dto.getNum();
+	}
+
+
 	//회원탈퇴
 	@GetMapping("/member/deleteme")
 	@ResponseBody
