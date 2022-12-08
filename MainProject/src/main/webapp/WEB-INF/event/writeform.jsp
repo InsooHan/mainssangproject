@@ -46,7 +46,7 @@
 					<input type="radio" name="category"
 					value='극장' >극장
 					<input type="radio" name="category"
-					value='제휴/할인' checked="checked">제휴/할인
+					value='제휴/할인' >제휴/할인
 					<input type="radio" name="category"
 					value='시사회/무대인사'>시사회/무대인사
 				</td>

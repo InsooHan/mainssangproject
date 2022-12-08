@@ -16,7 +16,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="container">
+<div class="container  mt-3">
 <br><br>
 <p style="font-size: 2.5em; color: #252451; font-weight: 700;">시스템 점검
 <p>CGV의 주요한 이슈 및 여러가지 소식들을 확인하실 수 있습니다.</p>
@@ -69,8 +69,8 @@
 	<table class="table table-bordered" >
 		<tr  align="center">
 			<th width="50" >번호</th>
-			<th width="100">구분</th>
-			<th width="200">제목</th>
+			<th width="80">구분</th>
+			<th width="300">제목</th>
 			<th width="100">작성일</th>
 			<th width="50">조회</th>
 

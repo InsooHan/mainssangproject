@@ -34,11 +34,26 @@ div.carousel-item {
 }
 
 </style>
+<script>
+$(window).scroll(function(){
+	if ($(this).scrollTop() > 300){
+		$('.btn_gotop').show();
+	} else{
+		$('.btn_gotop').hide();
+	}
+});
+$('.btn_gotop').click(function(){
+	$('html, body').animate({scrollTop:0},400);
+	return false;
+});
+</script>
 </head>
 <body>
+
 <div style="position: fixed;bottom: 100px;right: 100px; ">
-<a style="" href ="#header"><img style="width: 50px;height: 50px;" alt="" src="../save/m_top.png"> </a>
+<a class="btn_gotop" style="" href ="#header"><img style="width: 50px;height: 50px;" alt="" src="../save/m_top.png"> </a>
 </div>
+
 <div class="container mt-3" id="header">
 <br><br>
 <p style="font-size: 2.5em; color: #252451; font-weight: 700;">진행중인 이벤트
@@ -75,33 +90,23 @@ div.carousel-item {
 	 <br>
 	 
 	 <!-- 캐러셀 시작 -->
-
 	<div style="background-color: #f8f8fa" id="Dark" class="carousel carousel-dark slide carousel-fade" data-bs-ride="carousel">
-	
-
 	  <div class="carousel-indicators">
 	    <button type="button" data-bs-target="#Dark" data-bs-slide-to="0" class="active"></button>
 	    <button type="button" data-bs-target="#Dark" data-bs-slide-to="1"></button>
 	    <button type="button" data-bs-target="#Dark" data-bs-slide-to="2"></button>
 	  </div>
-	  
-
 	  <div class="carousel-inner ">
-	  <br><br>
-	  <!-- 1 -->
-	     <div class="carousel-item active" data-bs-interval="2000">
-    
+	  	<br><br>
+	  		<!-- 1 -->
+	     <div class="carousel-item active" data-bs-interval="2000"> 
     	<div style="display: flex;">
      	<a style="width: 50%; height: 50%; "  href="detail?num=12">
 					<img  src="../save/1.png" class="d-block w-100"  alt="대체문자열"/>
-		</a>
-		
-     	
-     	
+		</a>  	
      	<a style="width: 50%; height: 50%; " href="detail?num=11" >
 				<img  src="../save/2.jpg" class="d-block w-100"  alt="대체문자열"/>
-		</a>
-		
+		</a>	
       </div>
       <div style="display: flex;">
       	<div style="width: 50%; display: flex;">
@@ -113,10 +118,6 @@ div.carousel-item {
       		<p style="font-size: 14px; margin-left: 150px;">2022-06-01~2022-12-31 </p>
       	</div>
       </div>
-      <!-- <div style="display: flex;">
-      <p style="width: 50%;margin-left: 200px; ">수능 끝! 새로운 시작 응원해📣 </p>
-      <p style="width: 50%; margin-left: 150px;">[에버랜드X메가박스] 제휴 할인 프로모션!</p>
-	   </div> -->
     </div>
 	    
     <!-- 2 -->

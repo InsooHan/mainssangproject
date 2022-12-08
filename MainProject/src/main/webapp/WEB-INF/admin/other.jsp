@@ -69,8 +69,8 @@
 	<table class="table table-bordered" >
 		<tr  align="center">
 			<th width="50" >번호</th>
-			<th width="100">구분</th>
-			<th width="200">제목</th>
+			<th width="80">구분</th>
+			<th width="300">제목</th>
 			<th width="100">작성일</th>
 			<th width="50">조회</th>
 
