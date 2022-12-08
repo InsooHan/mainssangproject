@@ -146,13 +146,19 @@ public class MovieController {
 	
 	//관람평 수정폼
 	@GetMapping("/movie/rvupdateform")
-	@ResponseBody
-	public String reviewupdateform(String idx, Model model) {
+	public ModelAndView reviewupdateform(String idx) {
+		
+		ModelAndView mview = new ModelAndView();
 		
 		MovieReviewDto rvdto = service.getReviewData(idx);
-		model.addAttribute("rvdto", rvdto);
+		mview.addObject("rvdto", rvdto);
 		
-		return "/movie/detail";
+		mview.addObject("rvgrade", rvdto.getGrade());
+		mview.addObject("rvcontent", rvdto.getContent());
+		
+		mview.setViewName("/movie/moviedetail");
+		
+		return mview;
 	}
 	
 	//관람평 수정

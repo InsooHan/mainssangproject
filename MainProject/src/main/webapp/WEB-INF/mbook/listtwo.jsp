@@ -242,7 +242,7 @@ $(function() {
 <div style="height: 800px; padding-top: 30px; background-color:#505050;">
 <div class="container">
 	<div class="item fir" style="flex-basis: 70px;">
-		<div class="one" style="background-color: white;"><b>상영시간</b></div>
+		<div class="one" style="background-color: rgb(51,51,51); color: white;"><b>상영시간</b></div>
 		<div class="one" style="background-color: #FF5050;"><b>인원/좌석</b></div>
 		<div class="one" style="background-color: white;"><b>결제</b></div>
 		<div class="one" style="background-color: white;"><b>결제완료</b></div>
