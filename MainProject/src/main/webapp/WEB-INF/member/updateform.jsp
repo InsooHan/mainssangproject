@@ -19,7 +19,7 @@
 	height: 160px;
 }
 
-</style>
+</style> 
 
 </head>
 <body>
@@ -30,7 +30,8 @@
 				<br>
 			</div>
 			<div align="center">
-				<form id="myForm" action="../member/update_mypage.do" method="post">
+				<form id="myForm" action="../member/updateMembers" method="post">
+				<input type="hidden" name="num" value="${dto.num}">
 					<p>
 						<label>Name</label> 
 						<input class="w3-input" type="text" id="name" name="name" value="${ dto.name }" required> 
