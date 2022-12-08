@@ -83,4 +83,24 @@ public class MemberService implements MemberServieInter {
 		mapperInter.updateMember(dto);
 	}
 
+	@Override
+	public void upPoint(String num, int point) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map=new HashMap<>();
+		map.put("num", num);
+		map.put("point", point);
+		
+		mapperInter.upPoint(map);
+	}
+
+	@Override
+	public void downPoint(String num, int point) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map=new HashMap<>();
+		map.put("num", num);
+		map.put("point", point);
+		
+		mapperInter.downPoint(map);
+	}
+
 }
