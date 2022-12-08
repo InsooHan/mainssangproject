@@ -16,9 +16,6 @@
 <body>
 <style type="text/css">
 button.nav-link {
-	color: black;
-}
-button.nav-link {
 	background-color: white !important;
 	color: black !important;
 	border: 1px;
@@ -45,60 +42,66 @@ color: black;
 span.badge{
 	font-size: 0.9em;
 }
+
+table{
+    margin-left:auto; 
+    margin-right:auto;
+}
+
+.nav li{
+display: inline-block;
+font-size: 1.3em;
+}
+
+.pagination{
+ justify-content : center; 
+}
+
+tr {
+  line-height: 1.7rem;
+}
 </style>
 
 </head>
 <body>
 <!-- 카테고리 선택 -->
-<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" style="margin-left: 20px;">
+<ul class="nav nav-pills mb-3 justify-content-start" id="pills-tab" role="tablist" style="margin-top: 40px; margin-left: 140px;">
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" style="font-size: 1.2em;" onclick="location.href='list'">전체</button>
+    <button class="nav-link" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" onclick="location.href='list'">전체</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" data-bs-toggle="pill"  type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onclick="location.href='best'" style="font-size: 1.2em;">인기글</button>
+    <button class="nav-link active" data-bs-toggle="pill"  type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onclick="location.href='best'">인기글</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" data-bs-toggle="pill"  type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onclick="location.href='movietalk'" style="font-size: 1.2em;">영화수다</button>
+    <button class="nav-link" data-bs-toggle="pill"  type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onclick="location.href='movietalk'">영화수다</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" onclick="location.href='moviereport'" style="font-size: 1.2em;">영화정보</button>
+    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" onclick="location.href='moviereport'">영화정보</button>
   </li>
 </ul>
 
 <!-- 인기글 리스트 출력(공지사항 포함x) -->
-  	<div class="boardlist" style="margin-left: 40px; margin-top: 20px;">
-  	<c:if test="${dto.category!='공지사항' }">
+  	<div class="boardlist">
 	<table class="table table-hover" style="width: 1200px;">
 	<thead>
 		<tr>
 			<th width="120"></th>
-			<th>제목</th>
+			<th style="text-align: center;">제목</th>
 			<th width="200">작성자</th>
 			<th width="180">작성일</th>
-			<th width="70">조회</th>
-			<th width="60">추천</th>
+			<th width="70" style="text-align: center;">조회</th>
+			<th width="60" style="text-align: center;">추천</th>
 		</tr>
 		</thead>
 		
 		<tbody>
-		<c:if test="${totalCount==0 }">
-			<tr>
-				<td colspan="6" align="center">
-					<h4>등록된 글이 없습니다</h4>
-				</td>
-			</tr>
-		</c:if>
-		
-		<c:if test="${totalCount>0 }">
-			<c:forEach var="dto" items="${list }">
+
+			<c:forEach var="dto" items="${list }" varStatus="i">
 				
 				<tr>
-					<td align="center">					
-						${dto.category }
-					</td>
-					
-					<td>
-							
+					<td align="center">${i.count }</td>				
+
+					<td>	
 							<a href="detail?num=${dto.num }&currentPage=${currentPage}" style="color: black;">
 							${dto.subject }</a>
 							
@@ -113,7 +116,7 @@ span.badge{
 							
 							<!-- 댓글개수 -->
 							<c:if test="${dto.anscount>0 }">
-							<a style="color: red;" href="detail?num=${dto.num }&currentPage=${currentPage}#answer"><b>[${dto.anscount }]</b></a>
+							<a style="color: red;" href="detail?num=${dto.num }#answer"><b>[${dto.anscount }]</b></a>
 							</c:if>
 							
 							<!-- 오늘 날짜일경우 제목 옆에 new -->
@@ -130,11 +133,10 @@ span.badge{
 					
 					</td>
 					<td> <fmt:formatDate value="${dto.writeday }" pattern="yyyy-MM-dd"/></td>
-					<td style="padding-left: 20px;">${dto.readcount }</td>
-					<td style="padding-left: 20px;">${dto.likes }</td>
+					<td style="text-align: center;">${dto.readcount }</td>
+					<td style="text-align: center;">${dto.likes }</td>
 					</tr>
 			</c:forEach>
-		</c:if>
 		</tbody>
 	
 	<thead>
@@ -150,69 +152,10 @@ span.badge{
 	</thead>
 
 	</table>
-	</c:if>
-	
-	
-	<!-- 페이징처리 -->
-<c:if test="${totalCount>0 }">
-	<div style="width: 800px; align-content: center; margin-left: 550px;" class="container">
-		<ul class="pagination">
-			<!-- 이전 -->
-			<c:if test="${startPage>1 }">
-				<li>
-			<a href="best?currentPage=${startPage-1 }">이전</a>
-				</li>&nbsp;
-			</c:if>
-			
-			<c:forEach var="pp" begin="${startPage }" end="${endPage }">
-				<c:if test="${currentPage==pp }">
-					<li class="active">
-				<a href="best?currentPage=${pp }">${pp }</a>
-					</li>&nbsp;
-				
-				</c:if>
-				
-				<c:if test="${currentPage!=pp }">
-					<li>
-				<a href="best?currentPage=${pp }">${pp }</a>
-					</li>&nbsp;
-				
-				</c:if>
-			
-			</c:forEach>
-			
-			<!-- 다음 -->
-			<c:if test="${endPage<totalPage }">
-			<li>
-				<a href="best?currentPage=${endPage+1 }>">다음</a>
-			</li>
-			</c:if>
-		</ul>
-	</div>
-	
-	</c:if>
-
 </div>
   	
 
 
-
-<div class="searcharea" style="align-content: center; margin-left: 500px;">
-	<!-- 검색창 -->
-	<form action="list">
-		<div>
-			<select name="searchcolumn" style="width: 100px;">
-				<option value="subject">제목</option>
-				<option value="id">아이디</option>
-				<option value="name">작성자</option>
-				<option value="content">내용</option>
-			</select>
-			<input type="text" name="searchword" style="width: 160px; height: 24px;">
-			<input type="submit" value="검색" class="btn btn-secondary btn-sm">
-		</div>
-	</form>
-	
-</div>
 <script type="text/javascript">
 $("#write").click(function(){
 	<c:if test="${sessionScope.loginok==null }">

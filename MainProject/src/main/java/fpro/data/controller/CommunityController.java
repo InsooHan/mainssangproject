@@ -23,8 +23,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fpro.data.dto.BoardAnswerDto;
 import fpro.data.dto.CommunityDto;
+import fpro.data.dto.MemberDto;
 import fpro.data.service.CommunityService;
 import fpro.data.service.LoginService;
+import fpro.data.service.MessageService;
+
 
 
 
@@ -36,10 +39,13 @@ public class CommunityController {
 	@Autowired
 	LoginService lser;
 	
+	@Autowired
+	MessageService mser;
+	
 	@GetMapping("/community/list")
 	public ModelAndView list(@RequestParam(defaultValue = "1") int currentPage,
 			@RequestParam(value = "searchcolumn",required = false) String sc,
-			@RequestParam(value = "searchword",required = false) String sw
+			@RequestParam(value = "searchword",required = false) String sw,HttpSession session
 			) {	//required = false => null값일때
 		ModelAndView mview=new ModelAndView();
 				
@@ -50,8 +56,8 @@ public class CommunityController {
 				int startPage;	//각 블럭의 시작페이지
 				int endPage;	//각 블럭의 끝페이지
 				int start;	//각 페이지의 시작번호
-				int perPage=6;	//한 페이지에 보여질 글의 갯수
-				int perBlock=5;	//한 블럭당 보여지는 페이지개수
+				int perPage=10;	//한 페이지에 보여질 글의 갯수
+				int perBlock=2;	//한 블럭당 보여지는 페이지개수
 				
 				
 				//총 페이지개수
@@ -72,6 +78,11 @@ public class CommunityController {
 
 				//각 페이지에서 필요한 게시글 불러오기
 				List<CommunityDto>list =ser.getList(sc, sw, start, perPage);
+				
+				
+				//쪽지개수
+				String id=(String)session.getAttribute("myid");
+				int count=mser.countMessageView(id);
 				
 				
 				//댓글개수
@@ -95,6 +106,8 @@ public class CommunityController {
 				mview.addObject("currentPage", currentPage);
 				mview.addObject("no", no);
 				mview.addObject("totalCount", totalCount);
+				mview.addObject("count", count);
+
 		
 		mview.setViewName("/community/list");
 		return mview;
@@ -113,7 +126,7 @@ public class CommunityController {
 		int startPage;	//각 블럭의 시작페이지
 		int endPage;	//각 블럭의 끝페이지
 		int start;	//각 페이지의 시작번호
-		int perPage=6;	//한 페이지에 보여질 글의 갯수
+		int perPage=10;	//한 페이지에 보여질 글의 갯수
 		int perBlock=5;	//한 블럭당 보여지는 페이지개수
 		
 		
@@ -176,7 +189,7 @@ public class CommunityController {
 		int startPage;	//각 블럭의 시작페이지
 		int endPage;	//각 블럭의 끝페이지
 		int start;	//각 페이지의 시작번호
-		int perPage=6;	//한 페이지에 보여질 글의 갯수
+		int perPage=10;	//한 페이지에 보여질 글의 갯수
 		int perBlock=5;	//한 블럭당 보여지는 페이지개수
 		
 		
@@ -227,41 +240,12 @@ public class CommunityController {
 	}
 	
 	@GetMapping("/community/best")
-	public ModelAndView best(@RequestParam(defaultValue = "1") int currentPage,
-			@RequestParam(value = "searchcolumn",required = false) String sc,
-			@RequestParam(value = "searchword",required = false) String sw
-			) {	//required = false => null값일때
+	public ModelAndView best(@RequestParam(defaultValue = "1") int currentPage) {	
 		ModelAndView mview=new ModelAndView();
 
-		
-		int totalCount=ser.getTotalCount(sc, sw);
-		int totalPage;	//총 페이지수
-		int startPage;	//각 블럭의 시작페이지
-		int endPage;	//각 블럭의 끝페이지
-		int start;	//각 페이지의 시작번호
-		int perPage=6;	//한 페이지에 보여질 글의 갯수
-		int perBlock=5;	//한 블럭당 보여지는 페이지개수
-		
-		
-		//총 페이지개수
-		totalPage=totalCount/perPage+(totalCount%perPage==0?0:1);
-
-		//각 블럭의 시작페이지(현재페이지 3: 시작:1 끝:5)
-		startPage=(currentPage-1)/perBlock*perBlock+1;
-		endPage=startPage+perBlock-1;
-
-		//총 페이지수가 8... 2번째 블럭은 startpage가 6, endpage가 10... endpage는 8로 수정해줘야함
-		if(endPage>totalPage)
-			endPage=totalPage;
-
-
-		//각 페이지에서 불러올 시작번호
-		//현재페이지가 1일경우 start는 1,현재페이지가 2일경우 6
-		start=(currentPage-1)*perPage;
-
+	
 		//각 페이지에서 필요한 게시글 불러오기
-
-		List<CommunityDto>list =ser.getListBest(sc, sw, start, perPage);
+		List<CommunityDto>list =ser.getListBest();
 		
 		//댓글개수
 		for(CommunityDto d:list) {
@@ -269,21 +253,10 @@ public class CommunityController {
 		}
 
 
-		//각 글 앞에 붙힐 시작번호
-		//총 글이 만약 20... 1페이지는 20부터 2페이지는 15부터
-		//출력해서 1씩 감소하면서 출력
-		int no=totalCount-(currentPage-1)*perPage;
-
-
 		//출력에 필요한 변수들을 request에 저장
 		mview.addObject("list", list);
-		mview.addObject("totalPage", totalPage);
-		mview.addObject("startPage", startPage);
-		mview.addObject("endPage", endPage);
 		mview.addObject("currentPage", currentPage);
-		mview.addObject("no", no);
-		mview.addObject("totalCount", totalCount);
-
+	
 		
 		mview.setViewName("/community/best");
 		return mview;
@@ -337,8 +310,9 @@ public class CommunityController {
 		ModelAndView model=new ModelAndView();
 		CommunityDto dto=ser.getData(num);
 		ser.updateReadCount(num);
-
-
+		int asize=ser.getAlist(num).size();
+		
+		model.addObject("asize", asize);
 		model.addObject("num", num);
 		model.addObject("dto", dto);
 		model.addObject("currentPage", currentPage);
@@ -360,14 +334,15 @@ public class CommunityController {
 		
 	@PostMapping("/community/update")
 	public String update(@ModelAttribute CommunityDto dto, HttpSession session,int currentPage) {
-		
+		if(dto.getCategory()==null) {
+			dto.setCategory(ser.getMaxCategory(dto.getNum()));
+		}
 		//update
 		ser.updateBoard(dto);
 		
 		
 		return "redirect:detail?num="+dto.getNum()+"&currentPage="+currentPage;	
 	}
-		
 
 	
 	@GetMapping("/community/delete")
