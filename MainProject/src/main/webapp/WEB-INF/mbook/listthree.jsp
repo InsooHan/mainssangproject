@@ -70,11 +70,13 @@ $(function() {
 	//연령 등급 색 넣기
 	var age="${age}";
 	if(age==12){
-		$("#movieage").css("background-color","orange");
+		$("#movieage").css("background-color","#46AAFF");
 	}else if(age==15) {
-		$("#movieage").css("background-color","lightblue");
-	}else{
-		$("#movieage").css("background-color","red");
+		$("#movieage").css("background-color","orange");
+	}else if(age=="청소년관람불가"){
+		$("#movieage").css("background-color","#FF5675");
+	}else {
+		$("#movieage").css("background-color","green");
 	}
 	
 	//인원수 넣기
@@ -172,10 +174,11 @@ $(function() {
 			<b style="color: white; font-size: 15px;">결제수단</b>
 		</div>
 		<div style="height: 45%; background-color: rgb(232,232,232);">
-			<br>
-			<span style="margin: 5px 5px; font-weight: bold;"> Mpoint 보유현황 :&nbsp;${memberdto.mpoint} point </span><br><br>&nbsp;
+			<br>&nbsp;&nbsp;
+			<span style="margin: 5px 5px; font-weight: bold;"> Mpoint 보유현황 :&nbsp;<b style="color: orange;">${memberdto.mpoint}</b> point </span><br><br>&nbsp;
 			<input id="mpoint" type="number" class="form-control" style="width: 200px; display: inline-block;">&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-success" id="mpointbtn">포인트 적용</button>
 		</div>
+		
 		<div style="height: 35%; background-color: rgb(232,232,232); text-align: center;">
 			<i class="fa-solid fa-sack-dollar fa-5x"></i>
 		</div>

@@ -45,8 +45,9 @@ width: 70px;
 		<div class="one" style="background-color: rgb(51,51,51); color: white;"><b>결제</b></div>
 		<div class="one" style="background-color: #FF5050;"><b>결제완료</b></div>
 	</div>
-	<div class="item" style="background-color: white; width: 1430px;">
-		<span style="font-weight: bold;">결제가 완료되었습니다!</span>
+	<div class="item" style="background-color: #D7AC87; width: 1430px; text-align: center;">
+		<i class="fa-solid fa-circle-check fa-7x" style="margin-top: 140px; color: #A8F552;"></i><br><br>
+		<h3>결제에 성공하였습니다!</h3>
 	</div>
 </div>
 </div>

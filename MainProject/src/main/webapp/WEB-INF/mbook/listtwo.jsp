@@ -202,7 +202,7 @@ $(function() {
 			$(this).addClass("fa-solid fa-square fa-2xl seat booked");
 			
 			seat+="l"+seatnum+"l";
-			alert(seat);
+			//alert(seat);
 		}else{
 			$(this).removeClass("fa-solid fa-square fa-2xl seat booked");
 			$(this).addClass("fa-regular fa-square fa-2xl seat");
@@ -280,7 +280,7 @@ $(function() {
 			
 		</div>
 		<div class="five">
-			<span style="display: inline-block; width: 870px; height: 100%;">
+			<span style="display: inline-block; width: 1090px; height: 100%;">
 				&nbsp;&nbsp;&nbsp;
 				<b style="color: white; font-size: 12pt;">총 합계 : </b>
 				<b id="mprice" style="color: white; font-size: 14pt;">0</b>

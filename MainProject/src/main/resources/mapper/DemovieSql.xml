@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fpro.data.mapper.DemovieMapperInter">
 	<select id="getSomeDatas" parameterType="Map" resultType="demovie">
-		select d.movietime,d.cart_num,s.capacity, m.name, m.age, d.sang_num, d.seat from demovie d, sang s, movie m where d.movie_num=#{moviename} and d.theater_num=#{theater} and d.sang_num=s.num and d.movie_num=m.num order by d.movietime
+		select d.movietime,d.cart_num,s.capacity,s.sang_name, m.name, m.age, d.sang_num, d.seat from demovie d, sang s, movie m where d.movie_num=#{moviename} and d.theater_num=#{theater} and d.sang_num=s.num and d.movie_num=m.num order by d.movietime
 	</select>
 	
 	<select id="getSangData" parameterType="String" resultType="sang">
