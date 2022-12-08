@@ -9,7 +9,7 @@ import lombok.Data;
 public class SangDto {
 	
 	private String num;
-	private String name;
+	private String sang_name;
 	private int price;
 	private String capacity;
 	

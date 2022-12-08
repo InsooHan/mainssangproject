@@ -62,7 +62,7 @@ border:1px solid #bebebe;
 border-radius:10px;
 text-align:center;
 width:100px;
-height:50px;
+height:73px;
 cursor: pointer;
 background-color: #f8f8ff;
 }
@@ -218,6 +218,7 @@ $(function() {
 
 					
 					s+="&nbsp;<div class='detailtable' cartnum='"+item.cart_num+"'>"; // data-bs-toggle='modal' data-bs-target='#bookModal'>"
+					s+="<b>"+item.sang_name+"</b><br>";
 					s+="<span><b>";
 					s+=seatarr.length;	
 					s+="/"+item.capacity+"</b></span>";
