@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -160,6 +161,7 @@ public class EventController {
 		return "redirect:list";
 		//return "redirect:content?num="+service.getMaxNum();
 		//return "redirect:list?currnetPage="+currentPage;	
+		
 		}
 	@GetMapping("/event/form")
 	public String form() {
@@ -236,6 +238,8 @@ public class EventController {
 		}
 		//db insert
 		service.updateEvent(dto);
+		
+		
 		
 		return "redirect:list";
 		//return "redirect:content?num="+service.getMaxNum();

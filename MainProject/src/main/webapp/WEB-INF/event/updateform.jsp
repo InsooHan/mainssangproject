@@ -23,8 +23,9 @@
 	charset="utf-8"></script>	
 </head>
 <body>
-<div class="container">
-<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>이벤트 수정</b></h4>
+<br><br>
+<div class="container mt-3">
+<p style="font-size: 2.5em; color: #252451; font-weight: 700;">이벤트 수정
 <form action="update" method="post" enctype="multipart/form-data" ><!-- action insert로 번경 그리고 enctype은 설정다돼있으므로 추가안해도됨 -->
 	<input type="hidden" name="num" value="${dto.num }">
 		
@@ -45,7 +46,7 @@
 					<input type="radio" name="category" 
 					value='영화'>영화
 					<input type="radio" name="category"
-					value='극장' checked="checked">극장
+					value='극장' >극장
 					<input type="radio" name="category"
 					value='제휴/할인' >제휴/할인
 					<input type="radio" name="category"

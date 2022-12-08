@@ -25,11 +25,24 @@ div.look {
 }
 
 </style>
+<script>
+$(window).scroll(function(){
+	if ($(this).scrollTop() > 300){
+		$('.btn_gotop').show();
+	} else{
+		$('.btn_gotop').hide();
+	}
+});
+$('.btn_gotop').click(function(){
+	$('html, body').animate({scrollTop:0},400);
+	return false;
+});
+</script>
 </head>
 <body>
 
 <div style="position: fixed;bottom: 100px;right: 100px; ">
-<a style="" href ="#header"><img style="width: 50px;height: 50px;" alt="" src="../save/m_top.png"> </a>
+<a class="btn_gotop" style="" href ="#header"><img style="width: 50px;height: 50px;" alt="" src="../save/m_top.png"> </a>
 </div>
 <div class="container mt-3" id="header">
 <br><br>

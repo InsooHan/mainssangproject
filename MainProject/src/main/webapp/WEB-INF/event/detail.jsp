@@ -12,12 +12,34 @@
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="https://kit.fontawesome.com/a47cf79e39.js" crossorigin="anonymous"></script>
 <title>Insert title here</title>
+<script>
+$(window).scroll(function(){
+	if ($(this).scrollTop() > 300){
+		$('.btn_gotop').show();
+	} else{
+		$('.btn_gotop').hide();
+	}
+});
+$('.btn_gotop').click(function(){
+	$('html, body').animate({scrollTop:0},400);
+	return false;
+});
+</script>
 </head>
 <body>
+
 <div style="position: fixed;bottom: 100px;right: 100px; ">
-<a style="" href ="#header"><img style="width: 50px;height: 50px;" alt="" src="../save/m_top.png"> </a>
+<a class="btn_gotop" style="" href ="#header"><img style="width: 50px;height: 50px;" alt="" src="../save/m_top.png"> </a>
 </div>
-<div class="container" id="header" style="width: 1200px;" >
+<div style="position: fixed;bottom: 600px;right: 300px; ">
+<c:if test="${sessionScope.loginok!=null and sessionScope.myid=='admin' }">
+		<button type="button" class="btn btn-outline-info"
+		onclick="location.href='updateform?num=${dto.num}'">수정</button>
+		<button type="button" class="btn btn-outline-info"
+		onclick="location.href='delete?num=${dto.num}'">삭제</button>
+		</c:if>
+</div>
+<div class="container mt-3" id="header" style="width: 1200px;" >
 <table class="table table-bordered">
 
 <tr style="width: 100px;">
@@ -25,17 +47,7 @@
 
 <p style="font-size: 2.5em; color: #252451; font-weight: 700;">${dto.subject}
 <h5  style="color: gray;">기간: ${dto.startday }~${dto.endday }</h5>
-<tr>
-	<td>
-		<!-- 로그인 중이면서 세션의 아이디와 글의 아이디가 같을 경우에만 수정 삭제 나오게 -->
-		<c:if test="${sessionScope.loginok!=null and sessionScope.myid=='admin' }">
-		<button type="button" class="btn btn-outline-info"
-		onclick="location.href='updateform?num=${dto.num}'">수정</button>
-		<button type="button" class="btn btn-outline-info"
-		onclick="location.href='delete?num=${dto.num}'">삭제</button>
-		</c:if>
-	</td>
-</tr>
+
 <br>
 <hr>
 <br><br>
