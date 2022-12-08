@@ -89,7 +89,7 @@ body {
 }
 
 .main {
-	background-color: #555555;
+	background-color: #503396;
 	font-family: Noto Sans KR;
 	margin-top: 0px;
 }
@@ -387,7 +387,7 @@ body {
 </section>
 
 </div>
-<div style="height: 580px; background-color: #503396;">
+<div style="height: 580px; background-color: #503396; margin-top: 20px;">
 	<!-- 커뮤니티 -->
 	<div class="main_community" style="border: 1px solid black; border-radius:15px; background-color:white; width: 40%; height: 500px; float: right; margin-right: 130px; margin-top: 30px;">
 		<div style="background-color: #339EB2; border-radius:15px 15px 0px 0px; padding: 13px 20px 10px;"><h4 style="font-family: Noto Sans KR; font-weight: 500; color: white;">커뮤니티</h4></div>
