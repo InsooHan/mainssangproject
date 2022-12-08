@@ -62,9 +62,13 @@ border:1px solid #bebebe;
 border-radius:10px;
 text-align:center;
 width:100px;
-height:50px;
+height:73px;
 cursor: pointer;
 background-color: #f8f8ff;
+}
+#movie
+{
+overflow: auto;
 }
 </style>
 <script type="text/javascript">
@@ -214,6 +218,7 @@ $(function() {
 
 					
 					s+="&nbsp;<div class='detailtable' cartnum='"+item.cart_num+"'>"; // data-bs-toggle='modal' data-bs-target='#bookModal'>"
+					s+="<b>"+item.sang_name+"</b><br>";
 					s+="<span><b>";
 					s+=seatarr.length;	
 					s+="/"+item.capacity+"</b></span>";
@@ -308,9 +313,12 @@ $(function() {
 	<div class="item" id="movie" style="background-color: #dcdcdc; border: 1px solid #d2d2d2;">
  		<c:forEach var="dto" items="${list}" varStatus="i">
 			<a class='list-group-item list-group-item-action st four'>&nbsp;
+			<%-- <span style='border-radius: 100px; font-size:7pt; color:white; background-color: 
+			${dto.age==12?'#46AAFF':dto.age==15?'orange':dto.age=="청소년관람불가"?'#FF5675':dto.age=="전체관람가"?'green':''};'>
+			&nbsp;${dto.age}&nbsp;</span> --%>
 			<span style='border-radius: 100px; font-size:7pt; color:white; background-color: 
-			${dto.age==12?'#46AAFF':dto.age==15?'orange':dto.age==19?'#FF5675':''};'>
-			&nbsp;${dto.age}&nbsp;</span>
+			${dto.age=="청소년관람불가"?'#FF5675':dto.age=="전체관람가"?'green':dto.age==12?'#46AAFF':dto.age==15?'orange':''};'>
+			&nbsp;${dto.age=="청소년관람불가"?"청불":dto.age=="전체관람가"?'전체':dto.age}&nbsp;</span>
 			<span style="font-weight: bold;">${dto.name}</span><b style="display: none;">${dto.num}</b></a>
 		</c:forEach>
 	</div>

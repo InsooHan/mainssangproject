@@ -4,6 +4,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,10 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import fpro.data.dto.DemovieDto;
+import fpro.data.dto.MemberDto;
 import fpro.data.dto.MovieDto;
 import fpro.data.dto.SangDto;
 import fpro.data.dto.TheaterDto;
 import fpro.data.service.DemovieService;
+import fpro.data.service.MemberService;
 import fpro.data.service.MovieService;
 import fpro.data.service.TheaterService;
 
@@ -29,6 +34,8 @@ public class MoviebookController {
 	MovieService mservice;
 	@Autowired
 	DemovieService dservice;
+	@Autowired
+	MemberService memberservice;
 	
 	@GetMapping("/book/listtwo")
 	public ModelAndView moveListTwo(@RequestParam String moviename,@RequestParam String theater,@RequestParam String sangnum,@RequestParam String cartnum) {
@@ -71,7 +78,7 @@ public class MoviebookController {
 	}
 	
 	@GetMapping("/book/updatebook")
-	public ModelAndView updatebook(@RequestParam String cartnum,@RequestParam String seat,@RequestParam int adult,@RequestParam int youth) {
+	public ModelAndView updatebook(@RequestParam String cartnum,@RequestParam String seat,@RequestParam int adult,@RequestParam int youth,HttpSession session) {
 		ModelAndView mview=new ModelAndView();
 		
 		DemovieDto ddto=new DemovieDto();
@@ -166,6 +173,15 @@ public class MoviebookController {
 	
 		//System.out.println(seat+","+cartnum);
 		
+		//포인트 정보 넣기
+		String myid=(String) session.getAttribute("myid");
+		MemberDto memberdto=memberservice.getDataById(myid);
+		
+		int mpoint=memberdto.getMpoint();
+		String name=memberdto.getName();
+		
+		mview.addObject("memberdto", memberdto);
+		
 		mview.setViewName("/mbook/listthree");
 		
 		return mview;
@@ -197,6 +213,19 @@ public class MoviebookController {
 		return dservice.getSomeDatas(theater, moviename);
 	}
 	
+	@GetMapping("book/buy")
+	@ResponseBody
+	public void busSystem(@RequestParam int mpoint,@RequestParam int realprice,@RequestParam String membernum) {
+		int upuppoint=(int) (realprice*0.05);
+		
+		memberservice.downPoint(membernum, mpoint);
+		memberservice.upPoint(membernum, upuppoint);
+	}
+	
+	@GetMapping("book/listfinal")
+	public String moveSystem() {
+		return "/mbook/listfinal";
+	}
 	
 	
 }

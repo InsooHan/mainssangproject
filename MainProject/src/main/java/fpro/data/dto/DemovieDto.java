@@ -20,5 +20,5 @@ public class DemovieDto {
 	private int capacity;
 	private String name;
 	private String age;
-	
+	private String sang_name;
 }

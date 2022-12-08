@@ -52,18 +52,31 @@ div.item span.moviedetail
 {
 font-weight: bold;
 }
+#ckcard,#kakao
+{
+display: inline-block;
+text-align: center;
+width: 45%;
+height: 80%;
+cursor: pointer;
+border-radius: 30px;
+line-height: 35px;
+}
 </style>
 <script type="text/javascript">
 $(function() {
+	realprice=${realprice};
 	
 	//연령 등급 색 넣기
 	var age="${age}";
 	if(age==12){
-		$("#movieage").css("background-color","orange");
+		$("#movieage").css("background-color","#46AAFF");
 	}else if(age==15) {
-		$("#movieage").css("background-color","lightblue");
-	}else{
-		$("#movieage").css("background-color","red");
+		$("#movieage").css("background-color","orange");
+	}else if(age=="청소년관람불가"){
+		$("#movieage").css("background-color","#FF5675");
+	}else {
+		$("#movieage").css("background-color","green");
 	}
 	
 	//인원수 넣기
@@ -76,7 +89,55 @@ $(function() {
 		$("#inwon").append("&nbsp;청소년&nbsp;"+youth+"&nbsp;");
 	}
 	
+	//클릭하면 클래스명 추가
+	$("#ckcard").click(function(){
+		$("#kakao").css("border","");
+		$("#kakao").removeClass("select");
+		$(this).addClass("select");
+		$(this).css("border","3px solid orange");
+		$(".fa-sack-dollar").css("color","#CD3861");
+	});
+	$("#kakao").click(function(){
+		$("#ckcard").css("border","");
+		$("#ckcard").removeClass("select");
+		$(this).addClass("select");
+		$(this).css("border","3px solid orange");
+		$(".fa-sack-dollar").css("color","#FFDC3C");
+	});
 	
+	$("#pay").click(function(){
+		var test=$("div.item").find(".select").attr("var");
+		
+		
+		
+		if(test=="card"){
+			requestPay1();
+		}else if (test=="kakao") {
+			requestPay2();
+		}
+		
+	});
+	
+	//포인트 적용
+	$("#mpointbtn").click(function() {
+		mpoint=$("#mpoint").val();
+		membernum=${memberdto.num};
+		
+		if(mpoint>${memberdto.mpoint}){
+			alert("보유 포인트를 초과했습니다.");
+		}else if (mpoint<0) {
+			alert("마이너스를 입력했습니다.");
+		}else if (mpoint>${realprice}){
+			alert("가격을 초과했습니다.")
+		}else{
+			var totalprice=String(${realprice}-mpoint);
+			realprice=${realprice}-mpoint;
+			
+			$("#discount").text("-"+addComma(mpoint)+" 원");
+			$("#finalpay").text(addComma(totalprice)+" 원");
+			//$("#finalpay").text("ㅎㅎㅎ원");
+		}
+	});
 	
 });
 </script>
@@ -112,13 +173,30 @@ $(function() {
 		<div class="subname">
 			<b style="color: white; font-size: 15px;">결제수단</b>
 		</div>
+		<div style="height: 45%; background-color: rgb(232,232,232);">
+			<br>&nbsp;&nbsp;
+			<span style="margin: 5px 5px; font-weight: bold;"> Mpoint 보유현황 :&nbsp;<b style="color: orange;">${memberdto.mpoint}</b> point </span><br><br>&nbsp;
+			<input id="mpoint" type="number" class="form-control" style="width: 200px; display: inline-block;">&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-success" id="mpointbtn">포인트 적용</button>
+		</div>
+		
+		<div style="height: 35%; background-color: rgb(232,232,232); text-align: center;">
+			<i class="fa-solid fa-sack-dollar fa-5x"></i>
+		</div>
+		<div style="height: 10%; background-color: rgb(232,232,232);">
+			<span id="ckcard" var="card" style="background-color: #CD3861; margin-left: 18px;">
+				<b style="color: white;">신용/체크카드</b>
+			</span>
+			<span id="kakao" var="kakao" style="background-color: #FFDC3C;">
+				<b style="color: white;">카카오페이</b>
+			</span>
+		</div>
 	</div>
 	<div class="item" style="background-color: white;">
 		<div class="subname">
 			<b style="color: white; font-size: 15px;">결제하기</b>
 		</div>
-		<div style="height: 45%; background-color: white; text-align: center;">
-			<i class="fa-regular fa-credit-card"></i>
+		<div style="height: 45%; background-color: white; text-align: center; line-height: 270px;">
+			<i class="fa-regular fa-credit-card fa-7x"></i>
 		</div>
 		<div style="height: 10%; background-color: rgb(65,65,65); border: 0.7px solid rgb(103,103,103);">
 			<span style="color: white; font-weight: bold; line-height: 45px;">&nbsp;&nbsp;상품금액&nbsp;&nbsp;</span>
@@ -126,11 +204,11 @@ $(function() {
 		</div>
 		<div style="height: 10%; background-color: rgb(65,65,65); border: 0.7px solid rgb(103,103,103);">
 			<span style="color: white; font-weight: bold; line-height: 45px;">&nbsp;&nbsp;할인금액&nbsp;&nbsp;</span>
-			<span style="color: white; font-weight: bold; line-height: 45px;">-0&nbsp;원</span>
+			<span id="discount" style="color: white; font-weight: bold; line-height: 45px;">-0&nbsp;원</span>
 		</div>
 		<div style="height: 10%; background-color: rgb(65,65,65); border: 0.7px solid rgb(103,103,103);">
 			<span style="color: white; font-weight: bold; line-height: 45px;">&nbsp;&nbsp;결제금액&nbsp;&nbsp;</span>
-			<span style="color: white; font-weight: bold; line-height: 45px;">&nbsp;원</span>
+			<span id="finalpay" style="color: white; font-weight: bold; line-height: 45px;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${realprice}"/>&nbsp;원</span>
 		</div>
 		<div id="pay" style="height: 15%; background-color: red; text-align: center; color: white; line-height: 70px; cursor: pointer;">
 			<b>결제하기</b>
@@ -148,21 +226,74 @@ function requestPay1() {
         pg : 'html5_inicis',
         pay_method : 'card',
         merchant_uid: "merchant_" + new Date().getTime(), 
-        name : "nametest",
-        amount : 100,
-        buyer_email : 'Iamport@chai.finance',
-        buyer_name : '쌍용교육센터 파이널 프로젝트',
-        buyer_tel : '010-1234-5678',
-        buyer_addr : '서울특별시 강남구 역삼동',
+        name : "${realseat}",
+        amount : realprice,
+        buyer_email : '${memberdto.email}',
+        buyer_name : '${memberdto.name}',
+        buyer_tel : '${memberdto.hp}',
+        buyer_addr : '${memberdto.addr}',
         buyer_postcode : '123-456'
     }, function (rsp) { // callback
         if (rsp.success) {
             console.log(rsp);
             
+            $.ajax({
+    			type:"get",
+    			url:"buy",
+    			dataType:"html",
+    			data:{"realprice":realprice,"mpoint":mpoint,"membernum":membernum},
+    			success:function(res){
+    				
+    				location.href="/book/listfinal";
+    			}
+    		});
+            
+            
         } else {
             console.log(rsp);
         }
     });
+}
+
+//카카오페이
+function requestPay2() {
+    IMP.request_pay({
+        pg : 'kakaopay',
+        pay_method : 'card',
+        merchant_uid: "merchant_" + new Date().getTime(), 
+        name : "${realseat}",
+        amount : realprice,
+        buyer_email : '${memberdto.email}',
+        buyer_name : '${memberdto.name}',
+        buyer_tel : '${memberdto.hp}',
+        buyer_addr : '${memberdto.addr}',
+        buyer_postcode : '123-456'
+    }, function (rsp) { // callback
+        if (rsp.success) {
+            console.log(rsp);
+            
+            $.ajax({
+    			type:"get",
+    			url:"buy",
+    			dataType:"html",
+    			data:{"realprice":realprice,"mpoint":mpoint,"membernum":membernum},
+    			success:function(res){
+    				
+    				location.href="/book/listfinal";
+    			}
+    		});
+            
+          
+        } else {
+            console.log(rsp);
+        }
+    });
+}
+
+//3자리 콤마
+function addComma(value){
+    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return value; 
 }
 </script>
 </body>

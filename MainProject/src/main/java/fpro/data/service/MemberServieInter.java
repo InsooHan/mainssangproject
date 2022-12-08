@@ -25,5 +25,9 @@ public interface MemberServieInter {
 	public void updatePhoto(String num, String photo);
 
 	public void updateMember(MemberDto dto);
+	
+	public void upPoint(String num,int point);
+	
+	public void downPoint(String num,int point);
 
 }
