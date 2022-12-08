@@ -18,4 +18,5 @@ public class MovieReviewDto {
 	private String content;
 	private int likes;
 	private Timestamp writeday;
+	
 }
