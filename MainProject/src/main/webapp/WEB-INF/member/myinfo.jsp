@@ -60,7 +60,7 @@
 					url:"deleteme",
 					data:{"num":num},
 					success:function(res){
-						alert("탈되하셨습니다");
+						alert("탈퇴하셨습니다");
 						location.reload();
 					}
 				});

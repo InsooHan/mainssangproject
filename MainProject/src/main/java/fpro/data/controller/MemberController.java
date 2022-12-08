@@ -52,7 +52,7 @@ public class MemberController {
    
       service.insertMember(dto);
       
-      return "/layout/main";
+      return "redirect:/";
    }
    
    @GetMapping("/member/mypage")
