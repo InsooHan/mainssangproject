@@ -351,8 +351,80 @@ $(function(){
 
 				var m = res.boxOfficeResult.dailyBoxOfficeList[i];
 				
-				result += "<div class='one' style='margin-right: 45px'>";
-				result += "<a href='detail?'><p class='rank' style='z-index: 2;'>"+m.rank+"<span class='ir'>위</span></span></p><img src='${root }/save/' style='z-index: 1;'></a>"
+				result += "<div class='one' style='margin-right: 45px'>"
+				if(m.movieNm=='올빼미') {
+					result += "<a href='detail?num=11'>"
+				}
+				if(m.movieNm=='압꾸정') {
+					result += "<a href='detail?num=3'>"
+				}
+				if(m.movieNm=='극장판 뽀로로와 친구들: 바이러스를 없애줘!') {
+					result += "<a href='detail?num=16'>"
+				}
+				if(m.movieNm=='원피스 필름 레드') {
+					result += "<a href='detail?num=6'>"
+				}
+				if(m.movieNm=='탄생') {
+					result += "<a href='detail?num=7'>"
+				}
+				if(m.movieNm=='블랙 팬서: 와칸다 포에버') {
+					result += "<a href='detail?num=2'>"
+				}
+				if(m.movieNm=='오늘 밤, 세계에서 이 사랑이 사라진다 해도') {
+					result += "<a href='detail?num=12'>"
+				}
+				if(m.movieNm=='데시벨') {
+					result += "<a href='detail?num=17'>"
+				}
+				if(m.movieNm=='본즈 앤 올') {
+					result += "<a href='detail?num=8'>"
+				}
+				if(m.movieNm=='프레이 포 더 데블') {
+					result += "<a href='detail?num=13'>"
+				}
+				if(m.movieNm=='크리스마스 캐럴') {
+					result += "<a href='detail?num=14'>"
+				}
+				if(m.movieNm=='더 메뉴') {
+					result += "<a href='detail?num=15'>"
+				}
+				result += "<p class='rank' style='z-index: 2;'>"+m.rank+"<span class='ir'>위</span></span></p>"
+				if(m.movieNm=='올빼미') {
+					result += "<img src='${root }/save/올빼미.jpg' style='z-index: 1;'></a>"
+				}
+				if(m.movieNm=='압꾸정') {
+					result += "<img src='${root }/save/압꾸정.jpg' style='z-index: 1;'></a>"
+				}
+				if(m.movieNm=='극장판 뽀로로와 친구들: 바이러스를 없애줘!') {
+					result += "<img src='${root }/save/극장판뽀로로와친구들_바이러스를없애줘.jpg' style='z-index: 1;'></a>"
+				}
+				if(m.movieNm=='원피스 필름 레드') {
+					result += "<img src='${root }/save/원피스필름레드.jpg' style='z-index: 1;'></a>"
+				}
+				if(m.movieNm=='탄생') {
+					result += "<img src='${root }/save/탄생.jpg' style='z-index: 1;'></a>"
+				}
+				if(m.movieNm=='블랙 팬서: 와칸다 포에버') {
+					result += "<img src='${root }/save/블랙팬서_와칸다포에버.jpg' style='z-index: 1;'></a>"
+				}
+				if(m.movieNm=='오늘 밤, 세계에서 이 사랑이 사라진다 해도') {
+					result += "<img src='${root }/save/오늘밤세계에서이사랑이사라진다해도.jpg' style='z-index: 1;'></a>"
+				}
+				if(m.movieNm=='데시벨') {
+					result += "<img src='${root }/save/데시벨.jpg' style='z-index: 1;'></a>"
+				}
+				if(m.movieNm=='본즈 앤 올') {
+					result += "<img src='${root }/save/본즈앤올.jpg' style='z-index: 1;'></a>"
+				}
+				if(m.movieNm=='프레이 포 더 데블') {
+					result += "<img src='${root }/save/프레이포더데블.jpg' style='z-index: 1;'></a>"
+				}
+				if(m.movieNm=='크리스마스 캐럴') {
+					result += "<img src='${root }/save/크리스마스캐럴.jpg' style='z-index: 1;'></a>"
+				}
+				if(m.movieNm=='더 메뉴') {
+					result += "<img src='${root }/save/더메뉴.jpg' style='z-index: 1;'></a>"
+				}
 				result += "<div class='tit-area'>"
 				if(m.movieNm=='올빼미') {
 					result += "<p class='movie-grade age-15'>,</p>"
@@ -378,14 +450,17 @@ $(function(){
 				if(m.movieNm=='데시벨') {
 					result += "<p class='movie-grade age-12'>,</p>"
 				}
-				if(m.movieNm=='엔시티 드림 더 무비 : 인 어 드림') {
-					result += "<p class='movie-grade age-all'>,</p>"
-				}
 				if(m.movieNm=='본즈 앤 올') {
 					result += "<p class='movie-grade age-19'>,</p>"
 				}
-				if(m.movieNm=='동감') {
-					result += "<p class='movie-grade age-12'>,</p>"
+				if(m.movieNm=='프레이 포 더 데블') {
+					result += "<p class='movie-grade age-15'>,</p>"
+				}
+				if(m.movieNm=='크리스마스 캐럴') {
+					result += "<p class='movie-grade age-19'>,</p>"
+				}
+				if(m.movieNm=='더 메뉴') {
+					result += "<p class='movie-grade age-15'>,</p>"
 				}
 				result += "<b><p class='tit' style='padding-right: 25px; overflow: hidden;display: block;width: 100%;white-space: nowrap;text-overflow: ellipsis;padding: 2px 0 0 1px;font-size: 1.3333em;font-weight: 400;color: #333;'>"+m.movieNm+"</p></b>"		
 				result += "</div>"		
@@ -510,7 +585,7 @@ $(function(){
 							</a>
 							<div class="tit-area">    
 								<c:if test="${dto.age=='전체관람가' }">
-									<p class="movie-grade.age-all">,</p>    								
+									<p class='movie-grade age-all'>,</p>    								
 								</c:if>
 								<c:if test="${dto.age=='12' }">
 									<p class="movie-grade age-12">,</p>    								
@@ -518,13 +593,13 @@ $(function(){
 								<c:if test="${dto.age=='15' }">
 									<p class="movie-grade age-15">,</p>    								
 								</c:if>
-								<c:if test="${dto.age>='18' }">
+								<c:if test="${dto.age=='청소년관람불가' }">
 									<p class="movie-grade age-19">,</p>    								
 								</c:if>
 								<b><p class="tit" style="padding-right: 25px;">${dto.name }</p></b>
 							</div>
 							<div class="rate-date">    
-								<span class="rate">예매율 **.*% | </span>    
+								<span class="rate">예매율 ${dto.ticket }% | </span>    
 								<span class="date">개봉일 <fmt:formatDate value="${dto.opendate }" pattern="yyyy.MM.dd"/></span>
 							</div>
 							<div class="btn-movie">    
@@ -573,7 +648,7 @@ $(function(){
 							</a>
 							<div class="tit-area">    
 								<c:if test="${dto.age=='전체관람가' }">
-									<p class="movie-grade.age-all">,</p>    								
+									<p class='movie-grade age-all'>,</p>							
 								</c:if>
 								<c:if test="${dto.age=='12' }">
 									<p class="movie-grade age-12">,</p>    								
@@ -581,13 +656,13 @@ $(function(){
 								<c:if test="${dto.age=='15' }">
 									<p class="movie-grade age-15">,</p>    								
 								</c:if>
-								<c:if test="${dto.age>='18' }">
+								<c:if test="${dto.age=='청소년관람불가' }">
 									<p class="movie-grade age-19">,</p>    								
 								</c:if>
 								<b><p class="tit" style="padding-right: 25px;">${dto.name }</p></b>
 							</div>
 							<div class="rate-date">    
-								<span class="rate">예매율 **.*% | </span>    
+								<span class="rate">예매율 ${dto.ticket }% | </span>    
 								<span class="date">개봉일 <fmt:formatDate value="${dto.opendate }" pattern="yyyy.MM.dd"/></span>
 							</div>
 							<div class="btn-movie">    
@@ -614,7 +689,7 @@ $(function(){
 							</a>
 							<div class="tit-area">    
 								<c:if test="${cdto.age=='전체관람가' }">
-									<p class="movie-grade.age-all">,</p>    								
+									<p class="movie-grade age-all">,</p>    								
 								</c:if>
 								<c:if test="${cdto.age=='12' }">
 									<p class="movie-grade age-12">,</p>    								
@@ -622,13 +697,13 @@ $(function(){
 								<c:if test="${cdto.age=='15' }">
 									<p class="movie-grade age-15">,</p>    								
 								</c:if>
-								<c:if test="${cdto.age>='18' }">
+								<c:if test="${cdto.age=='청소년관람불가' }">
 									<p class="movie-grade age-19">,</p>    								
 								</c:if>
 								<b><p class="tit" style="padding-right: 25px;">${cdto.name }</p></b>
 							</div>
 							<div class="rate-date">    
-								<span class="rate">예매율 **.*% | </span>    
+								<span class="rate">예매율 ${cdto.ticket }% | </span>    
 								<span class="date">개봉일 <fmt:formatDate value="${cdto.opendate }" pattern="yyyy.MM.dd"/></span>
 							</div>
 							<div class="btn-movie">    
@@ -670,7 +745,8 @@ $(function(){
 	
 	$("button.btn-like").click(function() {
 		var heart = $(this).find("i").attr("class");
-		var n = $(this).attr("num");
+		var num = $(this).attr("num");
+		console.log(heart)
 		
 		//로그인 상태가 아닐 때
 		if(${sessionScope.loginok==null}) {
@@ -685,18 +761,29 @@ $(function(){
 					type:"get",
 					url:"likes",
 					dataType:"json",
-					data:{"num":n},
-					success:function(res) {
-						$("div.btn-movie").children().children("span.like").text(res.likes);
+					data:{"num":num},
+					success:function(res) {				
+	
+						//$("div.btn-movie").find("span.like").text(res.likes);
 					}
 				});	
-			}
+			}	
+			
 	 		else {
 				$(this).find("i").attr("class","fa-regular fa-heart").css("color","#222");
+		 		$.ajax({
+					type:"get",
+					url:"nolikes",
+					dataType:"json",
+					data:{"num":num},
+					success:function(res) {
+						
+						//$("div.btn-movie").find("span.like").text(res.likes);
+					}
+				});
 			}			
 		}
 	});
-
 </script>
 </body>
 </html>

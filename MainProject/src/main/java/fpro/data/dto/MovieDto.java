@@ -22,5 +22,6 @@ public class MovieDto {
 	private String runtime;
 	private Timestamp opendate;
 	private int sang;
+	private double ticket;
 	
 }
