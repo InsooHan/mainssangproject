@@ -19,8 +19,7 @@ display: flex;
 flex-direction: row;
 align-items: stretch;
 width: 1500px;
-height: 500px;
-
+height: 500px;	
 }
 .item
 {
@@ -134,8 +133,7 @@ $(function() {
 			dataType:"json",
 			data:{"city":city},
 			success:function(res){
-				//alert(res);
-				//alert(Object.keys(res[0]).includes('name'));  //true
+				
 				var s="";
 				
 				$.each(res,function(idx,item){
@@ -143,11 +141,6 @@ $(function() {
 					s+=item.num+"</b>";
 					s+=item.name+"</a>";
 				});  
-				
-				/* $.each(res[0], function(key, value){
-				    s+=key;
-				    s+=value;
-				}); */ 
 				
 				$("#theater").html(s);
 				
@@ -175,8 +168,6 @@ $(function() {
 		$(this).parent().css("background-color","black");
 		var mtime=$(this).find('p').text();
 		$(".movietime").text("");
-		//alert(mtime);
-		//location.href="movielist";
 		
  		 $.ajax({
 			type:"get",
@@ -184,7 +175,7 @@ $(function() {
 			data:{"moviename":moviename,"theater":theater},
 			dataType:"json",
 			success:function(res){
-				//alert(res); //object Object가 들어와야하지만 여기는 null이 출력됨
+				//alert(res); //
 				//alert(Object.keys(res[0]).includes('movietime'));
 				function formatDate(date) {
 					var d = new Date(date),
@@ -313,9 +304,6 @@ $(function() {
 	<div class="item" id="movie" style="background-color: #dcdcdc; border: 1px solid #d2d2d2;">
  		<c:forEach var="dto" items="${list}" varStatus="i">
 			<a class='list-group-item list-group-item-action st four'>&nbsp;
-			<%-- <span style='border-radius: 100px; font-size:7pt; color:white; background-color: 
-			${dto.age==12?'#46AAFF':dto.age==15?'orange':dto.age=="청소년관람불가"?'#FF5675':dto.age=="전체관람가"?'green':''};'>
-			&nbsp;${dto.age}&nbsp;</span> --%>
 			<span style='border-radius: 100px; font-size:7pt; color:white; background-color: 
 			${dto.age=="청소년관람불가"?'#FF5675':dto.age=="전체관람가"?'green':dto.age==12?'#46AAFF':dto.age==15?'orange':''};'>
 			&nbsp;${dto.age=="청소년관람불가"?"청불":dto.age=="전체관람가"?'전체':dto.age}&nbsp;</span>
@@ -330,9 +318,9 @@ $(function() {
 			
 		</div>
 		</div>
-		<div class="movietime">
+		<div class="movietime" style="text-align: center;">
 			<div style="display: block; height: 10px;"></div>
-			조회가능한 시간이 없습니다. 조건을 변경해주세요!
+			<b>조회가능한 시간이 없습니다. 조건을 변경해주세요!</b>
 		</div>
 	</div>
 
