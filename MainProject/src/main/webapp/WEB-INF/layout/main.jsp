@@ -128,8 +128,10 @@ body {
 .container_event{
 	display:grid;
 	width: 45%;
-	height: 420px;
+	height: 430px;
 	margin-left: 100px;
+	padding-bottom: 10px;
+	padding-top: 10px;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	grid-template-rows: 1fr 1fr;
 	gap: 10px;
@@ -144,6 +146,8 @@ body {
 .boxoffice{
 	flex-shrink: 0;
 }
+
+
 
 </style>
 </head>
@@ -210,7 +214,7 @@ body {
 								<!-- 4개 반복문 -->
 								<c:forEach var="movie" items="${mlist }" begin="0" end="3">
 									<div class="col-md-3 mb-3">
-										<div class="card" style="width: 250px;">
+										<div class="card" style="width: 250px; border: 0px solid black;" >
 											<div class="hovertest">
 											<img class="img-fluid" alt="100%x280" src="../save/${movie.poster}" style="width: 280px;">
 												<div class="cardbtn" style="text-align: center;">
@@ -239,7 +243,7 @@ body {
 								<!-- 4개 반복문 -->
 								<c:forEach var="movie" items="${mlist }" begin="4" end="7">
 									<div class="col-md-3 mb-3">
-										<div class="card" style="width: 250px;">
+										<div class="card" style="width: 250px; border: 0px solid black;">
 											<div class="hovertest">
 											<img class="img-fluid" alt="100%x280" src="../save/${movie.poster}" style="width: 280px;">
 												<div class="cardbtn" style="text-align: center;">
@@ -268,7 +272,7 @@ body {
 								<!-- 4개 반복문 -->
 								<c:forEach var="movie" items="${mlist }" begin="8" end="10">
 									<div class="col-md-3 mb-3">
-										<div class="card" style="width: 250px;">
+										<div class="card" style="width: 250px; border: 0px solid black;">
 											<div class="hovertest">
 											<img class="img-fluid" alt="100%x280" src="../save/${movie.poster}" style="width: 280px;">
 												<div class="cardbtn" style="text-align: center;">
@@ -399,7 +403,7 @@ body {
 	</div>
 	<!-- 이벤트 -->
 	<h4 style="font-family: Noto Sans KR; font-weight: 500; color: white; padding-top: 40px; margin-left: 100px;">이벤트</h4><br>
-	<div class="container_event" style="border:1px solid white; background-color: white; border-radius: 15px;">
+	<div class="container_event" style="border:0px solid white; background-color: white; border-radius: 15px;">
 		<c:forEach var="event" items="${elist }" begin="0" end="7">
 			<div class="item">
 			<a href="/event/detail?num=${event.num }"><img alt="#" src="../save/${event.photo}" style="width: 200px;"></a>

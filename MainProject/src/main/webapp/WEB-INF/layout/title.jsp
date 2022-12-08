@@ -115,7 +115,8 @@ p a:hover {
 						<button type="button" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block" data-bs-toggle="modal" data-bs-target="#ModalForm" style="position:relative; z-index:999; background-color: #339EB2; border: 0px; color: white;">로그인</button>
 					</c:if>
 					<c:if test="${sessionScope.loginok!=null}">
-						<span onclick="location.href='${root}/member/mypage?num=${getNum}'"><i class="fa-solid fa-user" style="color: #fff; font-size: 15pt; cursor: pointer; position:relative; z-index:999;"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;
+						<span onclick="location.href='${root}/member/mypage?num=${memnum }'"><i class="fa-solid fa-user" style="color: #fff; font-size: 15pt; cursor: pointer; position:relative; z-index:999;"></i></span>&nbsp;&nbsp;
+						<b style="color: white;">${sessionScope.myid }님 로그인 중</b>&nbsp;&nbsp;
 						<button type="button" class="btn btn-info btn-m" onclick="location.href='${root}/login/logoutprocess'" style="position:relative; z-index:999; background-color: #339EB2; border: 0px; color: white;">로그아웃</button>
 					</c:if>
 				</div>
