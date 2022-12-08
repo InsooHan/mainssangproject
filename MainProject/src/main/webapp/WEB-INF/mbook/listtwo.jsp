@@ -187,7 +187,7 @@ $(function() {
 	seat="";
 	
 	$(".seat").hover(function(){
-		$(this).css("color","gray");
+		$(this).css("color","orange");
 	},function(){
 		$(this).css("color","white");
 	});
@@ -207,7 +207,7 @@ $(function() {
 			$(this).removeClass("fa-solid fa-square fa-2xl seat booked");
 			$(this).addClass("fa-regular fa-square fa-2xl seat");
 			seat=seat.replace("l"+seatnum+"l","");
-			alert(seat);
+			//alert(seat);
 		}
 
 	});

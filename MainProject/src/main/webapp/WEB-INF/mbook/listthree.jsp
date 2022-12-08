@@ -135,7 +135,7 @@ $(function() {
 			
 			$("#discount").text("-"+addComma(mpoint)+" 원");
 			$("#finalpay").text(addComma(totalprice)+" 원");
-			//$("#finalpay").text("ㅎㅎㅎ원");
+			
 		}
 	});
 	
