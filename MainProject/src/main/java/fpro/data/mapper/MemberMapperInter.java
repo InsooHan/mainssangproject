@@ -20,4 +20,6 @@ public interface MemberMapperInter {
 	public MemberDto getDataByNum(String num);
 	public void updatePhoto(Map<String, String> map);
 	public void updateMember(MemberDto dto);
+	public void upPoint(Map<String, Object> map);
+	public void downPoint(Map<String, Object> map);
 }

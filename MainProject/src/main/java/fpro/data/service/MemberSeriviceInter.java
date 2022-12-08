@@ -17,4 +17,5 @@ public interface MemberSeriviceInter {
 	public MemberDto getDataByNum(String num);
 	public void updatePhoto(String num,String photo);
 	public void updateMember(MemberDto dto);
+	
 }

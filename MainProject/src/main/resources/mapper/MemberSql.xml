@@ -32,4 +32,10 @@
      <update id="updateMember" parameterType="member">
          update member set name=#{name},hp=#{hp},addr=#{addr},email=#{email} where num=#{num}
      </update>
+     <update id="upPoint" parameterType="Map">
+     	update member set mpoint=mpoint+#{point} where num=#{num}
+     </update>
+     <update id="downPoint" parameterType="Map">
+     	update member set mpoint=mpoint-#{point} where num=#{num}
+     </update>
   </mapper>
