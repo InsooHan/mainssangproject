@@ -199,16 +199,17 @@ public class EventController {
 	
 	
 	@PostMapping("/event/update")
-	public String update(@ModelAttribute EventDto dto, List<MultipartFile> upload,HttpSession session
+	public String update(@ModelAttribute EventDto dto,int num, List<MultipartFile> upload,HttpSession session
 	) {
 		//경로
 		String path=session.getServletContext().getRealPath("/save");
-		//업로드안했을때 0번지 파일이 ""이된다
-		//업로드 안해도 upload size()는1
-		//System.out.println(upload.size());
+		
+		String oldfilename = service.getData(num).getPhoto();
+		/**/
 		
 		if(upload.get(0).getOriginalFilename().equals(""))
-			dto.setPhoto("no");
+			/*dto.setPhoto("no");*/
+			dto.setPhoto(oldfilename);
 		else {
 			String photo="";
 			

@@ -14,8 +14,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="container">
-<h2>공지/뉴스</h2>
+<div class="container mt-3">
+<br><br>
+<p style="font-size: 2.5em; color: #252451; font-weight: 700;">공지/뉴스
+<p>CGV의 주요한 이슈 및 여러가지 소식들을 확인하실 수 있습니다.</p>
 <table class="table table-bordered" style="width: 700px;">
 	<tr>
 		<td>

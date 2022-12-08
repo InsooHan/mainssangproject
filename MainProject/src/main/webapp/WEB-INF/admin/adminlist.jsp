@@ -11,11 +11,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="https://kit.fontawesome.com/a47cf79e39.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css" />
 
 <title>Insert title here</title>
 </head>
 <body>
-<div class="container">
+<div class="container mt-3">
 <br><br>
 <p style="font-size: 2.5em; color: #252451; font-weight: 700;">공지/뉴스
 <p>CGV의 주요한 이슈 및 여러가지 소식들을 확인하실 수 있습니다.</p>
@@ -29,7 +30,8 @@
 				<option value="content">내용</option>
 			</select>
 			<input type="text" name="searchword" class="form-control" style="width:300px;" placeholder="검색어를 입력하세요">
-			<button type="submit" class="">검색하기</button>
+									<button type="submit" style="background-color: white;border:0 ;outline: 0;" class=""><i class="bi bi-search"></i></button> 
+
 		</div>
 	</form>	
 	<!--  글쓰기는 로그인을 해아만 보인다-->
@@ -69,8 +71,8 @@
 	<table class="table table-bordered" >
 		<tr  align="center">
 			<th width="50" >번호</th>
-			<th width="100">구분</th>
-			<th width="200">제목</th>
+			<th width="80">구분</th>
+			<th width="300">제목</th>
 			<th width="100">작성일</th>
 			<th width="50">조회</th>
 

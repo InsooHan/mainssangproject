@@ -14,9 +14,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<div class="container" style="width: 1200px;" >
+<div style="position: fixed;bottom: 100px;right: 100px; ">
+<a style="" href ="#header"><img style="width: 50px;height: 50px;" alt="" src="../save/m_top.png"> </a>
+</div>
+<div class="container" id="header" style="width: 1200px;" >
 <table class="table table-bordered">
+
+<tr style="width: 100px;">
+<br><br><br>
+
+<p style="font-size: 2.5em; color: #252451; font-weight: 700;">${dto.subject}
+<h5  style="color: gray;">기간: ${dto.startday }~${dto.endday }</h5>
 <tr>
 	<td>
 		<!-- 로그인 중이면서 세션의 아이디와 글의 아이디가 같을 경우에만 수정 삭제 나오게 -->
@@ -28,12 +36,6 @@
 		</c:if>
 	</td>
 </tr>
-<tr style="width: 100px;">
-<br><br><br>
-
-<p style="font-size: 2.5em; color: #252451; font-weight: 700;">${dto.subject}
-<h5  style="color: gray;">기간: ${dto.startday }~${dto.endday }</h5>
-
 <br>
 <hr>
 <br><br>

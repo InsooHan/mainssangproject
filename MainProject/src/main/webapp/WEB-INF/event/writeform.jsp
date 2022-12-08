@@ -40,11 +40,11 @@
 					<th width="120" bgcolor="pink">카테고리</th>
 				<td>
 					<input type="radio" name="category" 
-					value='메가pick'>메가pick
+					value='메가pick' checked="checked">메가pick
 					<input type="radio" name="category" 
 					value='영화'>영화
 					<input type="radio" name="category"
-					value='극장' checked="checked">극장
+					value='극장' >극장
 					<input type="radio" name="category"
 					value='제휴/할인' checked="checked">제휴/할인
 					<input type="radio" name="category"

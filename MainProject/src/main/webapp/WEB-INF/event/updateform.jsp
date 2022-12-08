@@ -41,13 +41,13 @@
 					<th width="120" bgcolor="pink">카테고리</th>
 				<td>
 					<input type="radio" name="category" 
-					value='메가pick'>메가pick
+					value='메가pick' checked="checked">메가pick
 					<input type="radio" name="category" 
 					value='영화'>영화
 					<input type="radio" name="category"
 					value='극장' checked="checked">극장
 					<input type="radio" name="category"
-					value='제휴/할인' checked="checked">제휴/할인
+					value='제휴/할인' >제휴/할인
 					<input type="radio" name="category"
 					value='시사회/무대인사'>시사회/무대인사
 				</td>
@@ -56,8 +56,8 @@
 					
 			<th width="120" bgcolor="pink">썸네일</th>
 				<td>
-					<input type="file" name="upload" class="form-control" "
-					required="required">
+					<input type="file" name="upload" class="form-control" 
+					required="required" value="${dto.photo }">
 				</td>
 		
 			

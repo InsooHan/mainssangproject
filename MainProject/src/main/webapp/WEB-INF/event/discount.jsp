@@ -27,14 +27,16 @@ div.look {
 </style>
 </head>
 <body>
-
-<div class="container mt-3" >
+<div style="position: fixed;bottom: 100px;right: 100px; ">
+<a style="" href ="#header"><img style="width: 50px;height: 50px;" alt="" src="../save/m_top.png"> </a>
+</div>
+<div class="container mt-3" id="header">
 <br><br>
 <p style="font-size: 2.5em; color: #252451; font-weight: 700;">진행중인 이벤트
 
 	<!-- admin만 글 작성가능 -->
 	<c:if test="${sessionScope.loginok!=null && sessionScope.myid=='admin'}">
-		<button type="button" class="btn btn-primary" style="float: right;" onclick="location.href='form'">상품 추가</button>
+		<button type="button" class="btn btn-primary" style="float: right;" onclick="location.href='form'">이벤트 추가</button>
 	</c:if>
 	
 	<!-- 카테고리 네비바 -->
