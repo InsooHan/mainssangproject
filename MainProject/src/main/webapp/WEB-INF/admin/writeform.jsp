@@ -16,7 +16,7 @@
 <body>
 <br><br>
 <div class="container mt-3 ">
-<h4><b>공지사항 추가</b></h4>
+<p style="font-size: 2.5em; color: #252451; font-weight: 700;">공지사항 추가
 <form action="insert" method="post" enctype="multipart/form-data">
 	<table class="table table-bordered" style="width: 500px;">
 		

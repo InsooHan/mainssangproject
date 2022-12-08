@@ -23,7 +23,7 @@
 	<input type="hidden" name="num" value="${dto.num }">
 
 	
-		<caption><b>공지 수정</b></caption>
+		<p style="font-size: 2.5em; color: #252451; font-weight: 700;">공지 수정
 		<tr>
 			<th width="120" bgcolor="pink">제목</th>
 				<td>
