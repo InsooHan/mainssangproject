@@ -23,13 +23,21 @@ border: 1px solid red;
 background-color: white !important;
 font-size: 0.7em; 
 }
+
+
+table {
+    margin-left:auto; 
+    margin-right:auto;
+    margin-top: 20px;
+}
+
+
 </style>
 </head>
 <body>
 
-
 <!-- 상세보기 출력 start -->
-<table class="table table" style=" width: 1000px; margin: 40px;">
+<table class="table table" style=" width: 1000px;">
 	
 	<tr>
 		<td>
@@ -64,15 +72,14 @@ font-size: 0.7em;
 		
 		<tr>
 			<td>
-			<br>
 			<!-- 댓글리스트 -->
-			<h5><b>댓글</b></h5>
+			<h5><b>댓글&nbsp;${asize }</b></h5>
 				<div id="answer">
 				</div>
 
 				
 			<!-- 댓글입력폼 -->
-				<div>
+				<div style="padding-left: 20px;">
 					<form action="" class="form-inline" name="aform" id="aform" num=${num }>
 					<input type="hidden" name="num" value="${num }">
 					<input type="hidden" name="currentPage" value="${currentPage }">
@@ -98,16 +105,20 @@ font-size: 0.7em;
 		<tr>
 		<!-- 글쓰기, 답글, 목록, 수정, 삭제버튼 -->
 			<td align="center">
+				<c:if test="${sessionScope.loginok!=null}">
 				<button class="btn btn btn-light" onclick="location.href='writeform'">
 				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
  					 <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
 				</svg>
 				글쓰기</button>
+				
+				
 				<button class="btn btn btn-light" onclick="location.href='writeform?num=${dto.num}&regroup=${dto.regroup }&restep=${dto.restep }&relevel=${dto.relevel }&currentPage=${currentPage}'">
 				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
   					<path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
 				</svg>
 				답글</button>
+				</c:if>
 				<button class="btn btn btn-light" onclick="location.href='list?currentPage=${currentPage}'">
 				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-justify" viewBox="0 0 16 16">
   					<path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
@@ -156,8 +167,7 @@ font-size: 0.7em;
       </form>
     </div>
   </div>
-</div>
-
+</div> 
 </body>
 
 
@@ -244,7 +254,7 @@ $.ajax({
 		var myid = '<%=(String)session.getAttribute("myid")%>';
 		
 
-		s+="<table style='width: 900px;'>";
+		s+="<table style='width: 1000px;'>";
 		$.each(data,function(i,elt){
 			s+="<tr><td>";
 			s+="<input id='dd' type='hidden' value='"+elt.id+"'>"
@@ -255,7 +265,7 @@ $.ajax({
 			s+="</span><br>";
 			s+="<span>"+elt.content+"</span><br><br>";
 			s+="<span style='color:gray;'>"+elt.writeday+"</span>&nbsp;&nbsp;&nbsp;";
-			if(myid==elt.id){
+			if(myid==elt.id && ${sessionScope.loginok!=null}){
 			s+="<span style='color:gray;'><a style='cursor:pointer;' id='aupdate' idx='"+elt.idx+"'>수정</a>&nbsp;";	
 			s+="/"
 			s+="&nbsp;<a style='cursor:pointer;' idx='"+elt.idx+"' id='adelete'>삭제</a></span>";	}
@@ -272,26 +282,6 @@ $.ajax({
 })	
 }
 		
-<%--
-$(document).on("click","#reanswer",function(){
-	
-	var s="";
-	s+="<form class='form-inline' name='areform' id='aform' style='width:700px;'>";
-	s+="<input type='hidden' name='idx' value='${idx }'>";
-	s+="<input type='text' name='num' value='${num }'>";
-	s+="<input type='hidden' name='currentPage' value='${currentPage }'>";
-	s+="<input type='hidden' name='ans_regroup' value='${ans_regroup }''>";
-	s+="<input type='hidden' name='ans_restep' value='${ans_restep }'>";
-	s+="<input type='hidden' name='ans_relevel' value='${ans_relevel}'>";
-	s+="<textarea></textarea>";
-	s+="<button type='submit' class='btn btn-info ainsert from-inline' style='width: 100px; height: 100px; margin-left: 10px;'>등록</button>";
-	s+="</form>";
-	s+="<br>";
-	
-
-	
-	$(this).append(s);
-})	--%>
 
 
 //댓글수정창

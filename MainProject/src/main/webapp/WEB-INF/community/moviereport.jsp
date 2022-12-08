@@ -14,9 +14,6 @@
 <title>Insert title here</title>
 <style type="text/css">
 button.nav-link {
-	color: black;
-}
-button.nav-link {
 	background-color: white !important;
 	color: black !important;
 	border: 1px;
@@ -42,40 +39,57 @@ color: black;
   background-color: #FBFCFC;
 }
 
+table{
+    margin-left:auto; 
+    margin-right:auto;
+}
+
+.nav li{
+display: inline-block;
+font-size: 1.3em;
+}
+
+.pagination{
+ justify-content : center; 
+}
+
+tr {
+  line-height: 1.7rem;
+}
 </style>
 
 </head>
 <body>
 
 <!-- 카테고리 선택 -->
-<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" style="margin-left: 20px;">
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" style="margin-top: 40px; margin-left: 140px;">
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" onclick="location.href='list'" style="font-size: 1.2em">전체</button>
+    <button class="nav-link" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" onclick="location.href='list'">전체</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" data-bs-toggle="pill"  type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onclick="location.href='best'" style="font-size: 1.2em;">인기글</button>
+    <button class="nav-link" data-bs-toggle="pill"  type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onclick="location.href='best'">인기글</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onclick="location.href='movietalk'" style="font-size: 1.2em">영화수다</button>
+    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onclick="location.href='movietalk'">영화수다</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link  active" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" onclick="location.href='moviereport'" style="font-size: 1.2em">영화정보</button>
+    <button class="nav-link  active" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" onclick="location.href='moviereport'">영화정보</button>
   </li>
 </ul>
 
 <!-- 영화정보 리스트 출력 -->
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-  	<div class="boardlist" style="margin-left: 40px; margin-top: 20px;">
+  	<div class="boardlist">
 	<table class="table table-hover" style="width: 1200px;">
 		<thead>
 		<tr>
 			<th width="90">&nbsp;&nbsp;&nbsp;&nbsp;번호</th>
-			<th align="center">제목</th>
+			<th style="text-align: center;">제목</th>
 			<th width="200">작성자</th>
 			<th width="180">작성일</th>
-			<th width="70" align="center">&nbsp;&nbsp;조회</th>
-			<th width="70" align="center">&nbsp;&nbsp;추천</th>
+			<th width="70" style="text-align: center;">조회</th>
+			<th width="70" style="text-align: center;">추천</th>
 		</tr>
 		</thead>
 		
@@ -129,8 +143,8 @@ color: black;
 
 					<td>${dto.name }</td>
 					<td> <fmt:formatDate value="${dto.writeday }" pattern="yyyy-MM-dd"/></td>
-					<td align="center">${dto.readcount }</td>
-					<td align="center">${dto.likes }</td>
+					<td style="text-align: center;">${dto.readcount }</td>
+					<td style="text-align: center;">${dto.likes }</td>
 					</tr>
 					</c:if>
 			</c:forEach>
@@ -151,47 +165,6 @@ color: black;
 
 	</table>
 	
-	
-	
-	<!-- 페이징처리 -->
-<c:if test="${totalCount>0}">
-	<div style="width: 800px; align-content: center; margin-left: 550px;" class="container">
-		<ul class="pagination">
-			<!-- 이전 -->
-			<c:if test="${startPage>1 }">
-				<li>
-			<a href="moviereport?currentPage=${startPage-1 }">이전</a>
-				</li>&nbsp;
-			</c:if>
-			
-			<c:forEach var="pp" begin="${startPage }" end="${endPage }">
-				<c:if test="${currentPage==pp }">
-					<li class="active">
-				<a href="moviereport?currentPage=${pp }">${pp }</a>
-					</li>&nbsp;
-				
-				</c:if>
-				
-				<c:if test="${currentPage!=pp }">
-					<li>
-				<a href="moviereport?currentPage=${pp }">${pp }</a>
-					</li>&nbsp;
-				
-				</c:if>
-			
-			</c:forEach>
-			
-			<!-- 다음 -->
-			<c:if test="${endPage<totalPage }">
-			<li>
-				<a href="moviereport?currentPage=${endPage+1 }>">다음</a>
-			</li>
-			</c:if>
-		</ul>
-	</div>
-	
-	</c:if>
-
 </div>
   	
   
@@ -205,8 +178,48 @@ color: black;
 </div>
 
 
+<!-- 페이징처리 -->
+<c:if test="${totalCount>0 }">  	
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+  <c:if test="${startPage>1 }">
+    <li class="page-item">
+      <a class="page-link" href="list?currentPage=${startPage-1 }" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    </c:if>
+    
+    <c:forEach var="pp" begin="${startPage }" end="${endPage }">
+				<c:if test="${currentPage==pp }">
+					<li class="page-item">
+				<a class="page-link" href="list?currentPage=${pp }">${pp }</a>
+					</li>&nbsp;
+				
+				</c:if>
+				
+				<c:if test="${currentPage!=pp }">
+					<li class="page-item">
+				<a class="page-link" href="list?currentPage=${pp }">${pp }</a>
+					</li>&nbsp;
+				
+				</c:if>
+			
+			</c:forEach>
+    
+ <c:if test="${endPage<totalPage }">
+    <li class="page-item">
+      <a class="page-link" href="list?currentPage=${endPage+1 }" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    </c:if>
+  </ul>
+</nav>
+</c:if>
 
-<div class="searcharea" style="align-content: center; margin-left: 500px;">
+
+<div class="searcharea" style="text-align: center; margin-right: 30px;">
 	<!-- 검색창 -->
 	<form action="moviereport">
 		<div>

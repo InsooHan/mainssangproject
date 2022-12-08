@@ -24,6 +24,7 @@ button.btn:hover{
 	color: white !important;
 	border-color: #339EB2 !important;
 }
+
 </style>
 <c:set var="root" value="<%=request.getContextPath() %>"/>
 
@@ -35,8 +36,8 @@ button.btn:hover{
 	charset="utf-8"></script>	
 </head>
 <body>
-<form action="update" method="post">
-	<!-- 5개 hidden넣어주기 -->
+<div style="margin:auto;text-align:center;">
+<form action="update" method="post" style="display:inline-block;">
 		<input type="hidden" name="num" value="${dto.num }">
 		<input type="hidden" name="currentPage" value="${currentPage }">
 		
@@ -44,7 +45,7 @@ button.btn:hover{
 	<table class="table table" style="margin: 40px; width: 700px;">
 	<tr>
 		<td>	
-			<!-- 새글일때만 카테고리 보이게(답글일 경우에는 원글의 카테고리가 그대로 보이기때문에 필요업ㄱ음) -->
+			<!-- 새글일때만 카테고리 보이게(답글일 경우에는 원글의 카테고리가 그대로 들어가게함) -->
 			<c:if test="${dto.restep==0 }">
 			<select class="form-select" aria-label="Default select example" name="category">
  			 <option value="" disabled selected hidden>게시판을 선택해주세요</option>
@@ -81,7 +82,7 @@ button.btn:hover{
 		
 	</table>   
 </form>
-
+</div>
 <!-- 스마트게시판에 대한 스크립트 코드 넣기 -->
 <script type="text/javascript">
 var oEditors = [];

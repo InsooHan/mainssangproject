@@ -106,6 +106,7 @@ public class CommunityService implements CommunityServiceInter {
 	@Override
 	public void updateBoard(CommunityDto dto) {
 		// TODO Auto-generated method stub
+
 		inter.updateBoard(dto);
 	}
 
@@ -167,23 +168,6 @@ public class CommunityService implements CommunityServiceInter {
 
 	
 
-	@Override
-	public void likesMinusUpdate(int num) {
-		// TODO Auto-generated method stub
-		inter.likesMinusUpdate(num);
-	}
-
-	@Override
-	public List<CommunityDto> getListBest(String searchcolumn, String searchword, int start, int perPage) {
-		// TODO Auto-generated method stub
-		Map<String, Object>map=new HashMap<>();
-		map.put("searchcolumn", searchcolumn);
-		map.put("searchword", searchword);
-		map.put("start", start);
-		map.put("perPage", perPage);
-		
-		return inter.getListBest(map);
-	}
 
 	@Override
 	public String getMaxCategory(int num) {
@@ -194,39 +178,10 @@ public class CommunityService implements CommunityServiceInter {
 	@Override
 	public void insertAnswer(BoardAnswerDto bdto) {
 		// TODO Auto-generated method stub
-		/*int idx=bdto.getIdx(); //0:새글.. 1보다큰값:답글
-		int regroup=bdto.getAns_regroup();
-		int restep=bdto.getAns_restep();
-		int relevel=bdto.getAns_relevel();
-		
-		if(idx==0) {	//새글
-			regroup=getMaxIdx()+1;	//num의 최대값+1
-			restep=0;
-			relevel=0;
-			
-		}else {
-			//같은 그룹중에서 전달받은 restep보다 큰 글들은 모두 +1
-			updateAnRestep(regroup, restep);
-			//전달받은 step과 level은 모두 ++1
-			restep++;
-			relevel++;
-		}
-			
-		
-		//바뀐값들을 다시 dto에 담는다
-		bdto.setAns_regroup(regroup);
-		bdto.setAns_restep(restep);
-		bdto.setAns_relevel(relevel);*/
-
-		
+	
 		inter.insertAnswer(bdto);
 	}
 
-	@Override
-	public int getMaxIdx() {
-		// TODO Auto-generated method stub
-		return inter.getMaxIdx();
-	}
 
 	@Override
 	public void updateAnRestep(int ans_regroup, int ans_restep) {
@@ -260,6 +215,21 @@ public class CommunityService implements CommunityServiceInter {
 	public void updateAnswer(BoardAnswerDto bdto) {
 		// TODO Auto-generated method stub
 		inter.updateAnswer(bdto);
+	}
+
+	@Override
+	public int getTotalCountBest(String searchcolumn, String searchword) {
+		// TODO Auto-generated method stub
+		Map<String, String> map=new HashMap<>();
+		map.put("searchcolumn", searchcolumn);
+		map.put("searchword", searchword);
+		return inter.getTotalCountBest(map);
+	}
+
+	@Override
+	public List<CommunityDto> getListBest() {
+		// TODO Auto-generated method stub
+		return inter.getListBest();
 	}
 
 	

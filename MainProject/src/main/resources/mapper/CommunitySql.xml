@@ -22,13 +22,10 @@
 			and ${searchcolumn} like concat('%',#{searchword},'%') 
 		</if>
 	</select>
+
 	
 	<select id="getMaxNum" resultType="int">
 		select ifnull(max(num),0) from community
-	</select>
-	
-	<select id="getMaxIdx" resultType="int">
-		select ifnull(max(idx),0) from boardanswer
 	</select>
 	
 	<select id="getMaxCategory" resultType="String" parameterType="int">
@@ -72,12 +69,8 @@
 		 order by regroup desc,restep asc limit #{start},#{perPage}
 	</select>
 	
-	<select id="getListBest" resultType="community" parameterType="Map">
-		select * from community where category!='공지사항' and relevel=0
-		<if test="searchcolumn!=null and searchword!=null">
-			and ${searchcolumn} like concat('%',#{searchword},'%') 
-		</if>
-		order by likes desc,regroup desc,restep asc limit #{start},#{perPage}
+	<select id="getListBest" resultType="community">
+	select * from community where writeday between date_add(now(),interval -1 week) and now() and category!='공지사항' and relevel=0 order by likes desc limit 10;
 	</select>
 	
 	<update id="updateReadCount" parameterType="int">
@@ -90,10 +83,6 @@
 	
 	<update id="likesUpdate" parameterType="int">
 		update community set likes=likes+1 where num=#{num}
-	</update>
-	
-	<update id="likesMinusUpdate" parameterType="int">
-		update community set likes=likes-1 where num=#{num}
 	</update>
 	
 	<update id="updateBoard" parameterType="community">

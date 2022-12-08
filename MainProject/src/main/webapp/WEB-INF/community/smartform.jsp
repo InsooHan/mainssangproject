@@ -35,7 +35,8 @@ button.btn:hover{
 	charset="utf-8"></script>	
 </head>
 <body>
-<form action="insert" method="post">
+<div style="margin:auto;text-align:center;">
+<form action="insert" method="post" style="display:inline-block;">
 	<!-- 5개 hidden넣어주기 -->
 		<input type="hidden" name="num" value="${num }">
 		<input type="hidden" name="currentPage" value="${currentPage }">
@@ -84,7 +85,7 @@ button.btn:hover{
 		
 	</table>   
 </form>
-
+</div>
 <!-- 스마트게시판에 대한 스크립트 코드 넣기 -->
 <script type="text/javascript">
 var oEditors = [];
