@@ -14,7 +14,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="container">
+<br><br>
+<div class="container mt-3 ">
 <h4><b>공지사항 추가</b></h4>
 <form action="insert" method="post" enctype="multipart/form-data">
 	<table class="table table-bordered" style="width: 500px;">
@@ -30,11 +31,11 @@
 			<th width="120" bgcolor="pink">구분</th>
 				<td>
 					<input type="radio" name="division" 
-					value='시스템점검'>시스템점검
+					value='시스템점검' checked="checked">시스템점검
 					<input type="radio" name="division" 
 					value='극장'>극장
 					<input type="radio" name="division"
-					value='기타' checked="checked">기타
+					value='기타' >기타
 				</td>
 		</tr>
 		<tr>

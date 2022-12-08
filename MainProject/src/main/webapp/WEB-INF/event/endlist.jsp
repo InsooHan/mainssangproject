@@ -17,7 +17,10 @@
 </head>
 <body>
 
-<div class="container" >
+<div style="position: fixed;bottom: 100px;right: 100px; ">
+<a style="" href ="#header"><img style="width: 50px;height: 50px;" alt="" src="../save/m_top.png"> </a>
+</div>
+<div class="container mt-3" id="header">
 
 <br><br>
 <p style="font-size: 2.5em; color: #252451; font-weight: 700;">종료된 이벤트
@@ -26,25 +29,22 @@
 		      <div class="tab-content">
 		     <div id="alllist" class="container tab-pane active"><br>
 		     	<form action="endlist" class="form-inline" >
-		<div style=" display: flex;" >
-		<h5>총 ${totalCount }개의 글이있습니다</h5>
-			<select  class="form-select" style="display: none " name="searchcolumn">
-				<option value="subject"></option>
-			</select>
-			<input type="text" name="searchword" class="form-control" style="margin-left: 800px;" placeholder="검색어를 입력하세요">
-			<button type="submit" style="background-color: white;border:0 ;outline: 0;" class=""><i class="bi bi-search"></i></button> 
-		</div>
-	</form>	
-			  <hr>
-			  <div class="event eventalllist"  style="/* display: flex; */cursor:pointer;">
+					<div style=" display: flex;" >
+					<h5>총 ${totalCount }개의 글이있습니다</h5>
+						<select  class="form-select" style="display: none " name="searchcolumn">
+								<option value="subject"></option>
+						</select>
+						<input type="text" name="searchword" class="form-control" style="margin-left: 800px;" placeholder="검색어를 입력하세요">
+						<button type="submit" style="background-color: white;border:0 ;outline: 0;" class=""><i class="bi bi-search"></i></button> 
+					</div>
+				</form>	
+			<br>
+			  <div class="event "  style="cursor:pointer;">
 	     		  <table class="table table-border" style="text-align: center;">
-		      		
-		
-		    			<c:forEach var="dto" items="${list}" varStatus="i">
-		    			
+  						<c:forEach var="dto" items="${list}" varStatus="i"> 
 		    			<tr onclick="location.href='detail?num=${dto.num }'">
-		    			<td width="200px"  rowspan="4" align="left"  >
-		    				<img style="width:120px; height:120px; border-radius: 10%; "  alt="" src="../save/${dto.photo }">
+		    			<td width="250px;"  rowspan="4" align="left"  >
+		    				<img style="width:180px; height:180px; border-radius: 10%; "  alt="" src="../save/${dto.photo }">
 		    			</td>
 		    			</tr>
 		    			
@@ -61,14 +61,14 @@
 		    			</tr>
 		    			
 		    			<tr onclick="location.href='detail?num=${dto.num }'">
-		    			<td align="left" style="font-size: 15px; color: #01738b;border-top : none;">
+		    			<td align="left" style="font-size: 15px; color: gray;border-top : none;">
 		    			<b>${dto.startday }~${dto.endday }</b>
 		    			</td>
 		    			</tr>
 		    			
-		    			<br>
+		    			
 	
-		    	</c:forEach> 
+		    			</c:forEach> 
 		    	
 		      </table>
 		      <c:if test="${totalCount>0 }">

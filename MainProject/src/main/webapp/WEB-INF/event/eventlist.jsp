@@ -36,14 +36,16 @@ div.carousel-item {
 </style>
 </head>
 <body>
-
-<div class="container mt-3" >
+<div style="position: fixed;bottom: 100px;right: 100px; ">
+<a style="" href ="#header"><img style="width: 50px;height: 50px;" alt="" src="../save/m_top.png"> </a>
+</div>
+<div class="container mt-3" id="header">
 <br><br>
 <p style="font-size: 2.5em; color: #252451; font-weight: 700;">진행중인 이벤트
 
 	<!-- admin만 글 작성가능 -->
 	<c:if test="${sessionScope.loginok!=null && sessionScope.myid=='admin'}">
-		<button type="button" class="btn btn-primary" style="float: right;" onclick="location.href='form'">상품 추가</button>
+		<button type="button" class="btn btn-primary" style="float: right;" onclick="location.href='form'">이벤트 추가</button>
 	</c:if>
 	
 	<!-- 카테고리 네비바 -->
@@ -72,9 +74,8 @@ div.carousel-item {
 	 
 	 <br>
 	 
-	 
 	 <!-- 캐러셀 시작 -->
-<br><br>
+
 	<div style="background-color: #f8f8fa" id="Dark" class="carousel carousel-dark slide carousel-fade" data-bs-ride="carousel">
 	
 
@@ -88,7 +89,7 @@ div.carousel-item {
 	  <div class="carousel-inner ">
 	  <br><br>
 	  <!-- 1 -->
-	     <div class="carousel-item active" data-bs-interval="3000">
+	     <div class="carousel-item active" data-bs-interval="2000">
     
     	<div style="display: flex;">
      	<a style="width: 50%; height: 50%; "  href="detail?num=12">
@@ -119,7 +120,7 @@ div.carousel-item {
     </div>
 	    
     <!-- 2 -->
-	      <div class="carousel-item " data-bs-interval="3000">
+	      <div class="carousel-item " data-bs-interval="2000">
     
     	<div style="display: flex;">
      	<a style="width: 50%; height: 50%; "  href="detail?num=11">
@@ -147,7 +148,7 @@ div.carousel-item {
 	    
 	    
 	    <!-- 3 -->
-      <div class="carousel-item" data-bs-interval="3000">
+      <div class="carousel-item" data-bs-interval="2000">
     
     	<div style="display: flex;">
      	<a style="width: 50%; height: 50%; "  href="detail?num=14">
@@ -303,6 +304,6 @@ div.carousel-item {
 		      </table>
 	      	  </div>
 	      </div>
-
+	      
 </body>
 </html>

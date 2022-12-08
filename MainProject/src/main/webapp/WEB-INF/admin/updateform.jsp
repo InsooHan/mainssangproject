@@ -17,7 +17,7 @@
 <body>
 
 
-<div class="container">
+<div class="container mt-3">
 <form action="update" method="post" enctype="multipart/form-data">
 	<table class="table table-bordered" style="width: 500px;">
 	<input type="hidden" name="num" value="${dto.num }">
@@ -35,7 +35,7 @@
 			<th width="120" bgcolor="pink">구분</th>
 				<td>
 					<input type="radio" name="division" 
-					value='시스템점검'>시스템점검
+					value='시스템점검' checked="checked">시스템점검
 					<input type="radio" name="division" 
 					value='극장'  >극장
 					<input type="radio" name="division"
@@ -51,8 +51,11 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-			<input type="text" style="width: 490px; height: 150px;" class="form-control"
-			name="content" required="required" value="${dto.content }">
+			<%-- <input type="text" style="width: 490px; height: 150px;" class="form-control"
+			name="content" required="required" value="${dto.content }"> --%>
+			<textarea style="width: 490px;height: 150px;" name="content" class="form-control" 
+			>${dto.content}</textarea>
+			
 			</td>
 		</tr>
 		<tr>

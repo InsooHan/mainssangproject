@@ -96,8 +96,9 @@ p a:hover {
               <li class="has-children">
             <a href="${root }/event/list">이벤트/공지사항</a>
               <ul class="dropdown">
-                  <li><a href="${root }/event/list">이벤트</a></li>
-                  <li><a href="${root }/admin/list">공지사항</a></li>
+                <li><a href="${root }/event/list">진행중인 이벤트</a></li>
+				<li><a href="${root }/event/endlist">종료된 이벤트</a></li>
+ 				<li><a href="${root }/admin/list">공지사항</a></li>
                 </ul>
                 </li>
             </ul>
