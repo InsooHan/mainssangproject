@@ -56,12 +56,16 @@ public class HomeController {
 		List<EventDto> elist = hservice.getEventToMain();
 		mview.addObject("elist", elist);
 		
-		//마이페이지 넘어갈 멤버 num 받아오기
-		String id = (String)session.getAttribute("myid");
-		MemberDto memdto = memservice.getDataById(id);
-		String memnum = memdto.getNum();
+		if(session.getAttribute("loginok")!=null) {
+			//마이페이지 넘어갈 멤버 num 받아오기
+			String id = (String)session.getAttribute("myid");
+			MemberDto memdto = memservice.getDataById(id);
+			String memnum = memdto.getNum();
+			
+			mview.addObject("memnum", memnum);
+		}
 		
-		mview.addObject("memnum", memnum);
+		
 		
 		mview.setViewName("/layout/main");
 		
