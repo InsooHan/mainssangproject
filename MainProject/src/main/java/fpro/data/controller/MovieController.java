@@ -8,13 +8,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import fpro.data.dto.MessageDto;
 import fpro.data.dto.MovieDto;
 import fpro.data.dto.MovieReviewDto;
 import fpro.data.service.MemberService;
@@ -35,14 +36,21 @@ public class MovieController {
 		//총 글의 개수
 		int newtotalCount = service.getNewTotalCount();
 		int commingtotalCount = service.getCommingTotalCount();
-		List<MovieDto> clistasc = service.getDatasAsc();
 		//전체리스트
 		List<MovieDto> list = service.getAllDatas();
+		//상영예정리스트
+		List<MovieDto> clistasc = service.getDatasAsc();
+		//예매율순 리스트
+		List<MovieDto> ticketlist = service.getticketDatas();
+		//누적관객순 리스트
+		List<MovieDto> acclist = service.getaccDatas();
 		
 		mview.addObject("newtotalCount", newtotalCount);
 		mview.addObject("commingtotalCount", commingtotalCount);
-		mview.addObject("clist", clistasc);
 		mview.addObject("list", list);
+		mview.addObject("clist", clistasc);
+		mview.addObject("ticketlist", ticketlist);
+		mview.addObject("acclist", acclist);
 		
 		mview.setViewName("/movie/movielist");
 		
@@ -55,6 +63,21 @@ public class MovieController {
 		return service.getSomeDatas();
 	}
 	
+	@GetMapping("/movie/msearch")
+	public ModelAndView moviesearchlist(@RequestParam(value = "ibxMovieNmSearch", required = false) String sc) {
+		
+		ModelAndView mview = new ModelAndView();
+		
+		//전체리스트
+		List<MovieDto> list = service.getSearch(sc);
+		mview.addObject("list", list);
+		mview.addObject("totCount", list.size());
+		
+		mview.setViewName("/movie/moviesearch");
+		
+		return mview;
+	}
+	
 	@GetMapping("/movie/detail")
 	public ModelAndView moviedetail(String num, String idx, HttpSession session) {
 		
@@ -62,9 +85,6 @@ public class MovieController {
 		
 		MovieDto dto = service.getData(num);
 		mview.addObject("dto", dto);
-		
-		MovieReviewDto rvdto = service.getReviewData(idx);
-		mview.addObject("rvdto", rvdto);
 		
 		//로그인한 id
 		String myid = (String)session.getAttribute("myid");
@@ -95,12 +115,12 @@ public class MovieController {
 		return "/movie/moviedetail";
 	}
 
-	//추천수 증가
+	//영화 like 증가
 	@GetMapping("/movie/likes")
 	@ResponseBody
 	public Map<String, Integer> likes(String num) {
 		
-		//추천수 증가sql
+		//영화 like 증가sql
 		service.mlikesUpdate(num);
 		int likes = service.getData(num).getLikes();
 		
@@ -109,12 +129,12 @@ public class MovieController {
 		
 		return map;
 	}
-	//추천수 감소
+	//영화 like 감소
 	@GetMapping("/movie/nolikes")
 	@ResponseBody
 	public Map<String, Integer> nolikes(String num) {
 		
-		//추천수 증가sql
+		//영화 like 증가sql
 		service.mlikesCancel(num);
 		int likes = service.getData(num).getLikes();
 		
@@ -146,22 +166,26 @@ public class MovieController {
 	
 	//관람평 수정폼
 	@GetMapping("/movie/rvupdateform")
-	public ModelAndView reviewupdateform(String idx) {
+	public ModelAndView reviewupdateform(String num, String idx) {
 		
 		ModelAndView mview = new ModelAndView();
+		
+		MovieDto dto = service.getData(num);
+		mview.addObject("dto", dto);
+		
+		//num에 해당하는 관람평
+		List<MovieReviewDto> rvlist = service.getReviewList(num);
+		mview.addObject("rvcount", rvlist.size()); //관람평 개수
+		mview.addObject("rvlist", rvlist); //관람평 리스트
 		
 		MovieReviewDto rvdto = service.getReviewData(idx);
 		mview.addObject("rvdto", rvdto);
 		
-		mview.addObject("rvgrade", rvdto.getGrade());
-		mview.addObject("rvcontent", rvdto.getContent());
-		
-		mview.setViewName("/movie/moviedetail");
+		mview.setViewName("/movie/moviereviewupdate");
 		
 		return mview;
 	}
-	
-	//관람평 수정
+	//관람평 수정(수정폼에서 수정)
 	@PostMapping("/movie/rvupdate")
 	public String reviewupdate(@ModelAttribute MovieReviewDto mrdto,HttpSession session) {
 		
@@ -169,7 +193,22 @@ public class MovieController {
 		service.updateReview(mrdto);
 		
 		//내용보기로 리다이렉트
-		return "redirect:/movie/detail?num="+mrdto.getNum();
+		return "redirect:/movie/detail?num="+mrdto.getNum()+"#nav-tab";
+	}
+	
+	//수정모달
+	@GetMapping("/movie/rvup")
+	@ResponseBody
+	public MovieReviewDto rvupdatemodal(String num, String idx) {
+		MovieReviewDto rvudto = service.getReviewData(idx);
+		return rvudto;
+	}
+	//관람평수정완료(모달)
+	@PostMapping("/movie/rvupdatem")
+	@ResponseBody
+	public void rvupdatem(MovieReviewDto mrdto,HttpSession session) {
+		
+		service.updateReview(mrdto);
 	}
 	
 	//관람평 삭제
@@ -178,6 +217,34 @@ public class MovieController {
 	public void deletereview(String idx, HttpSession session) {
 			
 		service.deleteReview(idx);
-			
+	}
+	
+	//관람평 like 증가
+	@GetMapping("/movie/rlikes")
+	@ResponseBody
+	public Map<String, Integer> rlikes(String idx) {
+		
+		//영화 like 증가sql
+		service.rvlikesUpdate(idx);
+		int likes = service.getReviewData(idx).getLikes();
+		
+		Map<String, Integer> map = new HashMap<>();
+		map.put("likes", likes);
+		
+		return map;
+	}
+	//관람평 like 감소
+	@GetMapping("/movie/rnolikes")
+	@ResponseBody
+	public Map<String, Integer> rnolikes(String idx) {
+		
+		//영화 like 증가sql
+		service.rvlikesCancel(idx);
+		int likes = service.getReviewData(idx).getLikes();
+		
+		Map<String, Integer> map = new HashMap<>();
+		map.put("likes", likes);
+		
+		return map;
 	}
 }

@@ -765,7 +765,7 @@
 					<!--  <div class="number lt" id="mainMegaScore">
 						<p title="관람 전 점수" class="before"><em>0</em><span class="ir">점</span></p>
 						<p title="관람 후 점수" class="after"><em>9.2</em><span class="ir">점</span></p> -->
-						<p title="실관람 평점" class="before"><em>8.6</em><span class="ir"></span></p>
+						<p title="실관람 평점" class="before"><em>0</em><span class="ir"></span></p>
 					</div>
 				</div>
 	
@@ -822,16 +822,16 @@
 	<div class="container">
 		<nav align="center" style="margin-left: 80px; width: 1116px;">
 		  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-		    <button class="nav-link active" id="data-tab" data-bs-toggle="tab" data-bs-target="#nav-data" type="button" 
-		    		role="tab" aria-controls="nav-data" aria-selected="true" style="width: 372px;"><b>주요정보</b></button>
-		    <button class="nav-link" id="review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" 
-		    		role="tab" aria-controls="nav-review" aria-selected="false" style="width: 372px;"><b>실관람평</b></button>
+		    <button class="nav-link" id="data-tab" data-bs-toggle="tab" data-bs-target="#nav-data" type="button" 
+		    		role="tab" aria-controls="nav-data" aria-selected="false" style="width: 372px;"><b>주요정보</b></button>
+		    <button class="nav-link active" id="review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" 
+		    		role="tab" aria-controls="nav-review" aria-selected="true" style="width: 372px;"><b>실관람평</b></button>
 		    <button class="nav-link" id="trailer-tab" data-bs-toggle="tab" data-bs-target="#nav-trailer" type="button" 
 		    		role="tab" aria-controls="nav-trailer" aria-selected="false" style="width: 372px;"><b>메인포스터</b></button>
 		  </div>
 		</nav>
 		<div class="tab-content" id="nav-tabContent">
-		  <div class="tab-pane fade show active" id="nav-data" role="tabpanel" aria-labelledby="nav-data-tab">
+		  <div class="tab-pane fade" id="nav-data" role="tabpanel" aria-labelledby="nav-data-tab">
 		  	<div class="movie-summary infoContent on" id="info">
 		  		<div class="txt" style="width: 1200px; padding: 10px 0 0 80px;">
 				  	${dto.content}		  		
@@ -859,7 +859,7 @@
 				            </div>
 				            <div class="score equal" style="position: relative; bottom: 15px;">
 				            	<div class="middle">
-				                	<div class="circle"><em style="font-style: inherit;">8.6</em><span class="ir"></span></div>
+				                	<div class="circle"><em style="font-style: inherit;">0</em><span class="ir"></span></div>
 				                </div>
 				            </div>
 				            <dl>
@@ -889,7 +889,7 @@
 		  	</div>
 		  </div>
 		  
-		  <div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
+		  <div class="tab-pane fade show active" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
 		  	<c:if test="${rvcount==0 }">
 			  	<!-- 한줄평 없을 때 -->
 	            <div class="tit-util mt40 oneContent" style="width: 1200px;height: 50px; padding: 10px 0 0 80px;">
@@ -909,33 +909,30 @@
             			전체 <em class="font-gblue" id="cnt1">${rvcount }</em> 건
 					</span>
             	</div>
-            	<div class="movie-sorting-right">
+<%--             	<div class="movie-sorting-right">
             		<span class="n"><button type="button" class="btn orderBtn on" id="bnewest" num=${dto.num }>최신순</button><span style="color: #d8d9db">|</span></span>
             		<span><button type="button" class="btn orderBtn" id="bchu">공감순</button><span style="color: #d8d9db">|</span></span>
             		<span><button type="button" class="btn orderBtn" id="bgra">평점순</button></span>
-            	</div>
+            	</div> --%>
             </div>
-            <c:if test="${sessionScope.loginok!=null }">
               <div class="rvwrite">
-				<form action="rvinsert" method="post" class="form-inline">
+				<form action="rvupdate" method="post" class="form-inline">
 					<input type="hidden" name="num" value="${dto.num }">
-					<input type="hidden" name="name" value="${rvname }">
-					<input type="hidden" name="myid" value="${rvmyid }">
+					<input type="hidden" name="idx" value="${rvdto.idx }">
 					
 					<div style="width:200px; height:80px; padding: 0 0 0 80px;">
 						<div class="user-prof" style="float: left;">
 	                    	<div class="prof-img" style="margin-left: 10px;"><img src="${root }/save/ico-mega-profile.png" alt="MEGABOX"></div>
-	                        <p class="user-id" style="margin-top: 10px;" align="center">${rvmyid }</p>
+	                        <p class="user-id" style="margin-top: 10px;" align="center">${rvdto.myid }</p>
 	                    </div>&nbsp;
 					</div>
 	                <div style="border: 1px solid #d8d9db; border-radius: 10px;">
-	                	&nbsp;&nbsp;&nbsp;평점&nbsp;<input type="number" name="grade" class="form-control" required="required" min="1" max="10">
-						<input type="text" name="content" class="form-control" required="required" style="width: 715px; height: 90px; border: 0;" placeholder="${dto.name } 영화의 어떤 점이 좋았는지 이야기해주세요.">
-						<button type="submit" class="rev btn" style="height: 60px;"><i class="fa-solid fa-pen"></i> 관람평쓰기</button>
+	                	&nbsp;&nbsp;&nbsp;평점&nbsp;<input type="number" name="grade" class="form-control" required="required" min="1" max="10" value="${rvdto.grade }">
+						<input type="text" name="content" class="form-control" required="required" style="width: 715px; height: 90px; border: 0;" value="${rvdto.content }" autofocus="autofocus">
+						<button type="submit" class="rev btn" style="height: 60px;"><i class="fa-solid fa-pen"></i><span style="color: #037B94;"><b> 관람평수정</b></span></button>
 	                </div>
 	          	</form>
               </div>
-			</c:if>
           	<!-- 최신순 -->
 			<div class="story-area" style="margin: 77px 0 150px 76px;">
 			  <div class="rlnew">
@@ -955,138 +952,20 @@
 									<span>${a.grade }</span>
 								</div>
 								<div class="story-txt" id="rcontent"><input type="hidden" name="rcontent" class="rcontent" value="${a.content }">${a.content }</div>
-								<div class="story-like" style="cursor: pointer; font-size: 12pt;" idx=${a.idx }>
-									<i class="fa-regular fa-thumbs-up" style="color: #444;" idx=${a.idx }></i>&nbsp;<span>${a.likes }</span>
+								<div class="story-like" style="cursor: pointer;">
+									<i class="fa-regular fa-thumbs-up"></i><span>${a.likes }</span>
 								</div>
 							</div>
 							</div>
 						</div>
 						<div class="story-my" style="margin-bottom: 30px;">
-							<c:if test="${sessionScope.loginok!=null&&sessionScope.myid==a.myid }">
-<%--  						  		<button type="button" class="btn rvmod" data-bs-toggle="modal" data-bs-target="#myModal" idx=${a.idx } onclick="modfunc(${a.idx})">
-									<i class="fa-regular fa-pen-to-square" style="color: #037B94;"></i>
-								</button> --%>
-								<span class='rvmod' style="cursor: pointer; font-size: 15pt;" idx=${a.idx } onclick="location.href='rvupdateform?num=${dto.num }&&idx=${a.idx}#nav-review'"><i class="fa-regular fa-pen-to-square"></i></span>
-								<span class='rvdel' style="cursor: pointer; font-size: 15pt;" idx=${a.idx }>&nbsp;<i class="fa-sharp fa-solid fa-trash"></i></span>
-								<br>
-							</c:if>
+							<span class='rvmod' style="cursor: pointer; font-size: 15px;" idx=${a.idx } onclick="location.href='rvupdateform?idx=${a.idx}'"><i class="fa-regular fa-pen-to-square"></i></span>
+							<span class='rvdel' style="cursor: pointer; font-size: 15px;" idx=${a.idx }><i class="fa-sharp fa-solid fa-trash"></i></span>
+							<br>
 						</div>
 				</c:forEach>
-			  </div>
-			  <!-- 공감순 -->
-			  <div class="rlchu">
- 				<c:forEach var="a" items="${rvchulist }">
-					<div class="user-prof">
-						<div class="prof-img">
-							<img src="${root }/save/bg-photo.png">
-						</div>
-						<p class="user-id" style="margin-top: 10px;">${a.myid }</p>
-					</div>
-					<div class="story-box">
-						<div class="story-wrap review">
-							<div class="tit">관람평</div>
-							<div class="story-cont">
-								<div class="story-point">
-									<input type="hidden" name="rgrade" class="rgrade" value="${a.grade }">
-									<span>${a.grade }</span>
-								</div>
-								<div class="story-txt" id="rcontent"><input type="hidden" name="rcontent" class="rcontent" value="${a.content }">${a.content }</div>
-								<div class="story-like" style="cursor: pointer; font-size: 12pt;" idx=${a.idx } >
-									<i class="fa-regular fa-thumbs-up" style="color: #444;"></i>&nbsp;<span>${a.likes }</span>
-								</div>
-							</div>
-							</div>
-						</div>
-						<div class="story-my" style="margin-bottom: 30px;">
-							<c:if test="${sessionScope.loginok!=null&&sessionScope.myid==a.myid }">
-<%--  						  		<button type="button" class="btn rvmod" data-bs-toggle="modal" data-bs-target="#myModal" onclick="modfunc(${a.idx})">
-									<i class="fa-regular fa-pen-to-square" style="color: #037B94;"></i>
-								</button> --%>
-								<span class='rvmod' style="cursor: pointer; font-size: 15pt;" idx=${a.idx } onclick="location.href='rvupdateform?num=${dto.num }&&idx=${a.idx}#nav-review'"><i class="fa-regular fa-pen-to-square"></i></span>
-								<span class='rvdel' style="cursor: pointer; font-size: 15pt;" idx=${a.idx }>&nbsp;<i class="fa-sharp fa-solid fa-trash"></i></span>
-								<br>
-							</c:if>
-						</div>
-				</c:forEach>
-			  </div>
-			  <!-- 평점순 -->
-			  <div class="rlgrade">
- 				<c:forEach var="a" items="${rvgradelist }">
-					<div class="user-prof">
-						<div class="prof-img">
-							<img src="${root }/save/bg-photo.png">
-						</div>
-						<p class="user-id" style="margin-top: 10px;">${a.myid }</p>
-					</div>
-					<div class="story-box">
-						<div class="story-wrap review">
-							<div class="tit">관람평</div>
-							<div class="story-cont">
-								<div class="story-point">
-									<input type="hidden" name="rgrade" class="rgrade" value="${a.grade }">
-									<span>${a.grade }</span>
-								</div>
-								<div class="story-txt" id="rcontent"><input type="hidden" name="rcontent" class="rcontent" value="${a.content }">${a.content }</div>
-								<div class="story-like" style="cursor: pointer; font-size: 12pt;" idx=${a.idx }>
-									<i class="fa-regular fa-thumbs-up" style="color: #444;"></i>&nbsp;<span>${a.likes }</span>
-								</div>
-							</div>
-							</div>
-						</div>
-						<div class="story-my" style="margin-bottom: 30px;">
-							<c:if test="${sessionScope.loginok!=null&&sessionScope.myid==a.myid }">
-<%-- 						  		<button type="button" class="btn rvmod" data-bs-toggle="modal" data-bs-target="#myModal" onclick="modfunc(${a.idx})">
-									<i class="fa-regular fa-pen-to-square" style="color: #037B94;"></i>
-								</button> --%>
-								<span class='rvmod' style="cursor: pointer; font-size: 15pt;" idx=${a.idx } onclick="location.href='rvupdateform?num=${dto.num }&&idx=${a.idx}#nav-review'"><i class="fa-regular fa-pen-to-square"></i></span>
-								<span class='rvdel' style="cursor: pointer; font-size: 15pt;" idx=${a.idx }>&nbsp;<i class="fa-sharp fa-solid fa-trash"></i></span>
-								<br>
-							</c:if>
-						</div>
-				</c:forEach>
-			  </div>
-
-			</div>
-
-			<!-- The Modal -->
-  			<div class="modal" id="myModal">
-			  <div class="modal-dialog modal-lg">
-			    <div class="modal-content">
-			
-			      <!-- Modal Header -->
-			      <div class="modal-header">
-			      	
-				  	<div class="user-prof">
-				    	<div class="prof-img" style="margin-left: 10px;"><img src="${root }/save/ico-mega-profile.png" alt="MEGABOX"></div>
-				        <p class="user-id" style="margin-top: 10px;" align="center">${rvmyid }</p>
-				    </div>&nbsp;
-				  	<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-			      </div>
-			
-			      <!-- Modal body -->
-			      <div class="modal-body">
-			      	<!-- <form class="form-inline"> -->
-						<input type="hidden" name="num" id="numm" value="${dto.num }">
-						<input type="hidden" name="idx" id="idxm" value="${rvudto.idx }">
-						
-				        <div style="border: 1px solid #d8d9db; border-radius: 10px;">
-				        	&nbsp;&nbsp;&nbsp;평점&nbsp;
-				        	<input type="number" name="grade" id="modgrade" class="form-control" required="required" min="1" max="10" style="width: 50px;">
-							<input type="text" name="content" id="modcontent" class="form-control" required="required" style="width: 715px; height: 90px; border: 0;">
-							<button type="button" class="rev btn" id="rvupd" style="height: 60px;"><i class="fa-solid fa-pen"></i> 관람평수정</button>
-				        </div>
-				    <!-- </form> -->
-			      </div>
-			
-			      <!-- Modal footer -->
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
-			      </div>
-			
-			    </div>
 			  </div>
 			</div>
-          	
 		  </div>
 		  
 		  <div class="tab-pane fade" id="nav-trailer" role="tabpanel" aria-labelledby="nav-trailer-tab">
@@ -1126,39 +1005,6 @@
 			$("div.rlnew").show();
 		}
 	});
-	
-	/* 수정 */
- 	function modfunc(idx) {	
-		$.ajax({
-			type:"get",
-			dataType:"json",
-			url:"rvup",
-			data:{"idx":idx},
-			success:function(res) {
-				$("#modgrade").val(res.grade);
-				$("#modcontent").val(res.content);
-			}
-		});
-		$("#myModal").modal();
-	}
-	/* 수정완료 */
-/*       $("#rvupd").click(function(){
-    	var grade = $("#modgrade").val();
-    	var content = $("#modcontent").val();
-    	var num = $("#numm").val();
-    	var idx = $("#idxm").val();
-    	alert(grade+","+content+","+num+","+idx)
- 		
-		 $.ajax({
-		    type:"post",
-		    dataType:"html",
-		    url:"rvupdatem",
-		    data :{"num":num,"idx":idx,"grade":grade,"content":content},
-		    success:function(res){
-		    	location.reload();
-		    }
-		 });	
-   }); */
 
 	$(".fa-regular fa-heart").hover(function() {
 		$(this).attr("class","fa-solid fa-heart").css("color","#339EB2")
@@ -1174,7 +1020,7 @@
 		var heart = $(this).find("i").attr("class");
 		
 		var num = ${dto.num};
-		//console.log(num);
+		console.log(num);
 		
 		//로그인 상태가 아닐 때
 		if(${sessionScope.loginok==null}) {
@@ -1205,50 +1051,6 @@
 					success:function(res) {
 						
 						$("div.btn-util").children().children("span.like").text(res.likes);
-					}
-				});
-			}			
-		}
-		
-	});
-	
-     
-     /* 관람평like */
-	$("div.story-like").click(function() {
-		var heart = $(this).find("i").attr("class");
-		//console.log(heart);
-		
-		var idx = $(this).attr("idx");
-		//console.log(idx);
-		
-		//로그인 상태가 아닐 때
-		if(${sessionScope.loginok==null}) {
-			alert("로그인을 먼저 해주세요.")
-		}
-		//로그인 상태일 때
-		if(${sessionScope.loginok!=null }) {
-			if(heart=='fa-regular fa-thumbs-up') {
-				$(this).find("i").attr("class","fa-solid fa-thumbs-up").css("color","#503396");
-					
-		 		$.ajax({
-					type:"get",
-					url:"rlikes",
-					dataType:"json",
-					data:{"idx":idx},
-					success:function(res) {
-						 /* $("div.story-like").children("span").text(res.likes); */
-					}
-				});
-			}
-			else {
-				$(this).find("i").attr("class","fa-regular fa-thumbs-up").css("color","#503396");
-		 		$.ajax({
-					type:"get",
-					url:"rnolikes",
-					dataType:"json",
-					data:{"idx":idx},
-					success:function(res) {	
-						/* $("div.story-like").children("span").text(res.likes); */
 					}
 				});
 			}			

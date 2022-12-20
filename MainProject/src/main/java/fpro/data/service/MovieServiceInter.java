@@ -10,6 +10,12 @@ public interface MovieServiceInter {
 	public List<MovieDto> getSomeDatas();
 	//전체리스트
 	public List<MovieDto> getAllDatas();
+	//검색리스트
+	public List<MovieDto> getSearch(String ibxMovieNmSearch);
+	//영화 예매율순
+	public List<MovieDto> getticketDatas();
+	//영화 누적관객순
+	public List<MovieDto> getaccDatas();
 	//최신영화 전체개수
 	public int getNewTotalCount();
 	//상영예정 전체개수
@@ -33,6 +39,10 @@ public interface MovieServiceInter {
 	public List<MovieReviewDto> getReviewListGrade(String num);
 	//관람평 데이터
 	public MovieReviewDto getReviewData(String idx);
+	//관람평 likes 증가
+	public void rvlikesUpdate(String idx);
+	//관람평 likes 감소
+	public void rvlikesCancel(String idx);
 	//관람평 수정
 	public void updateReview(MovieReviewDto mrdto);
 	//관람평 삭제
