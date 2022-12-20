@@ -80,7 +80,7 @@ $(function() {
 
 	    const week = ['일', '월', '화', '수', '목', '금', '토'];
 
-	    const dayOfWeek = week[a];
+	    const dayOfWeek = week[a]; 
 
 	    return dayOfWeek;
 
