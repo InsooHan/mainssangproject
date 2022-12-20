@@ -13,9 +13,9 @@ spring:
 #mysql
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://won.cw7kz1ybbs2q.us-east-1.rds.amazonaws.com:3306/webservice?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://soo.clytvtnuctpv.ap-northeast-2.rds.amazonaws.com:3306/webservice?serverTimezone=Asia/Seoul
     username: adminsist
-    password: thsutleo12
+    password: lsy971028*
 #mybatis
 mybatis:
   type-aliases-package: fpro.data.*

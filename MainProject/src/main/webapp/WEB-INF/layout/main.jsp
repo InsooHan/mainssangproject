@@ -247,9 +247,9 @@ body {
 											<div class="hovertest">
 											<img class="img-fluid" alt="100%x280" src="../save/${movie.poster}" style="width: 280px;">
 												<div class="cardbtn" style="text-align: center;">
-												<button class="btn btn-m detailbtn" type="button" style="background-color: #339EB2; color: white;" onclick="test()">상세보기</button>	
+												<button class="btn btn-m detailbtn" type="button" style="background-color: #339EB2; color: white;" onclick="location.href='${root}/movie/detail?num=${movie.num }'">상세보기</button>	
 												&nbsp;&nbsp;
-												<button class="btn btn-m bookbtn" type="button" style="background-color: #503396; color: white;" onclick="#">예매하기</button>	
+												<button class="btn btn-m bookbtn" type="button" style="background-color: #503396; color: white;" onclick="location.href='${root}/book/list'">예매하기</button>	
 												</div>
 											</div>
 											<div class="card-body">
@@ -276,9 +276,9 @@ body {
 											<div class="hovertest">
 											<img class="img-fluid" alt="100%x280" src="../save/${movie.poster}" style="width: 280px;">
 												<div class="cardbtn" style="text-align: center;">
-												<button class="btn btn-m detailbtn" type="button" style="background-color: #339EB2; color: white;" onclick="test()">상세보기</button>	
+												<button class="btn btn-m detailbtn" type="button" style="background-color: #339EB2; color: white;" onclick="location.href='${root}/movie/detail?num=${movie.num }'">상세보기</button>	
 												&nbsp;&nbsp;
-												<button class="btn btn-m bookbtn" type="button" style="background-color: #503396; color: white;" onclick="#">예매하기</button>	
+												<button class="btn btn-m bookbtn" type="button" style="background-color: #503396; color: white;" onclick="location.href='${root}/book/list'">예매하기</button>	
 												</div>
 											</div>
 											<div class="card-body">

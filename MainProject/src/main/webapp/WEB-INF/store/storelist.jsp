@@ -50,7 +50,9 @@
 	  	<a href="cart" style="font-size: 2.0em; float: right; color:#503396;">
 	  	<i class="fa-solid fa-cart-shopping" style="margin-right: 100px;"></i>
 	  	</a>
-	  	<div style="border-radius: 100px; background-color: #339EB2; position:absolute; top: 0; right:88px; z-index:10; color: white; width: 25px; height: 25px; text-align: center; vertical-align: middle;">${cartlistcount }</div>
+	  	<div style="border-radius: 100px; background-color: #339EB2; position:absolute; top: 0; right:88px; z-index:10; color: white; width: 25px; height: 25px; text-align: center; vertical-align: middle;">
+	  		${cartlistcount }
+	  	</div>
 	  	</div>
 	  	<!-- 장바구니 아이콘 end -->
 	  <p style="font-size: 2.5em; color: #252451; font-weight: 700;" align="left">스토어
