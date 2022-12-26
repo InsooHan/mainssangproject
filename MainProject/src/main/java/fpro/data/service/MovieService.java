@@ -27,6 +27,25 @@ public class MovieService implements MovieServiceInter {
 		// TODO Auto-generated method stub
 		return mapperInter.getAllDatas();
 	}
+	//검색리스트
+	@Override
+	public List<MovieDto> getSearch(String ibxMovieNmSearch) {
+		// TODO Auto-generated method stub
+		return mapperInter.getSearch(ibxMovieNmSearch);
+	}
+
+	//영화 예매율순
+	@Override
+	public List<MovieDto> getticketDatas() {
+		// TODO Auto-generated method stub
+		return mapperInter.getticketDatas();
+	}
+	//영화 누적관객순
+	@Override
+	public List<MovieDto> getaccDatas() {
+		// TODO Auto-generated method stub
+		return mapperInter.getaccDatas();
+	}
 	//최신영화 전체개수
 	@Override
 	public int getNewTotalCount() {
@@ -93,6 +112,18 @@ public class MovieService implements MovieServiceInter {
 	public MovieReviewDto getReviewData(String idx) {
 		// TODO Auto-generated method stub
 		return mapperInter.getReviewData(idx);
+	}
+	//관람평 like증가
+	@Override
+	public void rvlikesUpdate(String idx) {
+		// TODO Auto-generated method stub
+		mapperInter.rvlikesUpdate(idx);
+	}
+	//관람평 like감소
+	@Override
+	public void rvlikesCancel(String idx) {
+		// TODO Auto-generated method stub
+		mapperInter.rvlikesCancel(idx);
 	}
 	//관란평 수정
 	@Override

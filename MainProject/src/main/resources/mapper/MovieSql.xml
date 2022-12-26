@@ -9,6 +9,24 @@
 	<select id="getAllDatas" resultType="moviedto">
 		select * from movie order by opendate desc
 	</select>
+	<!-- 검색리스트 -->
+	<select id="getSearch" resultType="moviedto" parameterType="String">
+		select * from movie 
+		<if test="ibxMovieNmSearch==null">
+		order by opendate desc
+		</if>
+		<if test="ibxMovieNmSearch!=null">
+		where name like concat('%',#{ibxMovieNmSearch},'%')
+		</if>
+	</select>
+	<!-- 영화 예매율순 -->
+	<select id="getticketDatas" resultType="moviedto">
+		select * from movie order by ticket desc
+	</select>
+	<!-- 영화 누적관객순 -->
+	<select id="getaccDatas" resultType="moviedto">
+		select * from movie order by bookcount desc
+	</select>
 	<!-- 최신영화 전체개수 -->
 	<select id="getNewTotalCount" resultType="int">
 		select count(*) from movie where sang=0
@@ -56,6 +74,16 @@
 	<select id="getReviewData" parameterType="String" resultType="mreviewdto">
 		select * from moviereview where idx=#{idx}
 	</select>
+	<!-- 관람평 좋아요 증가 -->
+	<update id="rvlikesUpdate" parameterType="String">
+		update moviereview set likes=likes+1 where idx=#{idx}
+	</update>
+	<!-- 관람평 좋아요 감소 -->
+	<update id="rvlikesCancel" parameterType="String">
+		<if test="likes>=1">
+		update moviereview set likes=likes-1 where idx=#{idx}
+		</if>
+	</update>
 	<!-- 관람평 수정 -->
 	<update id="updateReview" parameterType="mreviewdto">
 		update moviereview set grade=#{grade}, content=#{content} where idx=#{idx}

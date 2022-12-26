@@ -149,10 +149,10 @@
 	}
 	
 	/* 박스오피스 순위 */
-	.movie-list0 .no-img .movie-list-info .rank {
+	.movie-list .no-img .movie-list-info .rank {
 	    background-image: none;
 	}
-	.movie-list0 .rank {
+	.movie-list .rank {
 	    position: relative;
 	    left: 0;
 	    top: 0;
@@ -193,8 +193,8 @@
 	
 	/* 영화목록 */
 	.movie-list .no-img .movie-list-info .rank, .movie-list1 .no-img, .movie-list2 .no-img{background-image:none}
-	.movie-list img, .movie-list0 img, .movie-list1 img, .movie-list2 img{width:242px;height:331px}
-	.movie-list .tit-area, .movie-list0 .tit-area, .movie-list1 .tit-area, .movie-list2 .tit-area{position:relative;width:100%;margin:15px 0 0 0;padding:0 0 0 30px;line-height:25px}
+	.movie-list img, .movie-list1 img, .movie-list2 img, .movie-list3 img, .movie-list4 img, .movie-list5 img{width:242px;height:331px}
+	.movie-list .tit-area, .movie-list1 .tit-area, .movie-list2 .tit-area, .movie-list3 .tit-area, .movie-list4 .tit-area, .movie-list5 .tit-area{position:relative;width:100%;margin:15px 0 0 0;padding:0 0 0 30px;line-height:25px}
 	
 	.one {
 		display: inline-block;
@@ -204,12 +204,13 @@
 		padding-right: 20px;
 	}
 	
-	.movie-list, .movie-list0, .movie-list1, .movie-list2 {
+	.movie-list, .movie-list1, .movie-list2, .movie-list3, .movie-list4, .movie-list5 {
 		position: relative;
 	}
 	
 	/* 등급(나이) */
-	.movie-list .tit-area .movie-grade, .movie-list0 .tit-area .movie-grade, .movie-list1 .tit-area .movie-grade, .movie-list2 .tit-area .movie-grade {
+	.movie-list .tit-area .movie-grade, 
+	.movie-list1 .tit-area .movie-grade, .movie-list2 .tit-area .movie-grade, .movie-list3 .tit-area .movie-grade, .movie-list4 .tit-area .movie-grade, .movie-list5 .tit-area .movie-grade {
 	    position: absolute;
 	    left: 0;
 	    top: 50%;
@@ -231,7 +232,7 @@
 	    background-image: url(https://img.megabox.co.kr/static/pc/images/common/txt/18_46x46.png);
 	    background-size: 23px 23px;
 	}
-	.movie-list p, .movie-list0 p, .movie-list1 p, .movie-list2 p {
+	.movie-list p, .movie-list1 p, .movie-list2 p, .movie-list3 p, .movie-list4 p, .movie-list5 p {
 	    margin: 0;
 	    padding: 0;
 	}
@@ -247,7 +248,8 @@
 	    background-repeat: no-repeat;
 	}
 	/* 영화제목 */
-	.movie-list .tit-area .tit, .movie-list0 .tit-area .tit, .movie-list1 .tit-area .tit, .movie-list2 .tit-area .tit {
+	.movie-list .tit-area .tit, 
+	.movie-list1 .tit-area .tit, .movie-list2 .tit-area .tit, .movie-list3 .tit-area .tit, .movie-list4 .tit-area .tit, .movie-list5 .tit-area .tit {
 	    overflow: hidden;
 	    display: block;
 	    width: 100%;
@@ -259,13 +261,15 @@
 	    color: #333;
 	}
 	
-	.movie-list .rate-date, .movie-list0 .rate-date, .movie-list1 .rate-date, .movie-list2 .rate-date {
+	.movie-list .rate-date, 
+	.movie-list1 .rate-date, .movie-list2 .rate-date, .movie-list3 .rate-date,  .movie-list4 .rate-date,  .movie-list5 .rate-date {
 	    overflow: hidden;
 	    padding: 10px 0 0 0;
 	}
 	
 	/* 좋아요 */
-	.movie-list .btn-movie .btn-like, .movie-list0 .btn-movie .btn-like, .movie-list1 .btn-movie .btn-like, .movie-list2 .btn-movie .btn-like {
+	.movie-list .btn-movie .btn-like, 
+	.movie-list1 .btn-movie .btn-like, .movie-list2 .btn-movie .btn-like, .movie-list3 .btn-movie .btn-like, .movie-list4 .btn-movie .btn-like, .movie-list5 .btn-movie .btn-like {
 	    float: left;
 	    width: 72px;
 	    margin: 10px 0 0 0;
@@ -299,7 +303,8 @@
 	    background-color: #fff;
 	    cursor: pointer;
 	}
-	.movie-list .button, .movie-list0 .button, .movie-list1 .button, .movie-list2 .button {
+	.movie-list .button, 
+	.movie-list1 .button, .movie-list2 .button, .movie-list3 .button, .movie-list4 .button, .movie-list5 .button {
 	    display: block;
 	    float: left;
 	    width: 160px;
@@ -353,77 +358,89 @@ $(function(){
 				
 				result += "<div class='one' style='margin-right: 45px'>"
 				if(m.movieNm=='올빼미') {
-					result += "<a href='detail?num=11'>"
+					result += "<a href='detail?num=8'>"
 				}
 				if(m.movieNm=='압꾸정') {
-					result += "<a href='detail?num=3'>"
+					result += "<a href='detail?num=5'>"
 				}
 				if(m.movieNm=='극장판 뽀로로와 친구들: 바이러스를 없애줘!') {
-					result += "<a href='detail?num=16'>"
+					result += "<a href='detail?num=11'>"
 				}
 				if(m.movieNm=='원피스 필름 레드') {
-					result += "<a href='detail?num=6'>"
+					result += "<a href='detail?num=10'>"
 				}
 				if(m.movieNm=='탄생') {
-					result += "<a href='detail?num=7'>"
+					result += "<a href='detail?num=9'>"
 				}
 				if(m.movieNm=='블랙 팬서: 와칸다 포에버') {
 					result += "<a href='detail?num=2'>"
 				}
 				if(m.movieNm=='오늘 밤, 세계에서 이 사랑이 사라진다 해도') {
-					result += "<a href='detail?num=12'>"
+					result += "<a href='detail?num=7'>"
 				}
 				if(m.movieNm=='데시벨') {
-					result += "<a href='detail?num=17'>"
+					result += "<a href='detail?num=15'>"
 				}
 				if(m.movieNm=='본즈 앤 올') {
-					result += "<a href='detail?num=8'>"
+					result += "<a href='detail?num=17'>"
 				}
 				if(m.movieNm=='프레이 포 더 데블') {
 					result += "<a href='detail?num=13'>"
 				}
 				if(m.movieNm=='크리스마스 캐럴') {
-					result += "<a href='detail?num=14'>"
+					result += "<a href='detail?num=12'>"
 				}
 				if(m.movieNm=='더 메뉴') {
-					result += "<a href='detail?num=15'>"
+					result += "<a href='detail?num=14'>"
+				}
+				if(m.movieNm=='영웅') {
+					result += "<a href='detail?num=20'>"
+				}
+				if(m.movieNm=='아바타: 물의 길') {
+					result += "<a href='detail?num=19'>"
 				}
 				result += "<p class='rank' style='z-index: 2;'>"+m.rank+"<span class='ir'>위</span></span></p>"
 				if(m.movieNm=='올빼미') {
-					result += "<img src='${root }/save/올빼미.jpg' style='z-index: 1;'></a>"
+					result += "<img src='${root }/save/tawnyowl.jpg' style='z-index: 1;'></a>"
 				}
 				if(m.movieNm=='압꾸정') {
-					result += "<img src='${root }/save/압꾸정.jpg' style='z-index: 1;'></a>"
+					result += "<img src='${root }/save/menofplastic.jpg' style='z-index: 1;'></a>"
 				}
 				if(m.movieNm=='극장판 뽀로로와 친구들: 바이러스를 없애줘!') {
-					result += "<img src='${root }/save/극장판뽀로로와친구들_바이러스를없애줘.jpg' style='z-index: 1;'></a>"
+					result += "<img src='${root }/save/Pororo_and_Friends.jpg' style='z-index: 1;'></a>"
 				}
 				if(m.movieNm=='원피스 필름 레드') {
-					result += "<img src='${root }/save/원피스필름레드.jpg' style='z-index: 1;'></a>"
+					result += "<img src='${root }/save/onepiecefilmred.jpg' style='z-index: 1;'></a>"
 				}
 				if(m.movieNm=='탄생') {
-					result += "<img src='${root }/save/탄생.jpg' style='z-index: 1;'></a>"
+					result += "<img src='${root }/save/abirth.jpg' style='z-index: 1;'></a>"
 				}
 				if(m.movieNm=='블랙 팬서: 와칸다 포에버') {
-					result += "<img src='${root }/save/블랙팬서_와칸다포에버.jpg' style='z-index: 1;'></a>"
+					result += "<img src='${root }/save/blackpanther.jpg' style='z-index: 1;'></a>"
 				}
 				if(m.movieNm=='오늘 밤, 세계에서 이 사랑이 사라진다 해도') {
-					result += "<img src='${root }/save/오늘밤세계에서이사랑이사라진다해도.jpg' style='z-index: 1;'></a>"
+					result += "<img src='${root }/save/Even_If_This_Love.jpg' style='z-index: 1;'></a>"
 				}
 				if(m.movieNm=='데시벨') {
-					result += "<img src='${root }/save/데시벨.jpg' style='z-index: 1;'></a>"
+					result += "<img src='${root }/save/Decibel.jpg' style='z-index: 1;'></a>"
 				}
 				if(m.movieNm=='본즈 앤 올') {
-					result += "<img src='${root }/save/본즈앤올.jpg' style='z-index: 1;'></a>"
+					result += "<img src='${root }/save/BONES_AND_ALL.jpg' style='z-index: 1;'></a>"
 				}
 				if(m.movieNm=='프레이 포 더 데블') {
-					result += "<img src='${root }/save/프레이포더데블.jpg' style='z-index: 1;'></a>"
+					result += "<img src='${root }/save/PREY_FOR_THE_DEVIL.jpg' style='z-index: 1;'></a>"
 				}
 				if(m.movieNm=='크리스마스 캐럴') {
-					result += "<img src='${root }/save/크리스마스캐럴.jpg' style='z-index: 1;'></a>"
+					result += "<img src='${root }/save/christmas_carol.jpg' style='z-index: 1;'></a>"
 				}
 				if(m.movieNm=='더 메뉴') {
-					result += "<img src='${root }/save/더메뉴.jpg' style='z-index: 1;'></a>"
+					result += "<img src='${root }/save/THE_MENU.jpg' style='z-index: 1;'></a>"
+				}
+				if(m.movieNm=='영웅') {
+					result += "<img src='${root }/save/Hero.jpg' style='z-index: 1;'></a>"
+				}
+				if(m.movieNm=='아바타: 물의 길') {
+					result += "<img src='${root }/save/Avatar_The_Way_of_Water.jpg' style='z-index: 1;'></a>"
 				}
 				result += "<div class='tit-area'>"
 				if(m.movieNm=='올빼미') {
@@ -462,6 +479,12 @@ $(function(){
 				if(m.movieNm=='더 메뉴') {
 					result += "<p class='movie-grade age-15'>,</p>"
 				}
+				if(m.movieNm=='영웅') {
+					result += "<p class='movie-grade age-12'>,</p>"
+				}
+				if(m.movieNm=='아바타: 물의 길') {
+					result += "<p class='movie-grade age-12'>,</p>"
+				}
 				result += "<b><p class='tit' style='padding-right: 25px; overflow: hidden;display: block;width: 100%;white-space: nowrap;text-overflow: ellipsis;padding: 2px 0 0 1px;font-size: 1.3333em;font-weight: 400;color: #333;'>"+m.movieNm+"</p></b>"		
 				result += "</div>"		
 				result += "<div class='rate-date' style='font-size: 11pt'><span class='rate'>예매율 "+m.salesShare+"% | </span><span class='date'>개봉일 "+m.openDt+"</span>"
@@ -471,12 +494,12 @@ $(function(){
 				result += "<i class='fa-regular fa-heart' style='font-size: 15px; padding-top: 12px;'></i>"
 				result += "<span style='font-size: 12pt;'></span>"
 				result += "</button>"		   
-				result += "<div class='case movieStat4'><a href='' class='button purple bokdBtn' title='영화 예매하기'>예매</a>"
+				result += "<div class='case movieStat4'><a href='${root}/book/list' class='button purple bokdBtn' title='영화 예매하기'>예매</a>"
 				result += "</div></div></div>"		  							
 				}
 			
 			//div에 출력
-			$(".movie-list0").html(result);
+			$(".movie-list").html(result);
 			
 		}
 	});
@@ -526,28 +549,23 @@ $(function(){
 					<div class="movie-list-util mt40">
 						<!-- 박스오피스 -->
 						<div class="topSort" style="display: block;">
-							<div class="movie-sorting sortTab">
-<!-- 						<span><button type="button" class="btn on" sort-type="ticketing">예매율순</button></span> -->
-<!-- 						<span><button type="button" class="btn" sort-type="accmAdnc">누적관객순</button></span> -->
-<!-- 						<span><button type="button" class="btn" sort-type="megaScore">메가스코어순</button></span> -->
-							</div>
+
 						<!-- 검색결과 없을 때 -->
 						<p class="no-result-count"><strong id="totCnt">10</strong> 위 까지의 영화순위입니다.</p>
 						<!--// 검색결과 없을 때 -->
 			
-<!-- 						<div class="movie-search">
+ 						<div class="movie-search" onclick="location.href='msearch'">
 							<form action="list" class="form-inline">
 								<input type="text" title="영화명을 입력하세요" id="ibxMovieNmSearch" name="ibxMovieNmSearch" placeholder="영화명 검색" class="input-text">
 								<button type="submit" class="btn-search-input" id="btnSearch">검색</button>
 							</form>
 						</div> 
--->
 		
 						</div>
 						<!--// 박스오피스 -->
 					</div>
 					
-					<div class="movie-list0"></div>
+					<div class="movie-list"></div>
 					<!--// movie-list-util -->			
 				</div>
 				
@@ -555,28 +573,29 @@ $(function(){
 					<!-- movie-list-util -->
 					<div class="movie-list-util mt40">
 						<!-- 최신영화 -->
-<!-- 						<div class="topSort">
+ 						<div class="topSort">
 							<div class="movie-sorting sortTab">
-								<span><button type="button" class="btn on" sort-type="ticketing">예매율순</button></span>
-								<span><button type="button" class="btn" sort-type="accmAdnc">누적관객순</button></span>
+								<span><button type="button" class="btn on" id="mnew">최신순</button></span>
+								<span><button type="button" class="btn" id="ticketing">예매율순</button></span>
+								<span><button type="button" class="btn" id="accmAdnc">누적관객순</button></span>
 							</div>
-						</div> -->
+						</div>
 						<!-- 검색결과 없을 때 -->
 						<p class="no-result-count"><strong id="totCnt">${newtotalCount }</strong>개의 영화가 검색되었습니다.</p>
 						<!--// 검색결과 없을 때 -->
 			
-<!--  						<div class="movie-search">
+ 						<div class="movie-search" onclick="location.href='msearch'">
 							<form action="list" class="form-inline">
 								<input type="text" title="영화명을 입력하세요" id="ibxMovieNmSearch" name="ibxMovieNmSearch" placeholder="영화명 검색" class="input-text">
 								<button type="submit" class="btn-search-input" id="btnSearch">검색</button>
 							</form>
-						</div> -->
+						</div>
 						
 						<!--// 최신영화 -->
 					</div>
 					
 					<!-- 최신영화 리스트 -->
-					<div class="movie-list">
+					<div class="movie-list1">
 						<c:forEach var="dto" items="${list }">
 					     <c:if test="${dto.sang=='0' }">
 						  <div class="one">
@@ -608,7 +627,89 @@ $(function(){
 									<span style="font-size: 12pt;" id="intrstCnt" class="like">${dto.likes }</span>
 								</button>    
 								<div class="case movieStat4">
-									<a href="" class="button purple bokdBtn" title="영화 예매하기">예매</a>    
+									<a href="${root}/book/list" class="button purple bokdBtn" title="영화 예매하기">예매</a>    
+								</div>
+							</div>
+						  </div>
+					     </c:if>
+						</c:forEach>
+					</div>
+					
+					<!-- 예매율순 리스트 -->
+					<div class="movie-list2">
+						<c:forEach var="dto" items="${ticketlist }">
+					     <c:if test="${dto.sang=='0' }">
+						  <div class="one">
+							<a href="detail?num=${dto.num }">
+								<img src="${root }/save/${dto.poster}">
+							</a>
+							<div class="tit-area">    
+								<c:if test="${dto.age=='전체관람가' }">
+									<p class='movie-grade age-all'>,</p>    								
+								</c:if>
+								<c:if test="${dto.age=='12' }">
+									<p class="movie-grade age-12">,</p>    								
+								</c:if>
+								<c:if test="${dto.age=='15' }">
+									<p class="movie-grade age-15">,</p>    								
+								</c:if>
+								<c:if test="${dto.age=='청소년관람불가' }">
+									<p class="movie-grade age-19">,</p>    								
+								</c:if>
+								<b><p class="tit" style="padding-right: 25px;">${dto.name }</p></b>
+							</div>
+							<div class="rate-date">    
+								<span class="rate">예매율 ${dto.ticket }% | </span>    
+								<span class="date">개봉일 <fmt:formatDate value="${dto.opendate }" pattern="yyyy.MM.dd"/></span>
+							</div>
+							<div class="btn-movie">    
+								<button type="button" class="button btn-like" data-no="22085900" num="${dto.num }">
+									<i class="fa-regular fa-heart" style="font-size: 15px; padding-top: 12px;"></i>
+									<span style="font-size: 12pt;" id="intrstCnt" class="like">${dto.likes }</span>
+								</button>    
+								<div class="case movieStat4">
+									<a href="${root}/book/list" class="button purple bokdBtn" title="영화 예매하기">예매</a>    
+								</div>
+							</div>
+						  </div>
+					     </c:if>
+						</c:forEach>
+					</div>
+					
+					<!-- 누적관객순 리스트 -->
+					<div class="movie-list3">
+						<c:forEach var="dto" items="${acclist }">
+					     <c:if test="${dto.sang=='0' }">
+						  <div class="one">
+							<a href="detail?num=${dto.num }">
+								<img src="${root }/save/${dto.poster}">
+							</a>
+							<div class="tit-area">    
+								<c:if test="${dto.age=='전체관람가' }">
+									<p class='movie-grade age-all'>,</p>    								
+								</c:if>
+								<c:if test="${dto.age=='12' }">
+									<p class="movie-grade age-12">,</p>    								
+								</c:if>
+								<c:if test="${dto.age=='15' }">
+									<p class="movie-grade age-15">,</p>    								
+								</c:if>
+								<c:if test="${dto.age=='청소년관람불가' }">
+									<p class="movie-grade age-19">,</p>    								
+								</c:if>
+								<b><p class="tit" style="padding-right: 25px;">${dto.name }</p></b>
+							</div>
+							<div class="rate-date">    
+								<span class="rate">예매율 ${dto.ticket }% | </span>    
+								<span class="date">개봉일 <fmt:formatDate value="${dto.opendate }" pattern="yyyy.MM.dd"/></span>
+							</div>
+							<div class="btn-movie">    
+								<button type="button" class="button btn-like" data-no="22085900" num="${dto.num }">
+									<i class="fa-regular fa-heart" style="font-size: 15px; padding-top: 12px;"></i>
+									<span style="font-size: 12pt;" id="intrstCnt" class="like">${dto.likes }</span>
+								</button>    
+								<div class="case movieStat4">
+									<a href="${root}/book/list" class="button purple bokdBtn" title="영화 예매하기">예매</a>    
 								</div>
 							</div>
 						  </div>
@@ -623,23 +724,23 @@ $(function(){
 						<!-- 상영예정작 -->
 						<div class="topSort">
 							<div class="movie-sorting sortTab">
-								<span><button type="button" class="btn on" sort-type="rfilmDe" id="open">개봉일순</button></span>
-								<span><button type="button" class="btn" sort-type="title" id="asc">가나다순</button></span>
+								<span><button type="button" class="btn on" id="open">개봉일순</button></span>
+								<span><button type="button" class="btn" id="asc">가나다순</button></span>
 							</div>
 						</div>
 						<!-- 검색결과 없을 때 -->
 						<p class="no-result-count"><strong id="totCnt">${commingtotalCount }</strong>개의 영화가 검색되었습니다.</p>
 						<!--// 검색결과 없을 때 -->
 			
-<!-- 						<div class="movie-search">
+						<div class="movie-search" onclick="location.href='msearch'">
 							<input type="text" title="영화명을 입력하세요" id="ibxMovieNmSearch" name="ibxMovieNmSearch" placeholder="영화명 검색" class="input-text">
 							<button type="button" class="btn-search-input" id="btnSearch">검색</button>
-						</div> -->
+						</div>
 						<!--// 상영예정작 -->
 					</div>
 					
 					<!-- 상영예정작 리스트 -->
-					<div class="movie-list1">
+					<div class="movie-list4">
 						<c:forEach var="dto" items="${list }">
 					     <c:if test="${dto.sang=='1' }">
 						  <div class="one">
@@ -671,7 +772,7 @@ $(function(){
 									<span style="font-size: 12pt;" id="intrstCnt" class="like">${dto.likes }</span>
 								</button>    
 								<div class="case movieStat4">
-									<a href="" class="button purple bokdBtn" title="영화 예매하기">예매</a>    
+									<a href="${root}/book/list" class="button purple bokdBtn" title="영화 예매하기">예매</a>    
 								</div>
 							</div>
 						  </div>
@@ -680,7 +781,7 @@ $(function(){
 					</div>
 					
 					<!-- 상영예정작 리스트(가나다순) -->
-					<div class="movie-list2">
+					<div class="movie-list5">
 						<c:forEach var="cdto" items="${clist }">
 					     <c:if test="${cdto.sang=='1' }">
 						  <div class="one">
@@ -712,7 +813,7 @@ $(function(){
 									<span style="font-size: 12pt;" id="intrstCnt" class="like">${dto.likes }</span>
 								</button>    
 								<div class="case movieStat4">
-									<a href="" class="button purple bokdBtn" title="영화 예매하기">예매</a>    
+									<a href="${root}/book/list" class="button purple bokdBtn" title="영화 예매하기">예매</a>    
 								</div>
 							</div>
 						  </div>
@@ -726,21 +827,43 @@ $(function(){
 	</div>
 	
 <script type="text/javascript">
-	/* 가나다순 */
-	$("div.movie-list2").hide();
+	/* 영화리스트 */
+	$("div.movie-list2").hide(); //예매율순
+	$("div.movie-list3").hide(); //누적관객순
+	$("div.movie-list5").hide(); //가나다순
 	
 	$(".movie-sorting span").click(function() {
  		$(this).children().addClass("on");
  		$(this).siblings().children().removeClass("on");
 	});
 
-	$("#asc").click(function() {
-		$("div.movie-list2").show();
-		$("div.movie-list1").hide();
-	});
-	$("#open").click(function() {
+	//최신순
+	$("#mnew").click(function() {
 		$("div.movie-list1").show();
 		$("div.movie-list2").hide();
+		$("div.movie-list3").hide();
+	});
+	//예매율순
+	$("#ticketing").click(function() {
+		$("div.movie-list2").show();
+		$("div.movie-list1").hide();
+		$("div.movie-list3").hide();
+	});
+	//누적관객순
+	$("#accmAdnc").click(function() {
+		$("div.movie-list3").show();
+		$("div.movie-list2").hide();
+		$("div.movie-list1").hide();
+	});
+	//개봉일순
+	$("#open").click(function() {
+		$("div.movie-list4").show();
+		$("div.movie-list5").hide();
+	});
+	//가나다순
+	$("#asc").click(function() {
+		$("div.movie-list5").show();
+		$("div.movie-list4").hide();
 	});
 	
 	$("button.btn-like").click(function() {
@@ -762,8 +885,7 @@ $(function(){
 					url:"likes",
 					dataType:"json",
 					data:{"num":num},
-					success:function(res) {				
-	
+					success:function(res) {
 						//$("div.btn-movie").find("span.like").text(res.likes);
 					}
 				});	
@@ -777,7 +899,6 @@ $(function(){
 					dataType:"json",
 					data:{"num":num},
 					success:function(res) {
-						
 						//$("div.btn-movie").find("span.like").text(res.likes);
 					}
 				});
