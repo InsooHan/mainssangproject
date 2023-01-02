@@ -1,4 +1,4 @@
-# SpringBoot-Project-MEGABOX
+# JSP를 사용하는 SpringBoot 프로젝트 - MEGABOX 웹사이트 구현
 
 ## 🖥️ 프로젝트 소개
 - 영화관 브랜드 MEGABOX의 홈페이지를 기반으로 영화 정보, 영화 예매, 영화관 상품 판매, 이벤트 게시판, 커뮤니티 게시판이 있는 웹페이지입니다.
