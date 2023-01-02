@@ -6,6 +6,25 @@
 ## 🕰️ 프로젝트 기간
 - 2022.11.17 ~ 2022.12.09
 
+## ⚙️ 개발 환경
+- 개발 도구
+    - Spring Tool Suite 4
+    - GitHub, Google docs
+- 개발 OS
+    - Windows 10
+- Back-end
+    - 언어: Java
+    - 프레임워크: Spring, MyBatis
+    - 서버: Apache Tomcat 9.0
+    - DB: mySQL
+- Front-end
+    - Web: HTML5, CSS, JavaScript, JSP, AJAX, jQuery
+    - API: BootStrap5, 영화진흥위원회 박스오피스 API, 아임포트 결제 API
+
+## 📜 ERD
+<img src="https://user-images.githubusercontent.com/106582252/210202733-51b4e8da-ac4b-4431-9e2a-4152fd95971c.png" alt=""></img>
+
+
 ## 🧑‍🤝‍🧑 프로젝트 역할 분담
 팀장 한인수: 로그인, 영화 예매 기능, 최종발표
 
