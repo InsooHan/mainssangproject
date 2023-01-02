@@ -59,3 +59,7 @@
 - '구매하기' 버튼 누르면 해당 주문 건에 대한 구매 페이지로 이동, 결제 API 연동
 - 장바구니에 이미 담긴 상품을 또 장바구니 추가하는 경우 장바구니에 들어있는 상품 개수 추가
 - 구매페이지/장바구니 내에서 수량 수정
+
+### 배포
+- AWS Elastick Beanstalk를 활용하여 서버 배포
+- 배포 링크: <http://finalpro-env.eba-nzzf26tf.ap-northeast-1.elasticbeanstalk.com/>
