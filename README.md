@@ -15,10 +15,9 @@
 - Back-end
     - 언어: Java
     - 프레임워크: Spring, MyBatis
-    - 서버: Apache Tomcat 9.0
     - DB: mySQL
 - Front-end
-    - Web: HTML5, CSS, JavaScript, JSP, AJAX, jQuery
+    - Web: HTML5, CSS, JavaScript, JSP, jQuery
     - API: BootStrap5, 영화진흥위원회 박스오피스 API, 아임포트 결제 API
 
 ## 📜 ERD
