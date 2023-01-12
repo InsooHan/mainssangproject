@@ -59,6 +59,6 @@
 - 장바구니에 이미 담긴 상품을 또 장바구니 추가하는 경우 장바구니에 들어있는 상품 개수 추가
 - 구매페이지/장바구니 내에서 수량 수정
 
-### 배포
+### 배포(aws 과금 문제로 현재 접속 불가능)
 - AWS Elastick Beanstalk를 활용하여 서버 배포
-- 배포 링크: <http://finalpro-env.eba-nzzf26tf.ap-northeast-1.elasticbeanstalk.com/>
+- 배포 링크: ~~<http://finalpro-env.eba-nzzf26tf.ap-northeast-1.elasticbeanstalk.com/>~~(aws 과금 문제로 현재 접속 불가능)
